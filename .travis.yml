@@ -14,3 +14,6 @@ addons:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - mvn sonar:sonar -Dsonar.projectKey=Geodezist_auto-solver -Dsonar.organization=geodezist-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
+
+
