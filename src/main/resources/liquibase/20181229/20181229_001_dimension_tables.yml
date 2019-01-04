@@ -1,0 +1,685 @@
+databaseChangeLog:
+- changeSet:
+    id: 1546108295497-1
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_category
+        remarks: Types of vehicles  (Типы транспорта)
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_category_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: name
+            type: VARCHAR(250)
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: value
+            type: INT
+
+- changeSet:
+    id: 1546108295497-2
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_bodystyle
+        remarks: Body Types (Типы кузова)
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_bodystyle_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: d_category_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: name
+            type: VARCHAR(250)
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: value
+            type: VARCHAR(45)
+
+- changeSet:
+    id: 1546108295497-3
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_mark
+        remarks: Brands of vehicles (Марки транспортного средства)
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_mark_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: d_category_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: name
+            type: VARCHAR(250)
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: value
+            type: INT
+
+- changeSet:
+    id: 1546108295497-4
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_model
+        remarks: Сar models (Модели транспорта)
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_model_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: d_mark_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: name
+            type: VARCHAR(250)
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: value
+            type: INT
+
+- changeSet:
+    id: 1546108295497-5
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_state
+        remarks: States of Ukraine (Области Украины)
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_state_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: name
+            type: VARCHAR(250)
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: value
+            type: INT
+
+- changeSet:
+    id: 1546108295497-6
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_city
+        remarks: Cities of Ukraine (Города Украины)
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_city_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: d_state_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(250)
+        - column:
+            constraints:
+              nullable: false
+            name: value
+            type: INT
+
+- changeSet:
+    id: 1546108295497-7
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_drive_type
+        remarks: Types of car drive (Типы привода)
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_drive_type_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: d_category_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(250)
+        - column:
+            constraints:
+              nullable: false
+            name: value
+            type: INT
+
+- changeSet:
+    id: 1546108295497-8
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_fuel_type
+        remarks: Fuel types (Типы топлива)
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_fuel_type_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: name
+            type: VARCHAR(250)
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: value
+            type: INT
+
+- changeSet:
+    id: 1546108295497-9
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_gearbox
+        remarks: Types of gearboxes (Коробки передач)
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_gearbox_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: d_category_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(250)
+        - column:
+            constraints:
+              nullable: false
+            name: value
+            type: INT
+
+- changeSet:
+    id: 1546108295497-10
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_option
+        remarks: Options (Опции)
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_option_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: d_category_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(250)
+        - column:
+            constraints:
+              nullable: false
+            name: value
+            type: INT
+
+- changeSet:
+    id: 1546108295497-11
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_color
+        remarks: Colors of vehicles (Цвета транспорта)
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_color_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: name
+            type: VARCHAR(250)
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: value
+            type: INT
+
+- changeSet:
+    id: 1546108295497-12
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_country
+        remarks: Countries (Страны)
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_country_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: name
+            type: VARCHAR(250)
+        - column:
+            constraints:
+              nullable: false
+              unique: true
+            name: value
+            type: INT
+
+- changeSet:
+    id: 1546108295497-13
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_filter
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_filter_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: key
+            type: VARCHAR(100)
+        - column:
+            constraints:
+              nullable: false
+            name: value
+            type: VARCHAR(1000)
+
+- changeSet:
+    id: 1546108295497-14
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_query
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_query_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: create_ts
+            type: timestamp
+        - column:
+            constraints:
+              nullable: false
+            name: d_user_id
+            type: INT
+        - column:
+            name: query_full_text
+            type: VARCHAR(2000)
+        - column:
+            name: last_run_ts
+            type: timestamp
+        - column:
+            name: status
+            type: VARCHAR(45)
+
+- changeSet:
+    id: 1546108295497-15
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_user
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_user_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(100)
+        - column:
+            constraints:
+              nullable: false
+            name: email
+            type: VARCHAR(254)
+        - column:
+            constraints:
+              nullable: false
+            defaultValueNumeric: 1
+            name: is_active
+            type: TINYINT(3)
+        - column:
+            constraints:
+              nullable: false
+            name: create_ts
+            type: timestamp
+        - column:
+            name: modify_ts
+            type: timestamp
+        - column:
+            constraints:
+              nullable: false
+            defaultValue: 1900-01-01
+            name: start_date
+            type: date
+        - column:
+            constraints:
+              nullable: false
+            defaultValue: 9999-01-01
+            name: end_date
+            type: date
+
+- changeSet:
+    id: 1546108295497-16
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: f_query_result
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: f_query_result_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: d_query_id
+            type: INT
+        - column:
+            name: original_data
+            type: VARCHAR
+        - column:
+            name: locationCityName
+            type: VARCHAR(1000)
+        - column:
+            name: usd
+            type: DECIMAL(10)
+        - column:
+            name: year
+            type: NUMBER(4)
+        - column:
+            name: race
+            type: DECIMAL(10)
+        - column:
+            name: fuelname
+            type: VARCHAR(45)
+        - column:
+            name: gearboxName
+            type: VARCHAR(45)
+        - column:
+            name: markName
+            type: VARCHAR(1000)
+        - column:
+            name: markId
+            type: INT
+        - column:
+            name: modelName
+            type: VARCHAR(1000)
+        - column:
+            name: modelId
+            type: INT
+        - column:
+            name: f_query_resultcol
+            type: VARCHAR(45)
+
+#---------------------------------------------
+- changeSet:
+    id: 1546108295497-17
+    author: geodezist@gmail.com
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: d_category_id
+        baseTableName: d_bodystyle
+        constraintName: fk_d_bodystyle_d_category_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: d_category_id
+        referencedTableName: d_category
+        validate: true
+
+- changeSet:
+    id: 1546108295497-18
+    author: geodezist@gmail.com
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: d_category_id
+        baseTableName: d_mark
+        constraintName: fk_d_mark_d_category_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: d_category_id
+        referencedTableName: d_category
+        validate: true
+
+- changeSet:
+    id: 1546108295497-19
+    author: geodezist@gmail.com
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: d_mark_id
+        baseTableName: d_model
+        constraintName: fk_d_model_d_mark_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: d_mark_id
+        referencedTableName: d_mark
+        validate: true
+
+- changeSet:
+    id: 1546108295497-20
+    author: geodezist@gmail.com
+    changes:
+    - addUniqueConstraint:
+        columnNames: d_state_id, name
+        constraintName: uidx_d_city_name
+        tableName: d_city
+
+- changeSet:
+    id: 1546108295497-21
+    author: geodezist@gmail.com
+    changes:
+    - addUniqueConstraint:
+        columnNames: d_state_id, value
+        constraintName: uidx_d_city_value
+        tableName: d_city
+
+- changeSet:
+    id: 1546108295497-22
+    author: geodezist@gmail.com
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: d_state_id
+        baseTableName: d_city
+        constraintName: fk_d_city_d_state_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: d_state_id
+        referencedTableName: d_state
+        validate: true
+
+- changeSet:
+    id: 1546108295497-23
+    author: geodezist@gmail.com
+    changes:
+    - addUniqueConstraint:
+        columnNames: d_category_id, name
+        constraintName: uidx_d_drive_type_name
+        tableName: d_drive_type
+
+- changeSet:
+    id: 1546108295497-24
+    author: geodezist@gmail.com
+    changes:
+    - addUniqueConstraint:
+        columnNames: d_category_id, value
+        constraintName: uidx_d_drive_type_value
+        tableName: d_drive_type
+
+- changeSet:
+    id: 1546108295497-25
+    author: geodezist@gmail.com
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: d_category_id
+        baseTableName: d_drive_type
+        constraintName: fk_d_drive_type_d_category_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: d_category_id
+        referencedTableName: d_category
+        validate: true
+
+#---------------------------------------------
+- changeSet:
+    id: 1546108295497-26
+    author: geodezist@gmail.com
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: d_user_id
+        indexName: idx_d_query_d_user_id
+        tableName: d_query
+
+- changeSet:
+    id: 1546108295497-27
+    author: geodezist@gmail.com
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: d_query_id
+        indexName: idx_fqyrt_d_query
+        tableName: f_query_result
+
+- changeSet:
+    id: 1546108295497-28
+    author: geodezist@gmail.com
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: d_user_id
+        baseTableName: d_query
+        constraintName: fk_d_query_d_user
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: d_user_id
+        referencedTableName: d_user
+        validate: true
+
+- changeSet:
+    id: 1546108295497-29
+    author: geodezist@gmail.com
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: d_query_id
+        baseTableName: f_query_result
+        constraintName: fk_fqyrt_d_query
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: d_query_id
+        referencedTableName: d_query
+        validate: true

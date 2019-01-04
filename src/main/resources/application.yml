@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    platform: postgresql
+    initialization-mode: always
+    driver-class-name: org.postgresql.Driver
+    username: autosolver
+    password: autosolver
+    url: jdbc:postgresql://localhost:5432/
+
+  liquibase:
+    change-log: classpath:liquibase/master.yml
+    default-schema: autosolver
+
+logging:
+  level:
+    org.springframework.*: info
