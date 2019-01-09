@@ -1,0 +1,5 @@
+databaseChangeLog:
+- include:
+    file: liquibase/20181229/20181229_001_dimension_tables.yml
+- include:
+    file: liquibase/20181229/prepare-test-data.sql
