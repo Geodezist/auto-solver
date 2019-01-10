@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface BodyStyleDao extends PagingAndSortingRepository<BodyStyle, Long> {
     List<BodyStyle> findByCategoryId(Long categoryId);
+
     BodyStyle findByCategoryIdAndValue(Long categoryId, int value);
 }

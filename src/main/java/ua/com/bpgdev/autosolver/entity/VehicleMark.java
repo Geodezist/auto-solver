@@ -1,35 +1,27 @@
 package ua.com.bpgdev.autosolver.entity;
 
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
-@ToString
-@EqualsAndHashCode
-@Entity
 @NoArgsConstructor
-@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@Entity
 @Table(name = "d_mark")
-public class VehicleMark {
+public class VehicleMark extends DimensionWithCategory {
     @Id
     @Column(name = "d_mark_id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "d_category_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @NonNull
-    private Category category;
+    public VehicleMark(Category category, String name, int value) {
+        super(category, name, value);
+    }
 
-    @NonNull
-    private String name;
-
-    @NonNull
-    private int value;
+    public VehicleMark(Long id, Category category, String name, int value) {
+        super(category, name, value);
+        this.id = id;
+    }
 }
