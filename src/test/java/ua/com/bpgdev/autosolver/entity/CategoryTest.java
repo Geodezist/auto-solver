@@ -1,5 +1,6 @@
 package ua.com.bpgdev.autosolver.entity;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,20 +51,10 @@ public class CategoryTest {
     }
 
     @Test
-    public void equalsTest() {
-        assertTrue(expectedCategory.equals(actualCategory));
-        assertTrue(actualCategory.equals(expectedCategory));
-    }
-
-    @Test
-    public void canEqualTest() {
-        assertTrue(expectedCategory.canEqual(actualCategory));
-        assertTrue(actualCategory.canEqual(expectedCategory));
-    }
-
-    @Test
-    public void hashCodeTest() {
-        assertEquals(expectedCategory.hashCode(), actualCategory.hashCode());
+    public void equalsContract() {
+        EqualsVerifier.forClass(Category.class)
+                .withIgnoredAnnotations(javax.persistence.Id.class)
+                .verify();
     }
 
     @Test
@@ -80,6 +71,11 @@ public class CategoryTest {
         assertNotEquals(expectedName, actualCategory.getName());
         actualCategory.setName(expectedName);
         assertEquals(expectedName, actualCategory.getName());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void setNameWithNullTest() {
+        actualCategory.setName(null);
     }
 
     @Test
@@ -108,5 +104,15 @@ public class CategoryTest {
     @Test
     public void getValueTest() {
         assertEquals(expectedCategory.getValue(), actualCategory.getValue());
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void CategoryAllArgsTest(){
+        Category category = new Category(null, null, expectedValue);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void CategoryRequiredArgsTest(){
+        Category category = new Category(null, expectedValue);
     }
 }
