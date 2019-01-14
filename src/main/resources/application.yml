@@ -1,15 +1,25 @@
 spring:
+  application:
+    name: auto-solver
+
   datasource:
-    platform: postgresql
-    initialization-mode: always
     driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/
     username: autosolver
     password: autosolver
-    url: jdbc:postgresql://localhost:5432/
+    platform: postgresql
+    initialization-mode: always
+
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
 
   liquibase:
     change-log: classpath:liquibase/master.yml
-    default-schema: autosolver
 
 logging:
   level:
