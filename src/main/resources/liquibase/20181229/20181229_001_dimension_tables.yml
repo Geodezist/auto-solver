@@ -645,9 +645,25 @@ databaseChangeLog:
             referencedTableName: d_category
             validate: true
 
+- changeSet:
+      id: 1546108295497-27
+      author: geodezist@gmail.com
+      changes:
+      - addForeignKeyConstraint:
+            baseColumnNames: d_category_id
+            baseTableName: d_option
+            constraintName: fk_d_option_d_category_id
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: d_category_id
+            referencedTableName: d_category
+            validate: true
+
 #---------------------------------------------
 - changeSet:
-    id: 1546108295497-27
+    id: 1546108295497-28
     author: geodezist@gmail.com
     changes:
     - createIndex:
@@ -658,7 +674,7 @@ databaseChangeLog:
         tableName: d_query
 
 - changeSet:
-    id: 1546108295497-28
+    id: 1546108295497-29
     author: geodezist@gmail.com
     changes:
     - createIndex:
@@ -669,7 +685,7 @@ databaseChangeLog:
         tableName: f_query_result
 
 - changeSet:
-    id: 1546108295497-29
+    id: 1546108295497-30
     author: geodezist@gmail.com
     changes:
     - addForeignKeyConstraint:
@@ -685,7 +701,7 @@ databaseChangeLog:
         validate: true
 
 - changeSet:
-    id: 1546108295497-30
+    id: 1546108295497-31
     author: geodezist@gmail.com
     changes:
     - addForeignKeyConstraint:
