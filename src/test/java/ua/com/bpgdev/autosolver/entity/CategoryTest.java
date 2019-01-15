@@ -108,11 +108,11 @@ public class CategoryTest {
 
     @Test(expected = NullPointerException.class)
     public void CategoryAllArgsTest(){
-        Category category = new Category(null, null, expectedValue);
+        new Category(null, null, expectedValue);
     }
 
     @Test(expected = NullPointerException.class)
     public void CategoryRequiredArgsTest(){
-        Category category = new Category(null, expectedValue);
+        new Category(null, expectedValue);
     }
 }

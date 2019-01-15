@@ -7,4 +7,4 @@
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=Geodezist_auto-solver&metric=sqale_rating)](https://sonarcloud.io/dashboard/index/Geodezist_auto-solver)
 
 Application which helps you to find used car with best price/quality ratio.
-- Data for analysys is agregated from auto.ria portal.
+- Data for analysis is aggregated from auto.ria portal.

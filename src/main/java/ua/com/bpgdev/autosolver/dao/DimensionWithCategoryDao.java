@@ -7,7 +7,7 @@ import ua.com.bpgdev.autosolver.entity.Category;
 import java.util.List;
 
 @NoRepositoryBean
-public interface DimensionWithCategoryDao<T> extends Repository<T, Long> {
+interface DimensionWithCategoryDao<T> extends Repository<T, Long> {
     List<T> findByCategoryId(Long categoryId);
 
     T findByCategoryIdAndName(Long categoryId, String name);
@@ -17,5 +17,4 @@ public interface DimensionWithCategoryDao<T> extends Repository<T, Long> {
     T findByCategoryAndName(Category category, String name);
 
     T findByCategoryAndValue(Category category, int value);
-
 }
