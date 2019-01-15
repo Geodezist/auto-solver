@@ -16,7 +16,7 @@ spring:
     hibernate:
       ddl-auto: update
     generate-ddl: false
-    show-sql: true
+#    show-sql: true
 
   liquibase:
     enabled: true
@@ -26,6 +26,6 @@ logging:
   level:
     org.springframework.*: off
     org.springframework.orm.jpa.*: off
-    org.hibernate.sql.*: debug
-    org.hibernate.type.descriptor.sql.*: trace
+#    org.hibernate.sql.*: debug
+#    org.hibernate.type.descriptor.sql.*: trace
     liquibase.*: off

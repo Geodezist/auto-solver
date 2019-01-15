@@ -7,16 +7,10 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class VehicleModelTest {
-    private Long actualId;
-    private String actualName;
-    private int actualValue;
-    private Category actualCategory;
-    private VehicleMark actualVehicleMark;
 
     private Long expectedId;
     private String expectedName;
     private int expectedValue;
-    private Category expectedCategory;
     private VehicleMark expectedVehicleMark;
 
     private VehicleModel actualVehicleModel;
@@ -24,22 +18,20 @@ public class VehicleModelTest {
 
     @Before
     public void beforeTest() {
-        actualId = 1L;
-        actualName = "actualTestVehicleModel";
-        actualValue = 101;
-        actualCategory = new Category(10L, "actualTestCategory", 110);
-        actualVehicleMark = new VehicleMark(100L, actualCategory, "actualTestVehicleMark", 1100);
+        String actualName = "actualTestVehicleModel";
+        int actualValue = 101;
+        Category actualCategory = new Category(10L, "actualTestCategory", 110);
+        VehicleMark actualVehicleMark = new VehicleMark(100L, actualCategory, "actualTestVehicleMark", 1100);
 
         actualVehicleModel = new VehicleModel(actualVehicleMark, actualName, actualValue);
 
         expectedId = 2L;
         expectedName = "expectedTestVehicleModel";
         expectedValue = 201;
-        expectedCategory = new Category(20L, "expectedTestCategory", 220);
+        Category expectedCategory = new Category(20L, "expectedTestCategory", 220);
         expectedVehicleMark = new VehicleMark(200L, expectedCategory, "expectedTestVehicleMark", 2200);
 
         expectedVehicleModel = new VehicleModel(expectedVehicleMark, expectedName, expectedValue);
-
     }
 
     @Test
@@ -95,11 +87,11 @@ public class VehicleModelTest {
 
     @Test(expected = NullPointerException.class)
     public void requiredArdConstructorWithMarkNullTest() {
-        VehicleModel vehicleModel = new VehicleModel(null, expectedName, expectedValue);
+        new VehicleModel(null, expectedName, expectedValue);
     }
 
     @Test(expected = NullPointerException.class)
     public void requiredArdConstructorWithNameNullTest() {
-        VehicleModel vehicleModel = new VehicleModel(expectedVehicleMark, null, expectedValue);
+        new VehicleModel(expectedVehicleMark, null, expectedValue);
     }
 }

@@ -48,13 +48,11 @@ public class DimensionWithCategoryTest {
     @Test(expected = NullPointerException.class)
     public void setCategoryWithNullTest() {
         expectedDimensionWithCategory.setCategory(null);
-
     }
 
     @Test(expected = NullPointerException.class)
     public void setNameWithNullTest() {
         expectedDimensionWithCategory.setName(null);
-
     }
 
     @Test(expected = NullPointerException.class)

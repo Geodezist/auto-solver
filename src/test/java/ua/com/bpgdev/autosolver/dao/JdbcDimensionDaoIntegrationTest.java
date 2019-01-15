@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @ActiveProfiles("test")
 @SuppressWarnings("OptionalGetWithoutIsPresent")
-public class DaoIntegrationTest {
+public class JdbcDimensionDaoIntegrationTest {
     @Autowired
     private CategoryDao categoryDao;
     @Autowired
@@ -31,6 +31,18 @@ public class DaoIntegrationTest {
     private DriveTypeDao driveTypeDao;
     @Autowired
     private GearBoxDao gearBoxDao;
+    @Autowired
+    private VehicleOptionDao vehicleOptionDao;
+    @Autowired
+    private CountryDao countryDao;
+    @Autowired
+    private FuelTypeDao fuelTypeDao;
+    @Autowired
+    private VehicleColorDao vehicleColorDao;
+    @Autowired
+    private UkraineStateDao ukraineStateDao;
+    @Autowired
+    private CityDao cityDao;
 
     @Test
     @Transactional
@@ -168,20 +180,138 @@ public class DaoIntegrationTest {
     @Transactional
     public void gearBoxITest() {
         String expectedGearBoxName = "gearBoxTest";
-        int expectedDriveTypeValue = 1000;
+        int expectedGearBoxValue = 1000;
         Long categoryId = 2000L;
         Category category = categoryDao.findById(categoryId).get();
         int expectedGearBoxCount = 4;
         List<GearBox> actualGearBoxes = new ArrayList<>();
-        GearBox expectedGearBox = new GearBox(category, expectedGearBoxName, expectedDriveTypeValue);
+        GearBox expectedGearBox = new GearBox(category, expectedGearBoxName, expectedGearBoxValue);
         GearBox actualGearBox;
 
         gearBoxDao.save(expectedGearBox);
-        actualGearBox = gearBoxDao.findByCategoryIdAndValue(categoryId, expectedDriveTypeValue);
+        actualGearBox = gearBoxDao.findByCategoryIdAndValue(categoryId, expectedGearBoxValue);
         gearBoxDao.findAll().forEach(actualGearBoxes::add);
         int actualGearBoxCount = actualGearBoxes.size();
 
         assertEquals(expectedGearBoxCount, actualGearBoxCount);
         assertEquals(expectedGearBox, actualGearBox);
+    }
+
+    @Test
+    @Transactional
+    public void vehicleOptionITest() {
+        String expectedVehicleOptionName = "vehicleOptionTest";
+        int expectedVehicleOptionValue = 1000;
+        Long categoryId = 2000L;
+        Category category = categoryDao.findById(categoryId).get();
+        int expectedVehicleOptionCount = 4;
+        List<VehicleOption> actualVehicleOptions = new ArrayList<>();
+        VehicleOption expectedVehicleOption = new VehicleOption(category, expectedVehicleOptionName, expectedVehicleOptionValue);
+        VehicleOption actualVehicleOption;
+
+        vehicleOptionDao.save(expectedVehicleOption);
+        actualVehicleOption = vehicleOptionDao.findByCategoryIdAndValue(categoryId, expectedVehicleOptionValue);
+        vehicleOptionDao.findAll().forEach(actualVehicleOptions::add);
+        int actualVehicleOptionCount = actualVehicleOptions.size();
+
+        assertEquals(expectedVehicleOptionCount, actualVehicleOptionCount);
+        assertEquals(expectedVehicleOption, actualVehicleOption);
+    }
+
+    @Test
+    @Transactional
+    public void countryITest() {
+        String expectedCountryName = "countryTest";
+        int expectedCountryValue = 1000;
+        int expectedCountryCount = 4;
+        List<Country> actualCountries = new ArrayList<>();
+        Country expectedCountry = new Country(expectedCountryName, expectedCountryValue);
+        Country actualCountry;
+
+        countryDao.save(expectedCountry);
+        actualCountry = countryDao.findByValue(expectedCountryValue);
+        countryDao.findAll().forEach(actualCountries::add);
+        int actualCountryCount = actualCountries.size();
+
+        assertEquals(expectedCountryCount, actualCountryCount);
+        assertEquals(expectedCountry, actualCountry);
+    }
+
+    @Test
+    @Transactional
+    public void fuelTypeITest() {
+        String expectedFuelTypeName = "fuelTypeTest";
+        int expectedFuelTypeValue = 1000;
+        int expectedFuelTypeCount = 4;
+        List<FuelType> actualFuelTypes = new ArrayList<>();
+        FuelType expectedFuelType = new FuelType(expectedFuelTypeName, expectedFuelTypeValue);
+        FuelType actualFuelType;
+
+        fuelTypeDao.save(expectedFuelType);
+        actualFuelType = fuelTypeDao.findByValue(expectedFuelTypeValue);
+        fuelTypeDao.findAll().forEach(actualFuelTypes::add);
+        int actualFuelTypeCount = actualFuelTypes.size();
+
+        assertEquals(expectedFuelTypeCount, actualFuelTypeCount);
+        assertEquals(expectedFuelType, actualFuelType);
+    }
+
+    @Test
+    @Transactional
+    public void vehicleColorITest() {
+        String expectedVehicleColorName = "vehicleColorTest";
+        int expectedVehicleColorValue = 1000;
+        int expectedVehicleColorCount = 4;
+        List<VehicleColor> actualVehicleColors = new ArrayList<>();
+        VehicleColor expectedVehicleColor = new VehicleColor(expectedVehicleColorName, expectedVehicleColorValue);
+        VehicleColor actualVehicleColor;
+
+        vehicleColorDao.save(expectedVehicleColor);
+        actualVehicleColor = vehicleColorDao.findByValue(expectedVehicleColorValue);
+        vehicleColorDao.findAll().forEach(actualVehicleColors::add);
+        int actualVehicleColorCount = actualVehicleColors.size();
+
+        assertEquals(expectedVehicleColorCount, actualVehicleColorCount);
+        assertEquals(expectedVehicleColor, actualVehicleColor);
+    }
+
+    @Test
+    @Transactional
+    public void ukraineStateITest() {
+        String expectedUkraineStateName = "ukraineStateTest";
+        int expectedUkraineStateValue = 1000;
+        int expectedUkraineStateCount = 4;
+        List<UkraineState> actualUkraineStates = new ArrayList<>();
+        UkraineState expectedUkraineState = new UkraineState(expectedUkraineStateName, expectedUkraineStateValue);
+        UkraineState actualUkraineState;
+
+        ukraineStateDao.save(expectedUkraineState);
+        actualUkraineState = ukraineStateDao.findByValue(expectedUkraineStateValue);
+        ukraineStateDao.findAll().forEach(actualUkraineStates::add);
+        int actualUkraineStateCount = actualUkraineStates.size();
+
+        assertEquals(expectedUkraineStateCount, actualUkraineStateCount);
+        assertEquals(expectedUkraineState, actualUkraineState);
+    }
+
+    @Test
+    @Transactional
+    public void cityITest() {
+        String expectedCityName = "vehicleOptionTest";
+        int expectedCityValue = 1000;
+        Long ukraineStateId = 2000L;
+        UkraineState ukraineState = ukraineStateDao.findById(ukraineStateId).get();
+        int expectedCityCount = 4;
+        List<City> actualCities = new ArrayList<>();
+        City expectedCity = new City(ukraineState, expectedCityName, expectedCityValue);
+        City actualCity;
+
+        cityDao.save(expectedCity);
+        actualCity = cityDao.findByUkraineStateIdAndValue(ukraineStateId, expectedCityValue);
+        cityDao.findAll().forEach(actualCities::add);
+        int actualCityCount = actualCities.size();
+
+        assertEquals(expectedCityCount, actualCityCount);
+        assertEquals(expectedCity, actualCity);
     }
 }
