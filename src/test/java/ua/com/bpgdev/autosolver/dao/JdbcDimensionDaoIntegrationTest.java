@@ -7,7 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import ua.com.bpgdev.autosolver.entity.*;
+import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.*;
+import ua.com.bpgdev.autosolver.dao.jdbc.dimension.simple.*;
+import ua.com.bpgdev.autosolver.entity.dimension.category.*;
+import ua.com.bpgdev.autosolver.entity.dimension.simple.*;
 
 import java.util.ArrayList;
 import java.util.List;
