@@ -12,6 +12,7 @@ public class UkraineStateTest {
         EqualsVerifier.forClass(UkraineState.class)
                 .withRedefinedSuperclass()
                 .withIgnoredAnnotations(javax.persistence.Id.class)
+                .withIgnoredFields("id")
                 .verify();
     }
 

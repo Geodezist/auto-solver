@@ -55,6 +55,7 @@ public class CategoryTest {
     public void equalsContract() {
         EqualsVerifier.forClass(Category.class)
                 .withIgnoredAnnotations(javax.persistence.Id.class)
+                .withIgnoredFields("id")
                 .verify();
     }
 

@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class FuelType extends SimpleDimension {
     @Id
     @Column(name = "d_fuel_type_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     public FuelType(String name, int value) {

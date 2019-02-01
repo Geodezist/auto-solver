@@ -12,6 +12,7 @@ public class VehicleColorTest {
         EqualsVerifier.forClass(VehicleColor.class)
                 .withRedefinedSuperclass()
                 .withIgnoredAnnotations(javax.persistence.Id.class)
+                .withIgnoredFields("id")
                 .verify();
     }
 

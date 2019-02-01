@@ -12,6 +12,7 @@ public class CountryTest {
         EqualsVerifier.forClass(Country.class)
                 .withRedefinedSuperclass()
                 .withIgnoredAnnotations(javax.persistence.Id.class)
+                .withIgnoredFields("id")
                 .verify();
     }
 

@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class Category {
     @Id
     @Column(name = "d_category_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     @NonNull

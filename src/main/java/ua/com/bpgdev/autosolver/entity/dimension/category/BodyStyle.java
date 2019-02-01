@@ -13,7 +13,8 @@ import javax.persistence.*;
 public class BodyStyle extends DimensionWithCategory {
     @Id
     @Column(name = "d_bodystyle_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     public BodyStyle(Category category, String name, int value) {
