@@ -13,6 +13,7 @@ public class GearBoxTest {
         EqualsVerifier.forClass(GearBox.class)
                 .withRedefinedSuperclass()
                 .withIgnoredAnnotations(javax.persistence.Id.class)
+                .withIgnoredFields("id")
                 .verify();
     }
 

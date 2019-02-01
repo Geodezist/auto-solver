@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class UkraineState extends SimpleDimension {
     @Id
     @Column(name = "d_state_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     public UkraineState(String name, int value) {

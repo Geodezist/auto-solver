@@ -13,7 +13,8 @@ import javax.persistence.*;
 public class GearBox extends DimensionWithCategory {
     @Id
     @Column(name = "d_gearbox_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     public GearBox(Category category, String name, int value) {

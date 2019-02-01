@@ -24,3 +24,8 @@ spring:
 logging:
   level:
     org.springframework.*: info
+
+autosolver:
+  external-api:
+    base-api-url: ${base_api_url}
+    api-key: ${api_key}

@@ -17,7 +17,8 @@ import javax.persistence.*;
 public class VehicleModel {
     @Id
     @Column(name = "d_model_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

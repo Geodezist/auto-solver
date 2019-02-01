@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class VehicleColor extends SimpleDimension {
     @Id
     @Column(name = "d_color_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     public VehicleColor(String name, int value) {

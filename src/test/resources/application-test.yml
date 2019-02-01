@@ -29,3 +29,8 @@ logging:
 #    org.hibernate.sql.*: debug
 #    org.hibernate.type.descriptor.sql.*: trace
     liquibase.*: off
+
+autosolver:
+  external-api:
+    base-api-url:
+    api-key:

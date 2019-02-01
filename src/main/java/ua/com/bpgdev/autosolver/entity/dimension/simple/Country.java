@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class Country extends SimpleDimension {
     @Id
     @Column(name = "d_country_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     public Country(String name, int value) {
