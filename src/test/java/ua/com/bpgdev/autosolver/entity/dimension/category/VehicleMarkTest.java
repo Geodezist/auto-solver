@@ -13,6 +13,7 @@ public class VehicleMarkTest {
         EqualsVerifier.forClass(VehicleMark.class)
                 .withRedefinedSuperclass()
                 .withIgnoredAnnotations(javax.persistence.Id.class)
+                .withIgnoredFields("id")
                 .verify();
     }
 

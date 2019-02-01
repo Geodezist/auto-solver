@@ -13,6 +13,7 @@ public class VehicleOptionTest {
         EqualsVerifier.forClass(VehicleOption.class)
                 .withRedefinedSuperclass()
                 .withIgnoredAnnotations(javax.persistence.Id.class)
+                .withIgnoredFields("id")
                 .verify();
     }
 

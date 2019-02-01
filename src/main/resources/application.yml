@@ -4,9 +4,9 @@ spring:
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/
-    username: autosolver
-    password: autosolver
+    url:  ${db_url}
+    username: ${db_user_name}
+    password: ${db_user_password}
     platform: postgresql
     initialization-mode: always
 
@@ -24,3 +24,8 @@ spring:
 logging:
   level:
     org.springframework.*: info
+
+autosolver:
+  external-api:
+    base-api-url: ${base_api_url}
+    api-key: ${api_key}

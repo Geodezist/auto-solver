@@ -13,6 +13,7 @@ public class DriveTypeTest {
         EqualsVerifier.forClass(DriveType.class)
                 .withRedefinedSuperclass()
                 .withIgnoredAnnotations(javax.persistence.Id.class)
+                .withIgnoredFields("id")
                 .verify();
     }
 

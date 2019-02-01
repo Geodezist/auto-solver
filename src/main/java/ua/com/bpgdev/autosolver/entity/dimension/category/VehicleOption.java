@@ -16,7 +16,8 @@ import javax.persistence.*;
 public class VehicleOption extends DimensionWithCategory {
     @Id
     @Column(name = "d_option_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     public VehicleOption(Category category, String name, int value) {

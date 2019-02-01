@@ -12,6 +12,7 @@ public class FuelTypeTest {
         EqualsVerifier.forClass(FuelType.class)
                 .withRedefinedSuperclass()
                 .withIgnoredAnnotations(javax.persistence.Id.class)
+                .withIgnoredFields("id")
                 .verify();
     }
 

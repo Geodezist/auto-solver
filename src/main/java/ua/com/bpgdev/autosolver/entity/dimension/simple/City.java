@@ -15,7 +15,8 @@ import javax.persistence.*;
 public class City extends SimpleDimension {
     @Id
     @Column(name = "d_city_id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Exclude
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

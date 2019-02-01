@@ -14,6 +14,7 @@ public class BodyStyleTest {
         EqualsVerifier.forClass(BodyStyle.class)
                 .withRedefinedSuperclass()
                 .withIgnoredAnnotations(javax.persistence.Id.class)
+                .withIgnoredFields("id")
                 .verify();
     }
 
