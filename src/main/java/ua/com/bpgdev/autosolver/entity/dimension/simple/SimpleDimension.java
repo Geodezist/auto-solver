@@ -10,7 +10,7 @@ import javax.persistence.MappedSuperclass;
 @NoArgsConstructor
 @EqualsAndHashCode
 @MappedSuperclass
-class SimpleDimension {
+public class SimpleDimension {
     @NonNull
     private String name;
 

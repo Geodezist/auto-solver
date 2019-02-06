@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DefaultBodyStyleService implements BodyStyleService {
+public class DefaultBodyStyleService
+        extends AbstractDimensionWithCategoryService<BodyStyle>
+        implements BodyStyleService {
     private BodyStyleDao bodyStyleDao;
 
     @Autowired
@@ -28,6 +30,11 @@ public class DefaultBodyStyleService implements BodyStyleService {
     @Override
     public List<BodyStyle> getByCategoryId(Long categoryId) {
         return bodyStyleDao.findByCategoryId(categoryId);
+    }
+
+    @Override
+    public List<BodyStyle> getByCategoryValue(int categoryValue) {
+        return bodyStyleDao.findByCategoryValue(categoryValue);
     }
 
     @Override

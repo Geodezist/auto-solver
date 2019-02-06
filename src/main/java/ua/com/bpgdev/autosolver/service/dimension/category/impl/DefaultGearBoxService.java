@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DefaultGearBoxService implements GearBoxService {
+public class DefaultGearBoxService
+        extends AbstractDimensionWithCategoryService<GearBox>
+        implements GearBoxService {
     private GearBoxDao gearBoxDao;
 
     @Autowired
@@ -28,6 +30,11 @@ public class DefaultGearBoxService implements GearBoxService {
     @Override
     public List<GearBox> getByCategoryId(Long categoryId) {
         return gearBoxDao.findByCategoryId(categoryId);
+    }
+
+    @Override
+    public List<GearBox> getByCategoryValue(int categoryValue) {
+        return gearBoxDao.findByCategoryValue(categoryValue);
     }
 
     @Override

@@ -11,7 +11,7 @@ public class RestApiUrlBuilder {
 
     @Autowired
     public RestApiUrlBuilder(@Value("${autosolver.external-api.base-api-url}") String baseApiUrl,
-                             @Value("${autosolver.external-api.api-key}") String apiKey){
+                             @Value("${autosolver.external-api.api-key}") String apiKey) {
         this.baseApiUrl = baseApiUrl;
         this.apiKey = apiKey;
     }

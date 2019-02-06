@@ -24,10 +24,5 @@ public class DefaultCountryPopulator extends SimpleCommonPopulator<Country> impl
     public int populateAll() {
         return countryService.saveAll(getUpstreamData(Country[].class, COUNTRY_API_ENTITY));
     }
-
-    @Override
-    public boolean populateCountry(Country country) {
-        return countryService.save(country);
-    }
 }
 

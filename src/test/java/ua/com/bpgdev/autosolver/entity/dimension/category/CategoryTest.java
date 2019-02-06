@@ -54,6 +54,7 @@ public class CategoryTest {
     @Test
     public void equalsContract() {
         EqualsVerifier.forClass(Category.class)
+                .withRedefinedSuperclass()
                 .withIgnoredAnnotations(javax.persistence.Id.class)
                 .withIgnoredFields("id")
                 .verify();
@@ -109,12 +110,12 @@ public class CategoryTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void CategoryAllArgsTest(){
+    public void CategoryAllArgsTest() {
         new Category(null, null, expectedValue);
     }
 
     @Test(expected = NullPointerException.class)
-    public void CategoryRequiredArgsTest(){
+    public void CategoryRequiredArgsTest() {
         new Category(null, expectedValue);
     }
 }

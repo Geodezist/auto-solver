@@ -35,9 +35,4 @@ public class DefaultVehicleOptionPopulator extends CategoryCommonPopulator<Vehic
         }
         return result;
     }
-
-    @Override
-    public boolean populateVehicleOption(VehicleOption vehicleOption) {
-        return false;
-    }
 }

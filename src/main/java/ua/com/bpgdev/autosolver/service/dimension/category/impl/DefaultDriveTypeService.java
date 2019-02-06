@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DefaultDriveTypeService implements DriveTypeService {
+public class DefaultDriveTypeService
+        extends AbstractDimensionWithCategoryService<DriveType>
+        implements DriveTypeService {
     private DriveTypeDao driveTypeDao;
 
     @Autowired
@@ -28,6 +30,11 @@ public class DefaultDriveTypeService implements DriveTypeService {
     @Override
     public List<DriveType> getByCategoryId(Long categoryId) {
         return driveTypeDao.findByCategoryId(categoryId);
+    }
+
+    @Override
+    public List<DriveType> getByCategoryValue(int categoryValue) {
+        return driveTypeDao.findByCategoryValue(categoryValue);
     }
 
     @Override

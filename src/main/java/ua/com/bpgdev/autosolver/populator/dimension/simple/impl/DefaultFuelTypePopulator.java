@@ -22,9 +22,4 @@ public class DefaultFuelTypePopulator extends SimpleCommonPopulator<FuelType> im
     public int populateAll() {
         return fuelTypeService.saveAll(getUpstreamData(FuelType[].class, FUEL_TYPE_API_ENTITY));
     }
-
-    @Override
-    public boolean populateFuelType(FuelType fuelType) {
-        return fuelTypeService.save(fuelType);
-    }
 }

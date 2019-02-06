@@ -1,28 +1,29 @@
 package ua.com.bpgdev.autosolver.entity.dimension.category;
 
 import lombok.*;
+import ua.com.bpgdev.autosolver.entity.dimension.simple.SimpleDimension;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
-@ToString
-@EqualsAndHashCode
-@Entity
 @NoArgsConstructor
-@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@Entity
 @Table(name = "d_category")
-public class Category {
+public class Category extends SimpleDimension {
     @Id
     @Column(name = "d_category_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
     private Long id;
 
-    @NonNull
-    private String name;
+    public Category(String name, int value) {
+        super(name, value);
+    }
 
-    @NonNull
-    private int value;
+    public Category(Long id, String name, int value) {
+        super(name, value);
+        this.id = id;
+    }
 }

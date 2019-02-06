@@ -10,6 +10,8 @@ import java.util.List;
 interface DimensionWithCategoryDao<T> extends Repository<T, Long> {
     List<T> findByCategoryId(Long categoryId);
 
+    List<T> findByCategoryValue(int categoryValue);
+
     T findByCategoryIdAndName(Long categoryId, String name);
 
     T findByCategoryIdAndValue(Long categoryId, int value);

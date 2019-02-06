@@ -35,9 +35,4 @@ public class DefaultBodyStylePopulator extends CategoryCommonPopulator<BodyStyle
         }
         return result;
     }
-
-    @Override
-    public boolean populateBodyStyle(BodyStyle bodyStyle) {
-        return false;
-    }
 }

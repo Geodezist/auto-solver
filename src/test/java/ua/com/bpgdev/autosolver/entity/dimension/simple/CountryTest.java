@@ -19,7 +19,7 @@ public class CountryTest {
     @Test
     public void setIdTest() {
         Long expectedId = 101L;
-        Country expectedCountry = new Country( "TestCountry", 101);
+        Country expectedCountry = new Country("TestCountry", 101);
         assertNotEquals(expectedId, expectedCountry.getId());
         expectedCountry.setId(expectedId);
         assertEquals(expectedId, expectedCountry.getId());

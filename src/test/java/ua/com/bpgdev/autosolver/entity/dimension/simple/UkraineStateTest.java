@@ -19,7 +19,7 @@ public class UkraineStateTest {
     @Test
     public void setIdTest() {
         Long expectedId = 101L;
-        UkraineState expectedUkraineState = new UkraineState( "TestUkraineState", 101);
+        UkraineState expectedUkraineState = new UkraineState("TestUkraineState", 101);
         assertNotEquals(expectedId, expectedUkraineState.getId());
         expectedUkraineState.setId(expectedId);
         assertEquals(expectedId, expectedUkraineState.getId());

@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DefaultVehicleColorService implements VehicleColorService {
+public class DefaultVehicleColorService
+        extends AbstractSimpleDimensionService<VehicleColor>
+        implements VehicleColorService {
     private VehicleColorDao vehicleColorDao;
 
     @Autowired
@@ -30,14 +32,5 @@ public class DefaultVehicleColorService implements VehicleColorService {
         entities.removeAll(getAll());
         vehicleColorDao.saveAll(entities);
         return entities.size();
-    }
-
-    @Override
-    public boolean save(VehicleColor entity) {
-        if (getAll().indexOf(entity) == -1) {
-            vehicleColorDao.save(entity);
-            return true;
-        }
-        return false;
     }
 }

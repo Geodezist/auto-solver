@@ -3,6 +3,7 @@ package ua.com.bpgdev.autosolver.service.dimension.category.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleMarkDao;
+import ua.com.bpgdev.autosolver.dto.dimension.simple.SimpleDTO;
 import ua.com.bpgdev.autosolver.entity.dimension.category.Category;
 import ua.com.bpgdev.autosolver.entity.dimension.category.VehicleMark;
 import ua.com.bpgdev.autosolver.service.dimension.category.VehicleMarkService;
@@ -11,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DefaultVehicleMarkService implements VehicleMarkService {
+public class DefaultVehicleMarkService
+        extends AbstractDimensionWithCategoryService<VehicleMark>
+        implements VehicleMarkService {
     private VehicleMarkDao vehicleMarkDao;
 
     @Autowired
@@ -29,6 +32,17 @@ public class DefaultVehicleMarkService implements VehicleMarkService {
     @Override
     public List<VehicleMark> getByCategoryId(Long categoryId) {
         return vehicleMarkDao.findByCategoryId(categoryId);
+    }
+
+    @Override
+    public List<VehicleMark> getByCategoryValue(int categoryValue) {
+        return vehicleMarkDao.findByCategoryValue(categoryValue);
+    }
+
+    @Override
+    public List<SimpleDTO> getByCategoryValueAndNameStartsWithDto(int categoryValue, String searchString) {
+        return MODEL_MAPPER.map(vehicleMarkDao.findByCategoryValueAndNameStartsWithIgnoreCase(categoryValue, searchString),
+                CATEGORY_DTO_TYPE);
     }
 
     @Override
