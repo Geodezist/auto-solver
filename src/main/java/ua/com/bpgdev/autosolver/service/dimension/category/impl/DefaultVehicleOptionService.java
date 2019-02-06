@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DefaultVehicleOptionService implements VehicleOptionService {
+public class DefaultVehicleOptionService
+        extends AbstractDimensionWithCategoryService<VehicleOption>
+        implements VehicleOptionService {
     private VehicleOptionDao vehicleOptionDao;
 
     @Autowired
@@ -28,6 +30,11 @@ public class DefaultVehicleOptionService implements VehicleOptionService {
     @Override
     public List<VehicleOption> getByCategoryId(Long categoryId) {
         return vehicleOptionDao.findByCategoryId(categoryId);
+    }
+
+    @Override
+    public List<VehicleOption> getByCategoryValue(int categoryValue) {
+        return vehicleOptionDao.findByCategoryValue(categoryValue);
     }
 
     @Override

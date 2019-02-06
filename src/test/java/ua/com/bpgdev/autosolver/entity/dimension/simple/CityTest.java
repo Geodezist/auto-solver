@@ -36,7 +36,7 @@ public class CityTest {
     }
 
     @Test(expected = NullPointerException.class)
-    public void setUkraineStateNullTest(){
+    public void setUkraineStateNullTest() {
         City expectedCity = new City(new UkraineState(), "TestCity", 101);
         expectedCity.setUkraineState(null);
     }

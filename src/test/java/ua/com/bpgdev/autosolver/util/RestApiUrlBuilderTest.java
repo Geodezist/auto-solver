@@ -16,7 +16,7 @@ public class RestApiUrlBuilderTest {
     RestApiUrlBuilder restApiUrlBuilder;
 
     @Test
-    public void getUrlApi(){
+    public void getUrlApi() {
         System.out.println(restApiUrlBuilder.getUrlApi("countries"));
     }
 

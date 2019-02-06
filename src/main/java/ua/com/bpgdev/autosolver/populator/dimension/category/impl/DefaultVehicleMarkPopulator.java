@@ -35,9 +35,4 @@ public class DefaultVehicleMarkPopulator extends CategoryCommonPopulator<Vehicle
         }
         return result;
     }
-
-    @Override
-    public boolean populateVehicleMark(VehicleMark vehicleMark) {
-        return false;
-    }
 }

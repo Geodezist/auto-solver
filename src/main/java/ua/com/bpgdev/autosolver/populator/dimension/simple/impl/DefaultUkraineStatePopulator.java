@@ -24,9 +24,4 @@ public class DefaultUkraineStatePopulator extends SimpleCommonPopulator<UkraineS
     public int populateAll() {
         return ukraineStateService.saveAll(getUpstreamData(UkraineState[].class, UKRAINE_STATE_API_ENTITY));
     }
-
-    @Override
-    public boolean populateUkraineState(UkraineState ukraineState) {
-        return ukraineStateService.save(ukraineState);
-    }
 }

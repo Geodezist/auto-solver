@@ -24,9 +24,4 @@ public class DefaultCategoryPopulator extends SimpleCommonPopulator<Category> im
     public int populateAll() {
         return categoryService.saveAll(getUpstreamData(Category[].class, CATEGORY_API_ENTITY));
     }
-
-    @Override
-    public boolean populateCategory(Category category) {
-        return categoryService.save(category);
-    }
 }

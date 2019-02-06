@@ -1,16 +1,24 @@
 package ua.com.bpgdev.autosolver.service.dimension.category.impl;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.CategoryDao;
+import ua.com.bpgdev.autosolver.dto.dimension.simple.SimpleDTO;
 import ua.com.bpgdev.autosolver.entity.dimension.category.Category;
 import ua.com.bpgdev.autosolver.service.dimension.category.CategoryService;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class DefaultCategoryService implements CategoryService {
+    private static final ModelMapper MODEL_MAPPER = new ModelMapper();
+    private static final Type SIMPLE_DTO_TYPE = new TypeToken<List<SimpleDTO>>() {
+    }.getType();
+
     private CategoryDao categoryDao;
 
     @Autowired
@@ -24,6 +32,12 @@ public class DefaultCategoryService implements CategoryService {
         categoryDao.findAll().forEach(categories::add);
         return categories;
     }
+
+    @Override
+    public List<SimpleDTO> getAllDto() {
+        return MODEL_MAPPER.map(getAll(), SIMPLE_DTO_TYPE);
+    }
+
 
     @Override
     public int saveAll(List<Category> categories) {

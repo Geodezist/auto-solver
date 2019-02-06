@@ -35,9 +35,4 @@ public class DefaultGearBoxPopulator extends CategoryCommonPopulator<GearBox> im
         }
         return result;
     }
-
-    @Override
-    public boolean populateGearBox(GearBox gearBox) {
-        return false;
-    }
 }

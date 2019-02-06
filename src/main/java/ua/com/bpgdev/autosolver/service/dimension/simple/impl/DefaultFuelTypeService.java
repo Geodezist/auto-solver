@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DefaultFuelTypeService implements FuelTypeService {
+public class DefaultFuelTypeService
+        extends AbstractSimpleDimensionService<FuelType>
+        implements FuelTypeService {
+
     private FuelTypeDao fuelTypeDao;
 
     @Autowired
@@ -30,14 +33,5 @@ public class DefaultFuelTypeService implements FuelTypeService {
         entities.removeAll(getAll());
         fuelTypeDao.saveAll(entities);
         return entities.size();
-    }
-
-    @Override
-    public boolean save(FuelType entity) {
-        if (getAll().indexOf(entity) == -1) {
-            fuelTypeDao.save(entity);
-            return true;
-        }
-        return false;
     }
 }

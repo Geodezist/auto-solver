@@ -35,9 +35,4 @@ public class DefaultDriveTypePopulator extends CategoryCommonPopulator<DriveType
         }
         return result;
     }
-
-    @Override
-    public boolean populateDriveType(DriveType driveType) {
-        return false;
-    }
 }

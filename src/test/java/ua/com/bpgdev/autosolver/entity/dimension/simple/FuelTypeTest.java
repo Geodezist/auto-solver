@@ -19,7 +19,7 @@ public class FuelTypeTest {
     @Test
     public void setIdTest() {
         Long expectedId = 101L;
-        FuelType expectedFuelType = new FuelType( "TestFuelType", 101);
+        FuelType expectedFuelType = new FuelType("TestFuelType", 101);
         assertNotEquals(expectedId, expectedFuelType.getId());
         expectedFuelType.setId(expectedId);
         assertEquals(expectedId, expectedFuelType.getId());

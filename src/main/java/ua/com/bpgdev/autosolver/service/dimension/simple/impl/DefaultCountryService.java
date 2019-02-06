@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DefaultCountryService implements CountryService {
+public class DefaultCountryService
+        extends AbstractSimpleDimensionService<Country>
+        implements CountryService {
     private CountryDao countryDao;
 
     @Autowired
@@ -25,19 +27,9 @@ public class DefaultCountryService implements CountryService {
         return countries;
     }
 
-    @Override
     public int saveAll(List<Country> entities) {
         entities.removeAll(getAll());
         countryDao.saveAll(entities);
         return entities.size();
-    }
-
-    @Override
-    public boolean save(Country entity) {
-        if (getAll().indexOf(entity) == -1) {
-            countryDao.save(entity);
-            return true;
-        }
-        return false;
     }
 }

@@ -19,7 +19,7 @@ public class VehicleColorTest {
     @Test
     public void setIdTest() {
         Long expectedId = 101L;
-        VehicleColor expectedVehicleColor = new VehicleColor( "TestVehicleColor", 101);
+        VehicleColor expectedVehicleColor = new VehicleColor("TestVehicleColor", 101);
         assertNotEquals(expectedId, expectedVehicleColor.getId());
         expectedVehicleColor.setId(expectedId);
         assertEquals(expectedId, expectedVehicleColor.getId());

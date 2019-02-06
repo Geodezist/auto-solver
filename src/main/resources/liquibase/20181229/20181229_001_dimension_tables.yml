@@ -55,34 +55,34 @@ databaseChangeLog:
             type: INT
 
 - changeSet:
-      id: 1546108295497-3
-      author: geodezist@gmail.com
-      changes:
-      - createTable:
-            tableName: d_city
-            remarks: Cities of Ukraine (Города Украины)
-            columns:
-            - column:
-                  autoIncrement: true
-                  constraints:
-                      primaryKey: true
-                  name: d_city_id
-                  type: INT
-            - column:
-                  constraints:
-                      nullable: false
-                  name: d_state_id
-                  type: INT
-            - column:
-                  constraints:
-                      nullable: false
-                  name: name
-                  type: VARCHAR(250)
-            - column:
-                  constraints:
-                      nullable: false
-                  name: value
-                  type: INT
+    id: 1546108295497-3
+    author: geodezist@gmail.com
+    changes:
+    - createTable:
+        tableName: d_city
+        remarks: Cities of Ukraine (Города Украины)
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              primaryKey: true
+            name: d_city_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: d_state_id
+            type: INT
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(250)
+        - column:
+            constraints:
+              nullable: false
+            name: value
+            type: INT
 
 - changeSet:
     id: 1546108295497-4
@@ -506,72 +506,72 @@ databaseChangeLog:
 
 #---------------------------------------------
 - changeSet:
-      id: 1546108295497-17
-      author: geodezist@gmail.com
-      changes:
-      - addUniqueConstraint:
-            columnNames: d_category_id, name, value
-            constraintName: uidx_d_bodystyle_name_value
-            tableName: d_bodystyle
+    id: 1546108295497-17
+    author: geodezist@gmail.com
+    changes:
+    - addUniqueConstraint:
+        columnNames: d_category_id, name, value
+        constraintName: uidx_d_bodystyle_name_value
+        tableName: d_bodystyle
 
 - changeSet:
-      id: 1546108295497-19
-      author: geodezist@gmail.com
-      changes:
-      - addForeignKeyConstraint:
-            baseColumnNames: d_category_id
-            baseTableName: d_bodystyle
-            constraintName: fk_d_bodystyle_d_category_id
-            deferrable: false
-            initiallyDeferred: false
-            onDelete: NO ACTION
-            onUpdate: NO ACTION
-            referencedColumnNames: d_category_id
-            referencedTableName: d_category
-            validate: true
+    id: 1546108295497-19
+    author: geodezist@gmail.com
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: d_category_id
+        baseTableName: d_bodystyle
+        constraintName: fk_d_bodystyle_d_category_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: d_category_id
+        referencedTableName: d_category
+        validate: true
 
 - changeSet:
-      id: 1546108295497-20
-      author: geodezist@gmail.com
-      changes:
-      - addUniqueConstraint:
-            columnNames: name, value
-            constraintName: uidx_d_category_name_value
-            tableName: d_category
+    id: 1546108295497-20
+    author: geodezist@gmail.com
+    changes:
+    - addUniqueConstraint:
+        columnNames: name, value
+        constraintName: uidx_d_category_name_value
+        tableName: d_category
 
 - changeSet:
-      id: 1546108295497-21
-      author: geodezist@gmail.com
-      changes:
-      - addUniqueConstraint:
-            columnNames: d_state_id, name
-            constraintName: uidx_d_city_name
-            tableName: d_city
+    id: 1546108295497-21
+    author: geodezist@gmail.com
+    changes:
+    - addUniqueConstraint:
+        columnNames: d_state_id, name
+        constraintName: uidx_d_city_name
+        tableName: d_city
 
 - changeSet:
-      id: 1546108295497-22
-      author: geodezist@gmail.com
-      changes:
-      - addUniqueConstraint:
-            columnNames: d_state_id, value
-            constraintName: uidx_d_city_value
-            tableName: d_city
+    id: 1546108295497-22
+    author: geodezist@gmail.com
+    changes:
+    - addUniqueConstraint:
+        columnNames: d_state_id, value
+        constraintName: uidx_d_city_value
+        tableName: d_city
 
 - changeSet:
-      id: 1546108295497-23
-      author: geodezist@gmail.com
-      changes:
-      - addForeignKeyConstraint:
-            baseColumnNames: d_state_id
-            baseTableName: d_city
-            constraintName: fk_d_city_d_state_id
-            deferrable: false
-            initiallyDeferred: false
-            onDelete: NO ACTION
-            onUpdate: NO ACTION
-            referencedColumnNames: d_state_id
-            referencedTableName: d_state
-            validate: true
+    id: 1546108295497-23
+    author: geodezist@gmail.com
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: d_state_id
+        baseTableName: d_city
+        constraintName: fk_d_city_d_state_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: d_state_id
+        referencedTableName: d_state
+        validate: true
 
 - changeSet:
     id: 1546108295497-24
@@ -678,22 +678,22 @@ databaseChangeLog:
         validate: true
 
 - changeSet:
-      id: 1546108295497-34
-      author: geodezist@gmail.com
-      changes:
-      - addUniqueConstraint:
-            columnNames: d_category_id, name
-            constraintName: uidx_d_mark_name
-            tableName: d_mark
+    id: 1546108295497-34
+    author: geodezist@gmail.com
+    changes:
+    - addUniqueConstraint:
+        columnNames: d_category_id, name
+        constraintName: uidx_d_mark_name
+        tableName: d_mark
 
 - changeSet:
-      id: 1546108295497-35
-      author: geodezist@gmail.com
-      changes:
-      - addUniqueConstraint:
-            columnNames: d_category_id, value
-            constraintName: uidx_d_mark_value
-            tableName: d_mark
+    id: 1546108295497-35
+    author: geodezist@gmail.com
+    changes:
+    - addUniqueConstraint:
+        columnNames: d_category_id, value
+        constraintName: uidx_d_mark_value
+        tableName: d_mark
 
 - changeSet:
     id: 1546108295497-36
@@ -764,20 +764,20 @@ databaseChangeLog:
         tableName: d_option
 
 - changeSet:
-      id: 1546108295497-42
-      author: geodezist@gmail.com
-      changes:
-      - addForeignKeyConstraint:
-            baseColumnNames: d_category_id
-            baseTableName: d_option
-            constraintName: fk_d_option_d_category_id
-            deferrable: false
-            initiallyDeferred: false
-            onDelete: NO ACTION
-            onUpdate: NO ACTION
-            referencedColumnNames: d_category_id
-            referencedTableName: d_category
-            validate: true
+    id: 1546108295497-42
+    author: geodezist@gmail.com
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: d_category_id
+        baseTableName: d_option
+        constraintName: fk_d_option_d_category_id
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: d_category_id
+        referencedTableName: d_category
+        validate: true
 
 #---------------------------------------------
 - changeSet:

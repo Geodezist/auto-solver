@@ -40,9 +40,4 @@ public class DefaultCityPopulator extends SimpleCommonPopulator<City> implements
         }
         return result;
     }
-
-    @Override
-    public boolean populateCity(City city) {
-        return cityService.save(city);
-    }
 }

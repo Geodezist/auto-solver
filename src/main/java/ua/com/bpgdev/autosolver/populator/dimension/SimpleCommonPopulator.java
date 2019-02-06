@@ -11,11 +11,11 @@ import java.util.List;
 public abstract class SimpleCommonPopulator<T> {
     private RestApiUrlBuilder restApiUrlBuilder;
 
-    public SimpleCommonPopulator(RestApiUrlBuilder restApiUrlBuilder) {
+    protected SimpleCommonPopulator(RestApiUrlBuilder restApiUrlBuilder) {
         this.restApiUrlBuilder = restApiUrlBuilder;
     }
 
-    public List<T> getUpstreamData(Class<T[]> objectClass, String apiEntityName) {
+    protected List<T> getUpstreamData(Class<T[]> objectClass, String apiEntityName) {
         ArrayList<T> result = new ArrayList<>();
         RestTemplate restTemplate = new RestTemplate();
 

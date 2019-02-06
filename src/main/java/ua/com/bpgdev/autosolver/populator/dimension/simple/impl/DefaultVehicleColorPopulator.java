@@ -24,9 +24,4 @@ public class DefaultVehicleColorPopulator extends SimpleCommonPopulator<VehicleC
     public int populateAll() {
         return vehicleColorService.saveAll(getUpstreamData(VehicleColor[].class, VEHICLE_COLOR_API_ENTITY));
     }
-
-    @Override
-    public boolean populateVehicleColor(VehicleColor vehicleColor) {
-        return vehicleColorService.save(vehicleColor);
-    }
 }

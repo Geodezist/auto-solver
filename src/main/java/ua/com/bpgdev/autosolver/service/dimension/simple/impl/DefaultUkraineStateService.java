@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DefaultUkraineStateService implements UkraineStateService {
+public class DefaultUkraineStateService
+        extends AbstractSimpleDimensionService<UkraineState>
+        implements UkraineStateService {
     private UkraineStateDao ukraineStateDao;
 
     @Autowired
@@ -30,14 +32,5 @@ public class DefaultUkraineStateService implements UkraineStateService {
         entities.removeAll(getAll());
         ukraineStateDao.saveAll(entities);
         return entities.size();
-    }
-
-    @Override
-    public boolean save(UkraineState entity) {
-        if (getAll().indexOf(entity) == -1) {
-            ukraineStateDao.save(entity);
-            return true;
-        }
-        return false;
     }
 }

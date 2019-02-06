@@ -15,7 +15,7 @@ import javax.persistence.MappedSuperclass;
 @NoArgsConstructor
 @EqualsAndHashCode
 @MappedSuperclass
-class DimensionWithCategory {
+public class DimensionWithCategory {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "d_category_id", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
