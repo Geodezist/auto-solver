@@ -2,8 +2,8 @@ package ua.com.bpgdev.autosolver.controller.populator.dimension;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.com.bpgdev.autosolver.populator.dimension.simple.*;
 
@@ -32,27 +32,27 @@ public class SimpleDimensionPopulatorController {
         this.vehicleColorPopulator = vehicleColorPopulator;
     }
 
-    @RequestMapping(path = "/countries", method = RequestMethod.GET)
+    @GetMapping(path = "/countries")
     public String populateCountries() {
         return String.valueOf(countryPopulator.populateAll());
     }
 
-    @RequestMapping(path = "/states", method = RequestMethod.GET)
+    @GetMapping(path = "/states")
     public String populateUkraineStates() {
         return String.valueOf(ukraineStatePopulator.populateAll());
     }
 
-    @RequestMapping(path = "/cities", method = RequestMethod.GET)
+    @GetMapping(path = "/cities")
     public String populateCities() {
         return String.valueOf(cityPopulator.populateAll());
     }
 
-    @RequestMapping(path = "/fuel_types", method = RequestMethod.GET)
+    @GetMapping(path = "/fuel_types")
     public String populateFuelTypes() {
         return String.valueOf(fuelTypePopulator.populateAll());
     }
 
-    @RequestMapping(path = "/vehicle_colors", method = RequestMethod.GET)
+    @GetMapping(path = "/vehicle_colors")
     public String populateVehicleColors() {
         return String.valueOf(vehicleColorPopulator.populateAll());
     }

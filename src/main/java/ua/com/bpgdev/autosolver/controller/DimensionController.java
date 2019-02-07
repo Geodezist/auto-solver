@@ -3,10 +3,7 @@ package ua.com.bpgdev.autosolver.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import ua.com.bpgdev.autosolver.dto.dimension.simple.CityDTO;
 import ua.com.bpgdev.autosolver.dto.dimension.simple.SimpleDTO;
 import ua.com.bpgdev.autosolver.service.dimension.category.*;
@@ -15,7 +12,8 @@ import ua.com.bpgdev.autosolver.service.dimension.simple.*;
 import java.util.List;
 
 @Controller
-@RequestMapping(path = "/api/dimension", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+@CrossOrigin(origins = "*")
+@RequestMapping(path = "/api/dimension", produces = {MediaType.APPLICATION_JSON_VALUE})
 @ResponseBody
 public class DimensionController {
     private CountryService countryService;
@@ -58,74 +56,74 @@ public class DimensionController {
         this.vehicleOptionService = vehicleOptionService;
     }
 
-    @RequestMapping(path = "/states/{stateValue}/cities")
+    @GetMapping(path = "/states/{stateValue}/cities")
     public List<SimpleDTO> getCitiesByUkraineState(@PathVariable int stateValue) {
         return cityService.getAllByUkraineStateValueDto(stateValue);
     }
 
-    @RequestMapping(path = "/cities")
+    @GetMapping(path = "/cities")
     public List<CityDTO> getCities() {
         return cityService.getAllDto();
     }
 
-    @RequestMapping(path = "/countries")
+    @GetMapping(path = "/countries")
     public List<SimpleDTO> getCountries() {
         return countryService.getAllDto();
     }
 
-    @RequestMapping(path = "/fuel_types")
+    @GetMapping(path = "/fuel_types")
     public List<SimpleDTO> getFuelTypes() {
         return fuelTypeService.getAllDto();
     }
 
-    @RequestMapping(path = "/states")
+    @GetMapping(path = "/states")
     public List<SimpleDTO> getUkraineStates() {
         return ukraineStateService.getAllDto();
     }
 
-    @RequestMapping(path = "/colors")
+    @GetMapping(path = "/colors")
     public List<SimpleDTO> getVehicleColors() {
         return vehicleColorService.getAllDto();
     }
 
-    @RequestMapping(path = "/categories/{categoryValue}/body_styles")
+    @GetMapping(path = "/categories/{categoryValue}/body_styles")
     public List<SimpleDTO> getBodyStyles(@PathVariable int categoryValue) {
         return bodyStyleService.getByCategoryValueDto(categoryValue);
     }
 
-    @RequestMapping(path = "/categories")
+    @GetMapping(path = "/categories")
     public List<SimpleDTO> getCategories() {
         return categoryService.getAllDto();
     }
 
-    @RequestMapping(path = "/categories/{categoryValue}/drive_types")
+    @GetMapping(path = "/categories/{categoryValue}/drive_types")
     public List<SimpleDTO> getDriveTypes(@PathVariable int categoryValue) {
         return driveTypeService.getByCategoryValueDto(categoryValue);
     }
 
-    @RequestMapping(path = "/categories/{categoryValue}/gearboxes")
+    @GetMapping(path = "/categories/{categoryValue}/gearboxes")
     public List<SimpleDTO> getGearBoxes(@PathVariable int categoryValue) {
         return gearBoxService.getByCategoryValueDto(categoryValue);
     }
 
-    @RequestMapping(path = "/categories/{categoryValue}/marks")
+    @GetMapping(path = "/categories/{categoryValue}/marks")
     public List<SimpleDTO> getVehicleMarks(@PathVariable int categoryValue) {
         return vehicleMarkService.getByCategoryValueDto(categoryValue);
     }
 
-    @RequestMapping(path = "/categories/{categoryValue}/marks/{searchString}")
+    @GetMapping(path = "/categories/{categoryValue}/marks/{searchString}")
     public List<SimpleDTO> getVehicleMarksByPartialName(@PathVariable int categoryValue,
                                                         @PathVariable String searchString) {
         return vehicleMarkService.getByCategoryValueAndNameStartsWithDto(categoryValue, searchString);
     }
 
-    @RequestMapping(path = "/categories/{categoryValue}/mark/{markValue}/models")
+    @GetMapping(path = "/categories/{categoryValue}/mark/{markValue}/models")
     public List<SimpleDTO> getVehicleModels(@PathVariable int categoryValue,
                                             @PathVariable int markValue) {
         return vehicleModelService.getByCategoryValueAndMarkValueDto(categoryValue, markValue);
     }
 
-    @RequestMapping(path = "/categories/{categoryValue}/options")
+    @GetMapping(path = "/categories/{categoryValue}/options")
     public List<SimpleDTO> getVehicleOptions(@PathVariable int categoryValue) {
         return vehicleOptionService.getByCategoryValueDto(categoryValue);
     }

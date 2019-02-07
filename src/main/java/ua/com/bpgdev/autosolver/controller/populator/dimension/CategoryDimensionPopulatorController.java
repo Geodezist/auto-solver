@@ -2,8 +2,8 @@ package ua.com.bpgdev.autosolver.controller.populator.dimension;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.com.bpgdev.autosolver.populator.dimension.category.*;
 
@@ -36,37 +36,37 @@ public class CategoryDimensionPopulatorController {
         this.vehicleOptionPopulator = vehicleOptionPopulator;
     }
 
-    @RequestMapping(path = "/categories", method = RequestMethod.GET)
+    @GetMapping(path = "/categories")
     public String populateCategories() {
         return String.valueOf(categoryPopulator.populateAll());
     }
 
-    @RequestMapping(path = "/bodystyles", method = RequestMethod.GET)
+    @GetMapping(path = "/bodystyles")
     public String populateBodyStyle() {
         return String.valueOf(bodyStylePopulator.populateAll());
     }
 
-    @RequestMapping(path = "/drive_types", method = RequestMethod.GET)
+    @GetMapping(path = "/drive_types")
     public String populateDriveTypes() {
         return String.valueOf(driveTypePopulator.populateAll());
     }
 
-    @RequestMapping(path = "/gearboxes", method = RequestMethod.GET)
+    @GetMapping(path = "/gearboxes")
     public String populateGearBoxes() {
         return String.valueOf(gearBoxPopulator.populateAll());
     }
 
-    @RequestMapping(path = "/vehicle_marks", method = RequestMethod.GET)
+    @GetMapping(path = "/vehicle_marks")
     public String populateVehicleMarks() {
         return String.valueOf(vehicleMarkPopulator.populateAll());
     }
 
-    @RequestMapping(path = "/vehicle_models", method = RequestMethod.GET)
+    @GetMapping(path = "/vehicle_models")
     public String populateVehicleModels() {
         return String.valueOf(vehicleModelPopulator.populateAll());
     }
 
-    @RequestMapping(path = "/vehicle_options", method = RequestMethod.GET)
+    @GetMapping(path = "/vehicle_options")
     public String populateVehicleOptions() {
         return String.valueOf(vehicleOptionPopulator.populateAll());
     }
