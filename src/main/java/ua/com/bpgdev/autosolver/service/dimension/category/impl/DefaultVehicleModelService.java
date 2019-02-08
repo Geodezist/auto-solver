@@ -2,6 +2,8 @@ package ua.com.bpgdev.autosolver.service.dimension.category.impl;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleMarkDao;
@@ -17,6 +19,8 @@ import java.util.List;
 @Service
 public class DefaultVehicleModelService
         implements VehicleModelService {
+    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+
     private static final ModelMapper MODEL_MAPPER = new ModelMapper();
     private static final Type SIMPLE_DTO_TYPE = new TypeToken<List<SimpleDTO>>() {
     }.getType();
@@ -40,12 +44,19 @@ public class DefaultVehicleModelService
     @Override
     public List<SimpleDTO> getByCategoryValueAndMarkValueDto(int categoryValue, int markValue) {
         Long markId = vehicleMarkDao.findByCategoryValueAndValue(categoryValue, markValue).getId();
-        return MODEL_MAPPER.map(vehicleModelDao.findByVehicleMarkId(markId), SIMPLE_DTO_TYPE);
+        List<SimpleDTO> result =MODEL_MAPPER.map(vehicleModelDao.findByVehicleMarkId(markId), SIMPLE_DTO_TYPE);
+
+        LOGGER.debug("Getting all Vehicle Models DTOs. Count of oblects - {}", result.size());
+        return result;
     }
 
     @Override
     public int saveAll(List<VehicleModel> entities) {
+        LOGGER.debug("Saving all Vehicle Models. Count of incoming oblects - {}"
+                , entities.size());
         entities.removeAll(getAll());
+        LOGGER.debug("Saving all Vehicle Models. Count of oblects after filtering - {}"
+                , entities.size());
         vehicleModelDao.saveAll(entities);
         return entities.size();
     }

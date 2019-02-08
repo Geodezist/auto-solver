@@ -28,7 +28,7 @@ public class DefaultCountryService
     }
 
     public int saveAll(List<Country> entities) {
-        entities.removeAll(getAll());
+        filterEntities(entities);
         countryDao.saveAll(entities);
         return entities.size();
     }

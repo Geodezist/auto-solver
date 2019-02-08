@@ -2,6 +2,8 @@ package ua.com.bpgdev.autosolver.service.dimension.category.impl;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.CategoryDao;
@@ -15,6 +17,9 @@ import java.util.List;
 
 @Service
 public class DefaultCategoryService implements CategoryService {
+    private final String className = getClass().getSimpleName();
+    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+
     private static final ModelMapper MODEL_MAPPER = new ModelMapper();
     private static final Type SIMPLE_DTO_TYPE = new TypeToken<List<SimpleDTO>>() {
     }.getType();
@@ -35,13 +40,23 @@ public class DefaultCategoryService implements CategoryService {
 
     @Override
     public List<SimpleDTO> getAllDto() {
-        return MODEL_MAPPER.map(getAll(), SIMPLE_DTO_TYPE);
+        List<SimpleDTO> result = MODEL_MAPPER.map(getAll(), SIMPLE_DTO_TYPE);
+        LOGGER.debug("Getting all DTOs by {}. Count of oblects - {}"
+                , className
+                , result.size());
+        return result;
     }
 
 
     @Override
     public int saveAll(List<Category> categories) {
+        LOGGER.debug("Saving all {}. Count of incoming oblects - {}"
+                , className
+                , categories.size());
         categories.removeAll(getAll());
+        LOGGER.debug("Saving all {}. Count of oblects after filtering - {}"
+                , className
+                , categories.size());
         categoryDao.saveAll(categories);
         return categories.size();
     }

@@ -29,7 +29,7 @@ public class DefaultUkraineStateService
 
     @Override
     public int saveAll(List<UkraineState> entities) {
-        entities.removeAll(getAll());
+        filterEntities(entities);
         ukraineStateDao.saveAll(entities);
         return entities.size();
     }

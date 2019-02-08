@@ -39,7 +39,7 @@ public class DefaultGearBoxService
 
     @Override
     public int saveAll(List<GearBox> entities) {
-        entities.removeAll(getAll());
+        filterEntities(entities);
         gearBoxDao.saveAll(entities);
         return entities.size();
     }
