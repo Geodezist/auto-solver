@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class DefaultVehicleModelService
         implements VehicleModelService {
-    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private static final ModelMapper MODEL_MAPPER = new ModelMapper();
     private static final Type SIMPLE_DTO_TYPE = new TypeToken<List<SimpleDTO>>() {
@@ -46,16 +46,16 @@ public class DefaultVehicleModelService
         Long markId = vehicleMarkDao.findByCategoryValueAndValue(categoryValue, markValue).getId();
         List<SimpleDTO> result =MODEL_MAPPER.map(vehicleModelDao.findByVehicleMarkId(markId), SIMPLE_DTO_TYPE);
 
-        LOGGER.debug("Getting all Vehicle Models DTOs. Count of oblects - {}", result.size());
+        logger.debug("Getting all Vehicle Models DTOs. Count of oblects - {}", result.size());
         return result;
     }
 
     @Override
     public int saveAll(List<VehicleModel> entities) {
-        LOGGER.debug("Saving all Vehicle Models. Count of incoming oblects - {}"
+        logger.debug("Saving all Vehicle Models. Count of incoming oblects - {}"
                 , entities.size());
         entities.removeAll(getAll());
-        LOGGER.debug("Saving all Vehicle Models. Count of oblects after filtering - {}"
+        logger.debug("Saving all Vehicle Models. Count of oblects after filtering - {}"
                 , entities.size());
         vehicleModelDao.saveAll(entities);
         return entities.size();

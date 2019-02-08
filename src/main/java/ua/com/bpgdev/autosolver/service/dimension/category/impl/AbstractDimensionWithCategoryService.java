@@ -14,7 +14,7 @@ import java.util.List;
 public abstract class AbstractDimensionWithCategoryService<T extends DimensionWithCategory>
         implements DimensionWithCategoryService<T, SimpleDTO> {
     private final String className = getClass().getSimpleName();
-    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     static final ModelMapper MODEL_MAPPER = new ModelMapper();
     static final Type CATEGORY_DTO_TYPE = new TypeToken<List<SimpleDTO>>() {
@@ -23,7 +23,7 @@ public abstract class AbstractDimensionWithCategoryService<T extends DimensionWi
     @Override
     public List<SimpleDTO> getByCategoryIdDto(Long categoryId) {
         List<SimpleDTO> result = MODEL_MAPPER.map(getByCategoryId(categoryId), CATEGORY_DTO_TYPE);
-        LOGGER.debug("Getting DTOs by {} filtered by Category id = {}. Count of oblects - {}"
+        logger.debug("Getting DTOs by {} filtered by Category id = {}. Count of oblects - {}"
                 , className
                 , categoryId
                 , result.size());
@@ -33,7 +33,7 @@ public abstract class AbstractDimensionWithCategoryService<T extends DimensionWi
     @Override
     public List<SimpleDTO> getByCategoryValueDto(int categoryValue) {
         List<SimpleDTO> result = MODEL_MAPPER.map(getByCategoryValue(categoryValue), CATEGORY_DTO_TYPE);
-        LOGGER.debug("Getting DTOs by {} filtered by Category value = {}. Count of oblects - {}"
+        logger.debug("Getting DTOs by {} filtered by Category value = {}. Count of oblects - {}"
                 , className
                 , categoryValue
                 , result.size());
@@ -41,11 +41,11 @@ public abstract class AbstractDimensionWithCategoryService<T extends DimensionWi
     }
 
     void filterEntities(List<T> entities){
-        LOGGER.debug("Saving all {}. Count of incoming oblects - {}"
+        logger.debug("Saving all {}. Count of incoming oblects - {}"
                 , className
                 , entities.size());
         entities.removeAll(getAll());
-        LOGGER.debug("Saving all {}. Count of oblects after filtering - {}"
+        logger.debug("Saving all {}. Count of oblects after filtering - {}"
                 , className
                 , entities.size());
     }

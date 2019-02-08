@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class DefaultCategoryService implements CategoryService {
     private final String className = getClass().getSimpleName();
-    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private static final ModelMapper MODEL_MAPPER = new ModelMapper();
     private static final Type SIMPLE_DTO_TYPE = new TypeToken<List<SimpleDTO>>() {
@@ -41,7 +41,7 @@ public class DefaultCategoryService implements CategoryService {
     @Override
     public List<SimpleDTO> getAllDto() {
         List<SimpleDTO> result = MODEL_MAPPER.map(getAll(), SIMPLE_DTO_TYPE);
-        LOGGER.debug("Getting all DTOs by {}. Count of oblects - {}"
+        logger.debug("Getting all DTOs by {}. Count of oblects - {}"
                 , className
                 , result.size());
         return result;
@@ -50,11 +50,11 @@ public class DefaultCategoryService implements CategoryService {
 
     @Override
     public int saveAll(List<Category> categories) {
-        LOGGER.debug("Saving all {}. Count of incoming oblects - {}"
+        logger.debug("Saving all {}. Count of incoming oblects - {}"
                 , className
                 , categories.size());
         categories.removeAll(getAll());
-        LOGGER.debug("Saving all {}. Count of oblects after filtering - {}"
+        logger.debug("Saving all {}. Count of oblects after filtering - {}"
                 , className
                 , categories.size());
         categoryDao.saveAll(categories);

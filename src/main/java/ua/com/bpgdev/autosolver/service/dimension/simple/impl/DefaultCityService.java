@@ -19,7 +19,7 @@ import java.util.List;
 
 @Service
 public class DefaultCityService implements CityService {
-    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private static final ModelMapper MODEL_MAPPER = new ModelMapper();
     private static final Type SIMPLE_DTO_TYPE = new TypeToken<List<SimpleDTO>>() {
@@ -54,7 +54,7 @@ public class DefaultCityService implements CityService {
     @Override
     public List<CityDTO> getAllDto() {
         List<CityDTO> result = MODEL_MAPPER.map(getAll(), CITY_DTO_TYPE);
-        LOGGER.debug("Getting all Cities DTOs. Count of oblects - {}", result.size());
+        logger.debug("Getting all Cities DTOs. Count of oblects - {}", result.size());
         return result;
     }
 
@@ -65,7 +65,7 @@ public class DefaultCityService implements CityService {
 
     public List<SimpleDTO> getAllByUkraineStateValueDto(int ukraneStateValue) {
         List<SimpleDTO> result = MODEL_MAPPER.map(getAllByUkraineStateValue(ukraneStateValue), SIMPLE_DTO_TYPE);
-        LOGGER.debug("Getting Cities DTOs by Ukreainian State value = {}. Count of oblects - {}"
+        logger.debug("Getting Cities DTOs by Ukreainian State value = {}. Count of oblects - {}"
                 , ukraneStateValue
                 , result.size());
         return result;
@@ -73,10 +73,10 @@ public class DefaultCityService implements CityService {
 
     @Override
     public int saveAll(List<City> entities) {
-        LOGGER.debug("Saving all Cities. Count of incoming oblects - {}"
+        logger.debug("Saving all Cities. Count of incoming oblects - {}"
                 , entities.size());
         entities.removeAll(getAll());
-        LOGGER.debug("Saving all Cities. Count of oblects after filtering - {}"
+        logger.debug("Saving all Cities. Count of oblects after filtering - {}"
                 , entities.size());
         cityDao.saveAll(entities);
         return entities.size();
