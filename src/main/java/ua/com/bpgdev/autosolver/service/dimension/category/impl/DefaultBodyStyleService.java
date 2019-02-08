@@ -39,7 +39,7 @@ public class DefaultBodyStyleService
 
     @Override
     public int saveAll(List<BodyStyle> entities) {
-        entities.removeAll(getAll());
+        filterEntities(entities);
         bodyStyleDao.saveAll(entities);
         return entities.size();
     }

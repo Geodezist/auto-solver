@@ -30,7 +30,7 @@ public class DefaultFuelTypeService
 
     @Override
     public int saveAll(List<FuelType> entities) {
-        entities.removeAll(getAll());
+        filterEntities(entities);
         fuelTypeDao.saveAll(entities);
         return entities.size();
     }

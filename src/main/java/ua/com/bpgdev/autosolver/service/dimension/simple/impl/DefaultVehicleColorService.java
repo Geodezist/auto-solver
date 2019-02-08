@@ -29,7 +29,7 @@ public class DefaultVehicleColorService
 
     @Override
     public int saveAll(List<VehicleColor> entities) {
-        entities.removeAll(getAll());
+        filterEntities(entities);
         vehicleColorDao.saveAll(entities);
         return entities.size();
     }

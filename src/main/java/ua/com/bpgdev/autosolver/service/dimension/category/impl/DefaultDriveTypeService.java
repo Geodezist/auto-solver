@@ -39,7 +39,7 @@ public class DefaultDriveTypeService
 
     @Override
     public int saveAll(List<DriveType> entities) {
-        entities.removeAll(getAll());
+        filterEntities(entities);
         driveTypeDao.saveAll(entities);
         return entities.size();
     }

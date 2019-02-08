@@ -39,7 +39,7 @@ public class DefaultVehicleOptionService
 
     @Override
     public int saveAll(List<VehicleOption> entities) {
-        entities.removeAll(getAll());
+        filterEntities(entities);
         vehicleOptionDao.saveAll(entities);
         return entities.size();
     }

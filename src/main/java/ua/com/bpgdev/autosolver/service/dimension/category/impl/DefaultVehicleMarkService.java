@@ -47,7 +47,7 @@ public class DefaultVehicleMarkService
 
     @Override
     public int saveAll(List<VehicleMark> entities) {
-        entities.removeAll(getAll());
+        filterEntities(entities);
         vehicleMarkDao.saveAll(entities);
         return entities.size();
     }
