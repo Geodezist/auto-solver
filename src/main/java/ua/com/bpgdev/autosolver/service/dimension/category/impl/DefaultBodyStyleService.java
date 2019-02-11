@@ -24,17 +24,27 @@ public class DefaultBodyStyleService
     public List<BodyStyle> getAll() {
         List<BodyStyle> bodyStyles = new ArrayList<>();
         bodyStyleDao.findAll().forEach(bodyStyles::add);
+        logger.debug("Getting all BodyStyles from DAO. Count of oblects - {}"
+                , bodyStyles.size());
         return bodyStyles;
     }
 
     @Override
     public List<BodyStyle> getByCategoryId(Long categoryId) {
-        return bodyStyleDao.findByCategoryId(categoryId);
+        List<BodyStyle> result = bodyStyleDao.findByCategoryId(categoryId);
+        logger.debug("Getting BodyStyles from DAO filtered by Category id = {}. Count of oblects - {}"
+                , categoryId
+                , result.size());
+        return result;
     }
 
     @Override
     public List<BodyStyle> getByCategoryValue(int categoryValue) {
-        return bodyStyleDao.findByCategoryValue(categoryValue);
+        List<BodyStyle> result = bodyStyleDao.findByCategoryValue(categoryValue);
+        logger.debug("Getting BodyStyles from DAO filtered by Category value = {}. Count of oblects - {}"
+                , categoryValue
+                , result.size());
+        return result;
     }
 
     @Override

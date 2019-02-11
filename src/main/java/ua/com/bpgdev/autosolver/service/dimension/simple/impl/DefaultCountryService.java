@@ -24,6 +24,8 @@ public class DefaultCountryService
     public List<Country> getAll() {
         List<Country> countries = new ArrayList<>();
         countryDao.findAll().forEach(countries::add);
+        logger.debug("Getting all Countries from DAO. Count of oblects - {}"
+                , countries.size());
         return countries;
     }
 

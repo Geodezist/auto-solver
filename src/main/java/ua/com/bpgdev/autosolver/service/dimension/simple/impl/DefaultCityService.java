@@ -6,6 +6,7 @@ import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.simple.CityDao;
 import ua.com.bpgdev.autosolver.dto.dimension.simple.CityDTO;
@@ -52,6 +53,7 @@ public class DefaultCityService implements CityService {
     }
 
     @Override
+    @Cacheable(value = "simpleDictionaryCache", key = "#root.targetClass + #root.methodName")
     public List<CityDTO> getAllDto() {
         List<CityDTO> result = MODEL_MAPPER.map(getAll(), CITY_DTO_TYPE);
         logger.debug("Getting all Cities DTOs. Count of oblects - {}", result.size());

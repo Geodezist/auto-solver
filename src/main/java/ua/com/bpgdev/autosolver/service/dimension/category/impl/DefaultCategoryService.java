@@ -5,6 +5,7 @@ import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.CategoryDao;
 import ua.com.bpgdev.autosolver.dto.dimension.simple.SimpleDTO;
@@ -35,10 +36,13 @@ public class DefaultCategoryService implements CategoryService {
     public List<Category> getAll() {
         List<Category> categories = new ArrayList<>();
         categoryDao.findAll().forEach(categories::add);
+        logger.debug("Getting all Categories from DAO. Count of oblects - {}"
+                , categories.size());
         return categories;
     }
 
     @Override
+    @Cacheable(value = "simpleDictionaryCache", key = "#root.targetClass + #root.methodName")
     public List<SimpleDTO> getAllDto() {
         List<SimpleDTO> result = MODEL_MAPPER.map(getAll(), SIMPLE_DTO_TYPE);
         logger.debug("Getting all DTOs by {}. Count of oblects - {}"

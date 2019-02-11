@@ -5,6 +5,7 @@ import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleMarkDao;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleModelDao;
@@ -42,6 +43,7 @@ public class DefaultVehicleModelService
     }
 
     @Override
+    @Cacheable(value = "vehicleModelsCache", key = "#root.targetClass + #root.methodName + #categoryValue + #markValue")
     public List<SimpleDTO> getByCategoryValueAndMarkValueDto(int categoryValue, int markValue) {
         Long markId = vehicleMarkDao.findByCategoryValueAndValue(categoryValue, markValue).getId();
         List<SimpleDTO> result =MODEL_MAPPER.map(vehicleModelDao.findByVehicleMarkId(markId), SIMPLE_DTO_TYPE);
