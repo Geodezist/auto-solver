@@ -8,7 +8,7 @@ import java.util.List;
 public interface VehicleMarkDao
         extends DimensionWithCategoryDao<VehicleMark>, PagingAndSortingRepository<VehicleMark, Long> {
 
-    List<VehicleMark> findByCategoryValueAndNameStartsWithIgnoreCase(int categoryId, String searchStrng);
+    List<VehicleMark> findByCategoryValueAndNameStartsWithIgnoreCase(int categoryId, String searchString);
 
     VehicleMark findByCategoryValueAndValue(int categoryValue, int value);
 }

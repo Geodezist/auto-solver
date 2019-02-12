@@ -7,7 +7,7 @@ import ua.com.bpgdev.autosolver.entity.dimension.simple.City;
 import java.util.List;
 
 public interface CityService extends SimpleDimensionService<City, CityDTO> {
-    List<City> getAllByUkraineStateValue(int ukraneStateValue);
+    List<City> getAllByUkraineStateValue(int ukraineStateValue);
 
-    List<SimpleDTO> getAllByUkraineStateValueDto(int ukraneStateValue);
+    List<SimpleDTO> getAllByUkraineStateValueDto(int ukraineStateValue);
 }

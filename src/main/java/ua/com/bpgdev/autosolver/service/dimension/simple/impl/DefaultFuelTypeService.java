@@ -25,7 +25,7 @@ public class DefaultFuelTypeService
     public List<FuelType> getAll() {
         List<FuelType> fuelTypes = new ArrayList<>();
         fuelTypeDao.findAll().forEach(fuelTypes::add);
-        logger.debug("Getting all FuelTypes from DAO. Count of oblects - {}"
+        logger.debug("Getting all FuelTypes from DAO. Count of objects - {}"
                 , fuelTypes.size());
         return fuelTypes;
     }

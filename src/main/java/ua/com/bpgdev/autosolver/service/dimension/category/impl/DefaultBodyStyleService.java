@@ -24,7 +24,7 @@ public class DefaultBodyStyleService
     public List<BodyStyle> getAll() {
         List<BodyStyle> bodyStyles = new ArrayList<>();
         bodyStyleDao.findAll().forEach(bodyStyles::add);
-        logger.debug("Getting all BodyStyles from DAO. Count of oblects - {}"
+        logger.debug("Getting all BodyStyles from DAO. Count of objects - {}"
                 , bodyStyles.size());
         return bodyStyles;
     }
@@ -32,7 +32,7 @@ public class DefaultBodyStyleService
     @Override
     public List<BodyStyle> getByCategoryId(Long categoryId) {
         List<BodyStyle> result = bodyStyleDao.findByCategoryId(categoryId);
-        logger.debug("Getting BodyStyles from DAO filtered by Category id = {}. Count of oblects - {}"
+        logger.debug("Getting BodyStyles from DAO filtered by Category id = {}. Count of objects - {}"
                 , categoryId
                 , result.size());
         return result;
@@ -41,7 +41,7 @@ public class DefaultBodyStyleService
     @Override
     public List<BodyStyle> getByCategoryValue(int categoryValue) {
         List<BodyStyle> result = bodyStyleDao.findByCategoryValue(categoryValue);
-        logger.debug("Getting BodyStyles from DAO filtered by Category value = {}. Count of oblects - {}"
+        logger.debug("Getting BodyStyles from DAO filtered by Category value = {}. Count of objects - {}"
                 , categoryValue
                 , result.size());
         return result;

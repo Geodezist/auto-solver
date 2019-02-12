@@ -1,6 +1,7 @@
 package ua.com.bpgdev.autosolver.service.dimension.category.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleMarkDao;
@@ -27,7 +28,7 @@ public class DefaultVehicleMarkService
     public List<VehicleMark> getAll() {
         List<VehicleMark> vehicleMarks = new ArrayList<>();
         vehicleMarkDao.findAll().forEach(vehicleMarks::add);
-        logger.debug("Getting all VehicleMarks from DAO. Count of oblects - {}"
+        logger.debug("Getting all VehicleMarks from DAO. Count of objects - {}"
                 , vehicleMarks.size());
         return vehicleMarks;
     }
@@ -35,7 +36,7 @@ public class DefaultVehicleMarkService
     @Override
     public List<VehicleMark> getByCategoryId(Long categoryId) {
         List<VehicleMark> result = vehicleMarkDao.findByCategoryId(categoryId);
-        logger.debug("Getting VehicleMarks from DAO filtered by Category id = {}. Count of oblects - {}"
+        logger.debug("Getting VehicleMarks from DAO filtered by Category id = {}. Count of objects - {}"
                 , categoryId
                 , result.size());
         return result;
@@ -44,7 +45,7 @@ public class DefaultVehicleMarkService
     @Override
     public List<VehicleMark> getByCategoryValue(int categoryValue) {
         List<VehicleMark> result = vehicleMarkDao.findByCategoryValue(categoryValue);
-        logger.debug("Getting VehicleMarks from DAO filtered by Category value = {}. Count of oblects - {}"
+        logger.debug("Getting VehicleMarks from DAO filtered by Category value = {}. Count of objects - {}"
                 , categoryValue
                 , result.size());
         return result;
@@ -57,7 +58,7 @@ public class DefaultVehicleMarkService
                 .map(vehicleMarkDao.findByCategoryValueAndNameStartsWithIgnoreCase(categoryValue, searchString),
                         CATEGORY_DTO_TYPE);
         logger.debug("Getting VehicleMarks from DAO filtered by Category value = {} "
-                        + "and Name starts with = {}. Count of oblects - {}"
+                        + "and Name starts with = {}. Count of objects - {}"
                 , categoryValue
                 , searchString
                 , result.size());
@@ -72,8 +73,16 @@ public class DefaultVehicleMarkService
     }
 
     @Override
+    @CacheEvict(value = "categoryDictionaryCache", condition = "#result != 0", allEntries = true)
     public int saveAll(List<VehicleMark> vehicleMarks, Category category) {
-        vehicleMarks.removeAll(getByCategoryId(category.getId()));
+        Long categoryId = category.getId();
+        logger.debug("Saving all VehicleMark by Category id = {}. Count of incoming objects - {}"
+                , categoryId
+                , vehicleMarks.size());
+        vehicleMarks.removeAll(getByCategoryId(categoryId));
+        logger.debug("Saving all VehicleMark by Category id = {}. Count of objects after filtering - {}"
+                , categoryId
+                , vehicleMarks.size());
         vehicleMarkDao.saveAll(vehicleMarks);
         return vehicleMarks.size();
     }

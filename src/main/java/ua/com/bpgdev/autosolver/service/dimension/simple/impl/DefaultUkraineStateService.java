@@ -24,7 +24,7 @@ public class DefaultUkraineStateService
     public List<UkraineState> getAll() {
         List<UkraineState> ukraineStates = new ArrayList<>();
         ukraineStateDao.findAll().forEach(ukraineStates::add);
-        logger.debug("Getting all UkraineStates from DAO. Count of oblects - {}"
+        logger.debug("Getting all UkraineStates from DAO. Count of objects - {}"
                 , ukraineStates.size());
         return ukraineStates;
     }

@@ -24,7 +24,7 @@ public class DefaultVehicleColorService
     public List<VehicleColor> getAll() {
         List<VehicleColor> vehicleColors = new ArrayList<>();
         vehicleColorDao.findAll().forEach(vehicleColors::add);
-        logger.debug("Getting all VehicleColor from DAO. Count of oblects - {}"
+        logger.debug("Getting all VehicleColor from DAO. Count of objects - {}"
                 , vehicleColors.size());
         return vehicleColors;
     }

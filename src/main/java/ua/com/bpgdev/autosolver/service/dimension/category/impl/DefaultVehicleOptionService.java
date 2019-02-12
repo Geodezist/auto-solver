@@ -24,7 +24,7 @@ public class DefaultVehicleOptionService
     public List<VehicleOption> getAll() {
         List<VehicleOption> vehicleOptions = new ArrayList<>();
         vehicleOptionDao.findAll().forEach(vehicleOptions::add);
-        logger.debug("Getting all VehicleOptions from DAO. Count of oblects - {}"
+        logger.debug("Getting all VehicleOptions from DAO. Count of objects - {}"
                 , vehicleOptions.size());
         return vehicleOptions;
     }
@@ -32,7 +32,7 @@ public class DefaultVehicleOptionService
     @Override
     public List<VehicleOption> getByCategoryId(Long categoryId) {
         List<VehicleOption> result = vehicleOptionDao.findByCategoryId(categoryId);
-        logger.debug("Getting VehicleOptions from DAO filtered by Category id = {}. Count of oblects - {}"
+        logger.debug("Getting VehicleOptions from DAO filtered by Category id = {}. Count of objects - {}"
                 , categoryId
                 , result.size());
         return result;
@@ -41,7 +41,7 @@ public class DefaultVehicleOptionService
     @Override
     public List<VehicleOption> getByCategoryValue(int categoryValue) {
         List<VehicleOption> result = vehicleOptionDao.findByCategoryValue(categoryValue);
-        logger.debug("Getting VehicleOptions from DAO filtered by Category value = {}. Count of oblects - {}"
+        logger.debug("Getting VehicleOptions from DAO filtered by Category value = {}. Count of objects - {}"
                 , categoryValue
                 , result.size());
         return result;
