@@ -24,9 +24,12 @@ public class DefaultCountryService
     public List<Country> getAll() {
         List<Country> countries = new ArrayList<>();
         countryDao.findAll().forEach(countries::add);
+        logger.debug("Getting all Countries from DAO. Count of objects - {}"
+                , countries.size());
         return countries;
     }
 
+    @Override
     public int saveAll(List<Country> entities) {
         filterEntities(entities);
         countryDao.saveAll(entities);

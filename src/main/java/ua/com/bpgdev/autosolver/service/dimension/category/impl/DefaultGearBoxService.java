@@ -24,17 +24,27 @@ public class DefaultGearBoxService
     public List<GearBox> getAll() {
         List<GearBox> gearBoxes = new ArrayList<>();
         gearBoxDao.findAll().forEach(gearBoxes::add);
+        logger.debug("Getting all GearBoxes from DAO. Count of objects - {}"
+                , gearBoxes.size());
         return gearBoxes;
     }
 
     @Override
     public List<GearBox> getByCategoryId(Long categoryId) {
-        return gearBoxDao.findByCategoryId(categoryId);
+        List<GearBox> result = gearBoxDao.findByCategoryId(categoryId);
+        logger.debug("Getting GearBoxes from DAO filtered by Category id = {}. Count of objects - {}"
+                , categoryId
+                , result.size());
+        return result;
     }
 
     @Override
     public List<GearBox> getByCategoryValue(int categoryValue) {
-        return gearBoxDao.findByCategoryValue(categoryValue);
+        List<GearBox> result = gearBoxDao.findByCategoryValue(categoryValue);
+        logger.debug("Getting GearBoxes from DAO filtered by Category value = {}. Count of objects - {}"
+                , categoryValue
+                , result.size());
+        return result;
     }
 
     @Override

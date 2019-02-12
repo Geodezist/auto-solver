@@ -24,17 +24,27 @@ public class DefaultVehicleOptionService
     public List<VehicleOption> getAll() {
         List<VehicleOption> vehicleOptions = new ArrayList<>();
         vehicleOptionDao.findAll().forEach(vehicleOptions::add);
+        logger.debug("Getting all VehicleOptions from DAO. Count of objects - {}"
+                , vehicleOptions.size());
         return vehicleOptions;
     }
 
     @Override
     public List<VehicleOption> getByCategoryId(Long categoryId) {
-        return vehicleOptionDao.findByCategoryId(categoryId);
+        List<VehicleOption> result = vehicleOptionDao.findByCategoryId(categoryId);
+        logger.debug("Getting VehicleOptions from DAO filtered by Category id = {}. Count of objects - {}"
+                , categoryId
+                , result.size());
+        return result;
     }
 
     @Override
     public List<VehicleOption> getByCategoryValue(int categoryValue) {
-        return vehicleOptionDao.findByCategoryValue(categoryValue);
+        List<VehicleOption> result = vehicleOptionDao.findByCategoryValue(categoryValue);
+        logger.debug("Getting VehicleOptions from DAO filtered by Category value = {}. Count of objects - {}"
+                , categoryValue
+                , result.size());
+        return result;
     }
 
     @Override

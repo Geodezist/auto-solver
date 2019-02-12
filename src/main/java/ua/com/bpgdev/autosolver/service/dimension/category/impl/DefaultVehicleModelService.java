@@ -5,6 +5,8 @@ import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleMarkDao;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleModelDao;
@@ -42,20 +44,22 @@ public class DefaultVehicleModelService
     }
 
     @Override
+    @Cacheable(value = "vehicleModelsCache", key = "#root.targetClass + #root.methodName + #categoryValue + #markValue")
     public List<SimpleDTO> getByCategoryValueAndMarkValueDto(int categoryValue, int markValue) {
         Long markId = vehicleMarkDao.findByCategoryValueAndValue(categoryValue, markValue).getId();
         List<SimpleDTO> result =MODEL_MAPPER.map(vehicleModelDao.findByVehicleMarkId(markId), SIMPLE_DTO_TYPE);
 
-        logger.debug("Getting all Vehicle Models DTOs. Count of oblects - {}", result.size());
+        logger.debug("Getting all Vehicle Models DTOs. Count of objects - {}", result.size());
         return result;
     }
 
     @Override
+    @CacheEvict(value = "vehicleModelsCache", condition = "#result != 0", allEntries = true)
     public int saveAll(List<VehicleModel> entities) {
-        logger.debug("Saving all Vehicle Models. Count of incoming oblects - {}"
+        logger.debug("Saving all Vehicle Models. Count of incoming objects - {}"
                 , entities.size());
         entities.removeAll(getAll());
-        logger.debug("Saving all Vehicle Models. Count of oblects after filtering - {}"
+        logger.debug("Saving all Vehicle Models. Count of objects after filtering - {}"
                 , entities.size());
         vehicleModelDao.saveAll(entities);
         return entities.size();

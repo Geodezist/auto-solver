@@ -24,17 +24,27 @@ public class DefaultDriveTypeService
     public List<DriveType> getAll() {
         List<DriveType> driveTypes = new ArrayList<>();
         driveTypeDao.findAll().forEach(driveTypes::add);
+        logger.debug("Getting all DriveTypes from DAO. Count of objects - {}"
+                , driveTypes.size());
         return driveTypes;
     }
 
     @Override
     public List<DriveType> getByCategoryId(Long categoryId) {
-        return driveTypeDao.findByCategoryId(categoryId);
+        List<DriveType> result = driveTypeDao.findByCategoryId(categoryId);
+        logger.debug("Getting DriveTypes from DAO filtered by Category id = {}. Count of objects - {}"
+                , categoryId
+                , result.size());
+        return result;
     }
 
     @Override
     public List<DriveType> getByCategoryValue(int categoryValue) {
-        return driveTypeDao.findByCategoryValue(categoryValue);
+        List<DriveType> result = driveTypeDao.findByCategoryValue(categoryValue);
+        logger.debug("Getting DriveTypes from DAO filtered by Category value = {}. Count of objects - {}"
+                , categoryValue
+                , result.size());
+        return result;
     }
 
     @Override
