@@ -10,14 +10,16 @@ import java.util.List;
 
 public abstract class SimpleCommonPopulator<T> {
     private RestApiUrlBuilder restApiUrlBuilder;
+    private RestTemplate restTemplate;
 
-    protected SimpleCommonPopulator(RestApiUrlBuilder restApiUrlBuilder) {
+    public SimpleCommonPopulator(RestApiUrlBuilder restApiUrlBuilder,
+                                    RestTemplate restTemplate) {
         this.restApiUrlBuilder = restApiUrlBuilder;
+        this.restTemplate = restTemplate;
     }
 
-    protected List<T> getUpstreamData(Class<T[]> objectClass, String apiEntityName) {
+    public List<T> getUpstreamData(Class<T[]> objectClass, String apiEntityName) {
         ArrayList<T> result = new ArrayList<>();
-        RestTemplate restTemplate = new RestTemplate();
 
         ResponseEntity<T[]> responseEntity =
                 restTemplate.getForEntity(

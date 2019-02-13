@@ -1,6 +1,7 @@
 package ua.com.bpgdev.autosolver.populator.dimension.simple.impl;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 import ua.com.bpgdev.autosolver.entity.dimension.simple.FuelType;
 import ua.com.bpgdev.autosolver.populator.dimension.SimpleCommonPopulator;
 import ua.com.bpgdev.autosolver.populator.dimension.simple.FuelTypePopulator;
@@ -13,8 +14,9 @@ public class DefaultFuelTypePopulator extends SimpleCommonPopulator<FuelType> im
     private FuelTypeService fuelTypeService;
 
     public DefaultFuelTypePopulator(RestApiUrlBuilder restApiUrlBuilder,
-                                    FuelTypeService fuelTypeService) {
-        super(restApiUrlBuilder);
+                                    FuelTypeService fuelTypeService,
+                                    RestTemplate restTemplate) {
+        super(restApiUrlBuilder, restTemplate);
         this.fuelTypeService = fuelTypeService;
     }
 

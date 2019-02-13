@@ -2,6 +2,7 @@ package ua.com.bpgdev.autosolver.populator.dimension.category.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 import ua.com.bpgdev.autosolver.entity.dimension.category.Category;
 import ua.com.bpgdev.autosolver.populator.dimension.SimpleCommonPopulator;
 import ua.com.bpgdev.autosolver.populator.dimension.category.CategoryPopulator;
@@ -15,8 +16,9 @@ public class DefaultCategoryPopulator extends SimpleCommonPopulator<Category> im
 
     @Autowired
     public DefaultCategoryPopulator(RestApiUrlBuilder restApiUrlBuilder,
-                                    CategoryService categoryService) {
-        super(restApiUrlBuilder);
+                                    CategoryService categoryService,
+                                    RestTemplate restTemplate) {
+        super(restApiUrlBuilder, restTemplate);
         this.categoryService = categoryService;
     }
 

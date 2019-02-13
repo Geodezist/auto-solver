@@ -2,6 +2,7 @@ package ua.com.bpgdev.autosolver.populator.dimension.simple.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 import ua.com.bpgdev.autosolver.entity.dimension.simple.VehicleColor;
 import ua.com.bpgdev.autosolver.populator.dimension.SimpleCommonPopulator;
 import ua.com.bpgdev.autosolver.populator.dimension.simple.VehicleColorPopulator;
@@ -15,8 +16,9 @@ public class DefaultVehicleColorPopulator extends SimpleCommonPopulator<VehicleC
 
     @Autowired
     public DefaultVehicleColorPopulator(RestApiUrlBuilder restApiUrlBuilder,
-                                        VehicleColorService vehicleColorService) {
-        super(restApiUrlBuilder);
+                                        VehicleColorService vehicleColorService,
+                                        RestTemplate restTemplate) {
+        super(restApiUrlBuilder, restTemplate);
         this.vehicleColorService = vehicleColorService;
     }
 

@@ -2,6 +2,7 @@ package ua.com.bpgdev.autosolver.populator.dimension.simple.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 import ua.com.bpgdev.autosolver.entity.dimension.simple.Country;
 import ua.com.bpgdev.autosolver.populator.dimension.SimpleCommonPopulator;
 import ua.com.bpgdev.autosolver.populator.dimension.simple.CountryPopulator;
@@ -15,8 +16,9 @@ public class DefaultCountryPopulator extends SimpleCommonPopulator<Country> impl
 
     @Autowired
     public DefaultCountryPopulator(RestApiUrlBuilder restApiUrlBuilder,
-                                   CountryService countryService) {
-        super(restApiUrlBuilder);
+                                   CountryService countryService,
+                                   RestTemplate restTemplate) {
+        super(restApiUrlBuilder, restTemplate);
         this.countryService = countryService;
     }
 
