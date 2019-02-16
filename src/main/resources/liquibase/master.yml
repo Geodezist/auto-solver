@@ -1,3 +1,5 @@
 databaseChangeLog:
 - include:
     file: liquibase/20181229/20181229_001_dimension_tables.yml
+- include:
+    file: liquibase/20190215/20190215_001_car_table.yml

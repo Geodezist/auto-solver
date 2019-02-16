@@ -17,6 +17,7 @@ spring:
           lob:
             non_contextual_creation: true
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    #show-sql: true
 
   liquibase:
     change-log: classpath:liquibase/master.yml
@@ -26,6 +27,8 @@ logging:
     org.springframework.*: info
     org.springframework.web.servlet.DispatcherServlet: debug
     ua.com.bpgdev.autosolver.*: debug
+    #org.hibernate.sql.*: debug
+    #org.hibernate.type.descriptor.sql.*: trace
 
 autosolver:
   external-api:

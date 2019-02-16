@@ -1,23 +1,39 @@
 package ua.com.bpgdev.autosolver.util;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@ActiveProfiles("test")
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static org.junit.Assert.*;
+
 public class RestApiUrlBuilderTest {
+    private static final String BASE_API_URL = "http://base.api.url/";
+    private static final String API_KEY = "TEST_API_KEY";
 
-    @Autowired
-    RestApiUrlBuilder restApiUrlBuilder;
+    private static final RestApiUrlBuilder restApiUrlBuilder = new RestApiUrlBuilder(BASE_API_URL, API_KEY);
 
     @Test
     public void getUrlApi() {
-        System.out.println(restApiUrlBuilder.getUrlApi("countries"));
+        String apiEntity = "countries";
+        String expected = BASE_API_URL + apiEntity + "?api_key=" + API_KEY;
+        String actual = restApiUrlBuilder.getUrlApi(apiEntity);
+        assertEquals(expected, actual);
     }
 
+    @Test
+    public void getUrlApiSearch() throws MalformedURLException {
+        String queryString = "testQueryString";
+        URL expextedURL = new URL(BASE_API_URL + "search?api_key=" + API_KEY + queryString);
+        URL actualURL = restApiUrlBuilder.getUrlApiSearch(queryString);
+        assertEquals(expextedURL, actualURL);
+    }
+
+    @Test
+    public void getUrlApiCar() throws MalformedURLException {
+        int carId = 1;
+        URL expextedURL = new URL(BASE_API_URL + "info?api_key="  + API_KEY + "&auto_id="  + carId);
+        URL actualURL = restApiUrlBuilder.getUrlApiCar(carId);
+        assertEquals(expextedURL, actualURL);
+    }
 }

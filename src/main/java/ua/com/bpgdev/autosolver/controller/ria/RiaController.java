@@ -5,11 +5,11 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ua.com.bpgdev.autosolver.dto.ria.RiaCarDTO;
+import ua.com.bpgdev.autosolver.service.fact.SourceCarService;
 import ua.com.bpgdev.autosolver.service.ria.RiaCarService;
 import ua.com.bpgdev.autosolver.service.ria.RiaSearchResultService;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -17,15 +17,18 @@ import java.util.Set;
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "/api/ria", produces = {MediaType.APPLICATION_JSON_VALUE})
 @ResponseBody
-public class RiaContoller {
+public class RiaController {
     private RiaSearchResultService riaSearchResultService;
     private RiaCarService riaCarService;
+    private SourceCarService sourceCarService;
 
     @Autowired
-    public RiaContoller(RiaSearchResultService riaSearchResultService,
-                        RiaCarService riaCarService) {
+    public RiaController(RiaSearchResultService riaSearchResultService,
+                         RiaCarService riaCarService,
+                         SourceCarService sourceCarService) {
         this.riaSearchResultService = riaSearchResultService;
         this.riaCarService = riaCarService;
+        this.sourceCarService = sourceCarService;
     }
 
     @GetMapping(path = "/search/{queryString}")
@@ -34,14 +37,18 @@ public class RiaContoller {
     }
 
     @GetMapping(path = "/car/{carId}")
-    public RiaCarDTO getCar(@PathVariable int carId) {
+    public RiaCarDTO getCar(@PathVariable Integer carId) {
         return riaCarService.getCar(carId);
     }
 
     @GetMapping(path = "/search/{queryString}/cars")
     public List<RiaCarDTO> getAllCar(@PathVariable String queryString) {
         List<Integer> carIds = new ArrayList<>(riaSearchResultService.getSearchResult(queryString));
-        return riaCarService.getAll(carIds);
-    }
+        List<Integer> existingCarIds = sourceCarService.findAllByCarIdIn(carIds);
+        carIds.removeAll(existingCarIds);
 
+        List<RiaCarDTO> riaCarDTOs = riaCarService.getAll(carIds);
+        sourceCarService.saveAllDTO(riaCarDTOs);
+        return riaCarDTOs;
+    }
 }
