@@ -31,18 +31,18 @@ public class RiaController {
         this.sourceCarService = sourceCarService;
     }
 
-    @GetMapping(path = "/search/{queryString}")
-    public Set<Integer> getAllCars(@PathVariable String queryString) {
-        return riaSearchResultService.getSearchResult(queryString);
-    }
-
     @GetMapping(path = "/car/{carId}")
     public RiaCarDTO getCar(@PathVariable Integer carId) {
         return riaCarService.getCar(carId);
     }
 
+    @GetMapping(path = "/search/{queryString}")
+    public Set<Integer> getAllCarIds(@PathVariable String queryString) {
+        return riaSearchResultService.getSearchResult(queryString);
+    }
+
     @GetMapping(path = "/search/{queryString}/cars")
-    public List<RiaCarDTO> getAllCar(@PathVariable String queryString) {
+    public List<RiaCarDTO> getAllCars(@PathVariable String queryString) {
         List<Integer> carIds = new ArrayList<>(riaSearchResultService.getSearchResult(queryString));
         List<Integer> existingCarIds = sourceCarService.findAllByCarIdIn(carIds);
         carIds.removeAll(existingCarIds);

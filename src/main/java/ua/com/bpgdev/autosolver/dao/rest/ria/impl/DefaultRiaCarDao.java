@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.com.bpgdev.autosolver.dao.rest.ria.RiaCarDao;
 import ua.com.bpgdev.autosolver.dto.ria.RiaCarDTO;
-import ua.com.bpgdev.autosolver.exception.AutosolverThreadInterruptedException;
 import ua.com.bpgdev.autosolver.util.RestApiUrlBuilder;
 
 import java.io.IOException;
@@ -34,7 +33,7 @@ public class DefaultRiaCarDao implements RiaCarDao {
     public RiaCarDTO getCar(Integer carId) throws InterruptedException {
         RiaCarDTO result = new RiaCarDTO();
         URL urlApiCar = restApiUrlBuilder.getUrlApiCar(carId);
-        logger.debug("Getting car from external REST resource - {}", urlApiCar.toString());
+        logger.debug("Getting car from external REST resource - {}", urlApiCar);
         JsonNode jsonResponseNode = null;
         for (int i = 0; i < TRY_COUNT; i++) {
             try {
@@ -74,7 +73,8 @@ public class DefaultRiaCarDao implements RiaCarDao {
                 result.add(car);
             }
         } catch (InterruptedException e) {
-            throw new AutosolverThreadInterruptedException("Thread was interrupted!", e);
+            logger.error("Thread was interrupted!", e);
+            Thread.currentThread().interrupt();
         }
         return result;
     }
