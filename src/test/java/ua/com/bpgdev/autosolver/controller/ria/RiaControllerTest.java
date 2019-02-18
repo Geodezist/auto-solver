@@ -12,8 +12,7 @@ import ua.com.bpgdev.autosolver.service.fact.SourceCarService;
 import ua.com.bpgdev.autosolver.service.ria.RiaCarService;
 import ua.com.bpgdev.autosolver.service.ria.RiaSearchResultService;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -28,6 +27,7 @@ public class RiaControllerTest {
     @InjectMocks
     private RiaController riaController;
     private RiaCarDTO expectedRiaCarDTO;
+    private Set<Integer> expectedIds;
 
     @Before
     public void beforeTest() {
@@ -46,6 +46,10 @@ public class RiaControllerTest {
         expectedRiaCarDTO.setGearboxName("GearboxName");
         expectedRiaCarDTO.setUkraineStateName("UkraineStateName");
         expectedRiaCarDTO.setCityName("CityName");
+
+        expectedIds = new HashSet<>();
+        expectedIds.add(1);
+        expectedIds.add(2);
     }
 
     @Test
@@ -57,13 +61,24 @@ public class RiaControllerTest {
 
     @Test
     public void getAllCarIds() {
-        Set<Integer> expectedIds = new HashSet<>();
-        expectedIds.add(1);
         Mockito.when(riaSearchResultService.getSearchResult("test")).thenReturn(expectedIds);
         Set<Integer> actualIds = riaController.getAllCarIds("test");
+        assertEquals(expectedIds, actualIds);
     }
 
     @Test
-    public void getAllCars() {
+    public void saveAllCars() {
+        List<Integer> expectedExistingCarIds = new ArrayList<>();
+        expectedExistingCarIds.add(2);
+        List<Integer> expectedNewCarIds = new ArrayList<>();
+        expectedNewCarIds.add(1);
+        List<RiaCarDTO> expectedRiaCarDTOs = new ArrayList<>();
+        expectedRiaCarDTOs.add(expectedRiaCarDTO);
+        Mockito.when(riaSearchResultService.getSearchResult("test")).thenReturn(expectedIds);
+        Mockito.when(sourceCarService.findAllByCarIdIn(new ArrayList<>(expectedIds))).thenReturn(expectedExistingCarIds);
+        Mockito.when(riaCarService.getAll(expectedNewCarIds)).thenReturn(expectedRiaCarDTOs);
+        Mockito.when(sourceCarService.saveAllDTO(expectedRiaCarDTOs)).thenReturn(1);
+        int actualRiaCarDTOCount  = riaController.saveAllCars("test");
+        assertEquals(expectedRiaCarDTOs.size(), actualRiaCarDTOCount);
     }
 }

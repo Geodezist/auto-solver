@@ -37,7 +37,11 @@ public class DefaultSourceCarService implements SourceCarService {
 
     @Override
     public List<Integer> findAllByCarIdIn(List<Integer> sourceCarIds) {
-        return sourceCarDao.findAllCarIdByCarIdIn(sourceCarIds);
+        List<Integer> result = new ArrayList<>();
+        if(sourceCarIds.size() > 0) {
+            result = sourceCarDao.findAllCarIdByCarIdIn(sourceCarIds);
+        }
+        return result;
     }
 
     @Override

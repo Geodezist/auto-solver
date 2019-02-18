@@ -42,13 +42,13 @@ public class RiaController {
     }
 
     @GetMapping(path = "/search/{queryString}/cars")
-    public List<RiaCarDTO> getAllCars(@PathVariable String queryString) {
+    public int saveAllCars(@PathVariable String queryString) {
         List<Integer> carIds = new ArrayList<>(riaSearchResultService.getSearchResult(queryString));
         List<Integer> existingCarIds = sourceCarService.findAllByCarIdIn(carIds);
         carIds.removeAll(existingCarIds);
 
         List<RiaCarDTO> riaCarDTOs = riaCarService.getAll(carIds);
         sourceCarService.saveAllDTO(riaCarDTOs);
-        return riaCarDTOs;
+        return riaCarDTOs.size();
     }
 }

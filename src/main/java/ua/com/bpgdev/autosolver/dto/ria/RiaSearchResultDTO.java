@@ -14,4 +14,5 @@ public class RiaSearchResultDTO {
     private int page;
     private List<Integer> carIds;
     private int totalCount;
+    private int pageSize;
 }

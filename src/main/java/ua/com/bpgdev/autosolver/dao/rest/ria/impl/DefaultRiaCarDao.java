@@ -70,7 +70,9 @@ public class DefaultRiaCarDao implements RiaCarDao {
         try {
             for (Integer carId : carIds) {
                 RiaCarDTO car = getCar(carId);
-                result.add(car);
+                if (car.getCarId() != null) {
+                    result.add(car);
+                }
             }
         } catch (InterruptedException e) {
             logger.error("Thread was interrupted!", e);
