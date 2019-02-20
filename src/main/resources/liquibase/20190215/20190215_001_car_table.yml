@@ -1,0 +1,246 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2019021510500-1
+      author: geodezist@gmail.com
+      changes:
+        - createTable:
+            tableName: src_car
+            remarks: Automobiles data from external source (Таблица для хранения первоначальной информации о авто)
+            columns:
+              - column:
+                  name: car_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: year
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: mileage
+                  type: INT
+                  remarks: Mileage in thousands kilometers (Пробег в тыс.км.)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price_usd
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: category_value
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: bodystyle_value
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: mark_value
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: model_value
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR
+                  constraints:
+                    nullable: true
+              - column:
+                  name: fuel_type_name
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fuel_type_name_eng
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: gearbox_name
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ukraine_state_name
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city_name
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 2019021510500-2
+      author: geodezist@gmail.com
+      changes:
+        - createTable:
+            tableName: f_car
+            remarks: Automobiles data (Таблица автомобилей)
+            columns:
+              - column:
+                  name: car_id
+                  type: INT
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: d_category_id
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: d_bodystyle_id
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: d_fuel_type_id
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: d_gearbox_id
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: d_model_id
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: d_city_id
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: year
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: mileage
+                  type: INT
+                  remarks: Mileage in thousands kilometers (Пробег в тыс.км.)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price_usd
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR
+                  constraints:
+                    nullable: true
+              - column:
+                  name: engine capacity
+                  type: VARCHAR
+                  constraints:
+                    nullable: false
+  #---------------------------------------------
+  - changeSet:
+      id: 2019021510500-3
+      author: geodezist@gmail.com
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: f_car
+            baseColumnNames: d_category_id
+            referencedTableName: d_category
+            referencedColumnNames: d_category_id
+            constraintName: fk_f_car_d_category_id
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            validate: true
+
+  - changeSet:
+      id: 2019021510500-4
+      author: geodezist@gmail.com
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: f_car
+            baseColumnNames: d_bodystyle_id
+            referencedTableName: d_bodystyle
+            referencedColumnNames: d_bodystyle_id
+            constraintName: fk_f_car_d_bodystyle_id
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            validate: true
+
+  - changeSet:
+      id: 2019021510500-5
+      author: geodezist@gmail.com
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: f_car
+            baseColumnNames: d_fuel_type_id
+            referencedTableName: d_fuel_type
+            referencedColumnNames: d_fuel_type_id
+            constraintName: fk_f_car_d_fuel_type_id
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            validate: true
+
+  - changeSet:
+      id: 2019021510500-6
+      author: geodezist@gmail.com
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: f_car
+            baseColumnNames: d_gearbox_id
+            referencedTableName: d_gearbox
+            referencedColumnNames: d_gearbox_id
+            constraintName: fk_f_car_d_gearbox_id
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            validate: true
+
+  - changeSet:
+      id: 2019021510500-7
+      author: geodezist@gmail.com
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: f_car
+            baseColumnNames: d_model_id
+            referencedTableName: d_model
+            referencedColumnNames: d_model_id
+            constraintName: fk_f_car_d_model_id
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            validate: true
+
+  - changeSet:
+      id: 2019021510500-8
+      author: geodezist@gmail.com
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: f_car
+            baseColumnNames: d_city_id
+            referencedTableName: d_city
+            referencedColumnNames: d_city_id
+            constraintName: fk_f_car_d_city_id
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            validate: true

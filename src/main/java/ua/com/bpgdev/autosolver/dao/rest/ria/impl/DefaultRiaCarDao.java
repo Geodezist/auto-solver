@@ -17,6 +17,7 @@ import java.util.List;
 
 @Component
 public class DefaultRiaCarDao implements RiaCarDao {
+    private static final int TRY_COUNT = 3;
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private RestApiUrlBuilder restApiUrlBuilder;
     private ObjectMapper objectMapper;
@@ -29,53 +30,53 @@ public class DefaultRiaCarDao implements RiaCarDao {
     }
 
     @Override
-    public RiaCarDTO getCar(int carId) throws IOException {
+    public RiaCarDTO getCar(Integer carId) throws InterruptedException {
         RiaCarDTO result = new RiaCarDTO();
         URL urlApiCar = restApiUrlBuilder.getUrlApiCar(carId);
-
-        logger.debug("Getting car from external REST resourse - " + urlApiCar.toString());
-
-        JsonNode jsonResponseNode = objectMapper.readTree(urlApiCar);
-        result.setCarId(carId);
-        result.setYear(jsonResponseNode.at("/autoData/year").intValue());
-        result.setMileage(jsonResponseNode.at("/autoData/raceInt").intValue());
-        result.setPriceUSD(jsonResponseNode.at("/USD").intValue());
-        result.setCategoryValue(jsonResponseNode.at("/autoData/categoryId").intValue());
-        result.setBodystyleValue(jsonResponseNode.at("/autoData/bodyId").intValue());
-        result.setMarkValue(jsonResponseNode.at("/markId").intValue());
-        result.setModelValue(jsonResponseNode.at("/modelId").intValue());
-        result.setDescription(jsonResponseNode.at("/autoData/description").textValue());
-        result.setFuelTyeName(jsonResponseNode.at("/autoData/fuelName").textValue());
-        result.setFuelTypeNameEng(jsonResponseNode.at("/autoData/fuelNameEng").textValue());
-        result.setGearboxName(jsonResponseNode.at("/autoData/gearboxName").textValue());
-        result.setUkraineStateName(jsonResponseNode.at("/stateData/regionName").textValue());
-        result.setCityName(jsonResponseNode.at("/stateData/name").textValue());
-
+        logger.debug("Getting car from external REST resource - {}", urlApiCar);
+        JsonNode jsonResponseNode = null;
+        for (int i = 0; i < TRY_COUNT; i++) {
+            try {
+                jsonResponseNode = objectMapper.readTree(urlApiCar);
+            } catch (IOException e) {
+                logger.debug("External resource is busy. Sleeping for {} second(s)", i);
+                Thread.sleep(i * 1000L);
+                logger.debug("Trying get data from external resource one more time...");
+            }
+        }
+        if (jsonResponseNode != null) {
+            result.setCarId(carId);
+            result.setYear(jsonResponseNode.at("/autoData/year").intValue());
+            result.setMileage(jsonResponseNode.at("/autoData/raceInt").intValue());
+            result.setPriceUSD(jsonResponseNode.at("/USD").intValue());
+            result.setCategoryValue(jsonResponseNode.at("/autoData/categoryId").intValue());
+            result.setBodystyleValue(jsonResponseNode.at("/autoData/bodyId").intValue());
+            result.setMarkValue(jsonResponseNode.at("/markId").intValue());
+            result.setModelValue(jsonResponseNode.at("/modelId").intValue());
+            result.setDescription(jsonResponseNode.at("/autoData/description").textValue());
+            result.setFuelTypeName(jsonResponseNode.at("/autoData/fuelName").textValue());
+            result.setFuelTypeNameEng(jsonResponseNode.at("/autoData/fuelNameEng").textValue());
+            result.setGearboxName(jsonResponseNode.at("/autoData/gearboxName").textValue());
+            result.setUkraineStateName(jsonResponseNode.at("/stateData/regionName").textValue());
+            result.setCityName(jsonResponseNode.at("/stateData/name").textValue());
+        }
         return result;
     }
 
     @Override
     public List<RiaCarDTO> getAll(List<Integer> carIds) {
         List<RiaCarDTO> result = new ArrayList<>();
-        logger.debug("Getting all cars from external REST resourse. Count of cars - {}", carIds.size());
+        logger.debug("Getting all cars from external REST resource. Count of cars - {}", carIds.size());
         try {
             for (Integer carId : carIds) {
-                int tryCount = 0;
-                try {
-                    RiaCarDTO car = getCar(carId);
+                RiaCarDTO car = getCar(carId);
+                if (car.getCarId() != null) {
                     result.add(car);
-                } catch (IOException e) {
-                    tryCount++;
-                    if (tryCount > 3) {
-                        throw new RuntimeException(e);
-                    }
-                    logger.debug("External resourse is busy. Sleeping for {} second(s)", tryCount);
-                    Thread.sleep(tryCount * 1000);
-                    logger.debug("Trying get data from external resourse one more time...");
                 }
             }
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            logger.error("Thread was interrupted!", e);
+            Thread.currentThread().interrupt();
         }
         return result;
     }

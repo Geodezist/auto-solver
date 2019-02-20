@@ -8,16 +8,16 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class RiaCarDTO {
-    private int carId;
-    private int year;
-    private int mileage;
-    private int priceUSD;
-    private int categoryValue;
-    private int bodystyleValue;
-    private int markValue;
-    private int modelValue;
+    private Integer carId;
+    private Integer year;
+    private Integer mileage;
+    private Integer priceUSD;
+    private Integer categoryValue;
+    private Integer bodystyleValue;
+    private Integer markValue;
+    private Integer modelValue;
     private String description;
-    private String fuelTyeName;
+    private String fuelTypeName;
     private String fuelTypeNameEng;
     private String gearboxName;
     private String ukraineStateName;

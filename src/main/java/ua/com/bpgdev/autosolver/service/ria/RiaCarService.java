@@ -5,7 +5,7 @@ import ua.com.bpgdev.autosolver.dto.ria.RiaCarDTO;
 import java.util.List;
 
 public interface RiaCarService {
-    RiaCarDTO getCar(int carId);
+    RiaCarDTO getCar(Integer carId);
 
     List<RiaCarDTO> getAll(List<Integer> carIds);
 }

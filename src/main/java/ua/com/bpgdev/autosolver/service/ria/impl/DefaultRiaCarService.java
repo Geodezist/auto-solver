@@ -1,15 +1,17 @@
 package ua.com.bpgdev.autosolver.service.ria.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.rest.ria.RiaCarDao;
 import ua.com.bpgdev.autosolver.dto.ria.RiaCarDTO;
 import ua.com.bpgdev.autosolver.service.ria.RiaCarService;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
 public class DefaultRiaCarService implements RiaCarService {
+    private final Logger logger = LoggerFactory.getLogger(getClass());
     private RiaCarDao riaCarDao;
 
     public DefaultRiaCarService(RiaCarDao riaCarDao) {
@@ -17,12 +19,13 @@ public class DefaultRiaCarService implements RiaCarService {
     }
 
     @Override
-    public RiaCarDTO getCar(int carId) {
+    public RiaCarDTO getCar(Integer carId) {
         RiaCarDTO car = null;
         try {
             car = riaCarDao.getCar(carId);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            logger.error("Thread was interrupted!", e);
+            Thread.currentThread().interrupt();
         }
         return car;
     }
