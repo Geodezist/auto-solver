@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ua.com.bpgdev.autosolver.dto.ria.RiaCarDTO;
+import ua.com.bpgdev.autosolver.entity.fact.SourceCar;
 import ua.com.bpgdev.autosolver.service.fact.SourceCarService;
 import ua.com.bpgdev.autosolver.service.ria.RiaCarService;
 import ua.com.bpgdev.autosolver.service.ria.RiaSearchResultService;
@@ -41,7 +42,7 @@ public class RiaController {
         return riaSearchResultService.getSearchResult(queryString);
     }
 
-    @GetMapping(path = "/search/{queryString}/cars")
+    @GetMapping(path = "/search/{queryString}/savecars")
     public int saveAllCars(@PathVariable String queryString) {
         List<Integer> carIds = new ArrayList<>(riaSearchResultService.getSearchResult(queryString));
         List<Integer> existingCarIds = sourceCarService.findAllByCarIdIn(carIds);
@@ -50,5 +51,11 @@ public class RiaController {
         List<RiaCarDTO> riaCarDTOs = riaCarService.getAll(carIds);
         sourceCarService.saveAllDTO(riaCarDTOs);
         return riaCarDTOs.size();
+    }
+
+    @GetMapping(path = "/search/{queryString}/getcars")
+    public List<SourceCar> getAllCars(@PathVariable String queryString) {
+        List<Integer> carIds = new ArrayList<>(riaSearchResultService.getSearchResult(queryString));
+        return sourceCarService.getAllByIds(carIds);
     }
 }
