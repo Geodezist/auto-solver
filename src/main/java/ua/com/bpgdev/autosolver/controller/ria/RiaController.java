@@ -43,14 +43,15 @@ public class RiaController {
     }
 
     @GetMapping(path = "/search/{queryString}/savecars")
-    public int saveAllCars(@PathVariable String queryString) {
+    public List<SourceCar> saveAllCars(@PathVariable String queryString) {
         List<Integer> carIds = new ArrayList<>(riaSearchResultService.getSearchResult(queryString));
         List<Integer> existingCarIds = sourceCarService.findAllByCarIdIn(carIds);
-        carIds.removeAll(existingCarIds);
+        List<Integer> absentCarIds = new ArrayList<>(carIds);
+        absentCarIds.removeAll(existingCarIds);
 
-        List<RiaCarDTO> riaCarDTOs = riaCarService.getAll(carIds);
+        List<RiaCarDTO> riaCarDTOs = riaCarService.getAll(absentCarIds);
         sourceCarService.saveAllDTO(riaCarDTOs);
-        return riaCarDTOs.size();
+        return sourceCarService.getAllByIds(carIds);
     }
 
     @GetMapping(path = "/search/{queryString}/getcars")

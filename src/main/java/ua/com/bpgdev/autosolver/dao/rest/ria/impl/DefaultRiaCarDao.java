@@ -33,7 +33,7 @@ public class DefaultRiaCarDao implements RiaCarDao {
     public RiaCarDTO getCar(Integer carId) throws InterruptedException {
         RiaCarDTO result = new RiaCarDTO();
         URL urlApiCar = restApiUrlBuilder.getUrlApiCar(carId);
-        logger.debug("Getting car from external REST resource - {}", urlApiCar);
+        logger.trace("Getting car from external REST resource - {}", urlApiCar);
         JsonNode jsonResponseNode = null;
         for (int i = 0; i < TRY_COUNT; i++) {
             try {
@@ -68,11 +68,14 @@ public class DefaultRiaCarDao implements RiaCarDao {
         List<RiaCarDTO> result = new ArrayList<>();
         logger.debug("Getting all cars from external REST resource. Count of cars - {}", carIds.size());
         try {
+            int counter = 1;
             for (Integer carId : carIds) {
                 RiaCarDTO car = getCar(carId);
                 if (car.getCarId() != null) {
                     result.add(car);
                 }
+                logger.debug("Processed {} from {}", counter, carIds.size());
+                counter++;
             }
         } catch (InterruptedException e) {
             logger.error("Thread was interrupted!", e);
