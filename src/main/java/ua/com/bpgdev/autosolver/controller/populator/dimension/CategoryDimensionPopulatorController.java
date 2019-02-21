@@ -63,7 +63,7 @@ public class CategoryDimensionPopulatorController {
 
     @GetMapping(path = "/vehicle_models")
     public String populateVehicleModels() {
-        return String.valueOf(vehicleModelPopulator.populateAll());
+        return String.valueOf(vehicleModelPopulator.populateAllAbsent());
     }
 
     @GetMapping(path = "/vehicle_options")

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleMarkDao;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleModelDao;
 import ua.com.bpgdev.autosolver.dto.dimension.simple.SimpleDTO;
+import ua.com.bpgdev.autosolver.entity.dimension.category.VehicleMark;
 import ua.com.bpgdev.autosolver.entity.dimension.category.VehicleModel;
 import ua.com.bpgdev.autosolver.service.dimension.category.VehicleModelService;
 
@@ -41,6 +42,10 @@ public class DefaultVehicleModelService
         List<VehicleModel> vehicleModels = new ArrayList<>();
         vehicleModelDao.findAll().forEach(vehicleModels::add);
         return vehicleModels;
+    }
+
+    public int getCount(VehicleMark vehicleMark){
+        return vehicleModelDao.countByVehicleMark(vehicleMark);
     }
 
     @Override
