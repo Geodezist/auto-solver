@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleMarkDao;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleModelDao;
@@ -24,6 +25,7 @@ public class DefaultVehicleModelService
         implements VehicleModelService {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
+    private static final Sort SORT_BY_NAME_ASC = Sort.by("name").ascending();
     private static final ModelMapper MODEL_MAPPER = new ModelMapper();
     private static final Type SIMPLE_DTO_TYPE = new TypeToken<List<SimpleDTO>>() {
     }.getType();
@@ -40,7 +42,7 @@ public class DefaultVehicleModelService
 
     private List<VehicleModel> getAll() {
         List<VehicleModel> vehicleModels = new ArrayList<>();
-        vehicleModelDao.findAll().forEach(vehicleModels::add);
+        vehicleModelDao.findAll(SORT_BY_NAME_ASC).forEach(vehicleModels::add);
         return vehicleModels;
     }
 
@@ -52,7 +54,7 @@ public class DefaultVehicleModelService
     @Cacheable(value = "vehicleModelsCache", key = "#root.targetClass + #root.methodName + #categoryValue + #markValue")
     public List<SimpleDTO> getByCategoryValueAndMarkValueDto(int categoryValue, int markValue) {
         Long markId = vehicleMarkDao.findByCategoryValueAndValue(categoryValue, markValue).getId();
-        List<SimpleDTO> result =MODEL_MAPPER.map(vehicleModelDao.findByVehicleMarkId(markId), SIMPLE_DTO_TYPE);
+        List<SimpleDTO> result =MODEL_MAPPER.map(vehicleModelDao.findByVehicleMarkId(markId, SORT_BY_NAME_ASC), SIMPLE_DTO_TYPE);
 
         logger.debug("Getting all Vehicle Models DTOs. Count of objects - {}", result.size());
         return result;

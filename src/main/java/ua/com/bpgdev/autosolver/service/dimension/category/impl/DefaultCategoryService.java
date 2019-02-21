@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.CategoryDao;
 import ua.com.bpgdev.autosolver.dto.dimension.simple.SimpleDTO;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @Service
 public class DefaultCategoryService implements CategoryService {
+    private static final Sort SORT_BY_VALUE_ASC = Sort.by("value").ascending();
     private final String className = getClass().getSimpleName();
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -36,7 +38,7 @@ public class DefaultCategoryService implements CategoryService {
     @Override
     public List<Category> getAll() {
         List<Category> categories = new ArrayList<>();
-        categoryDao.findAll().forEach(categories::add);
+        categoryDao.findAll(SORT_BY_VALUE_ASC).forEach(categories::add);
         logger.debug("Getting all Categories from DAO. Count of objects - {}"
                 , categories.size());
         return categories;

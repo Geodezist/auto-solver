@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static ua.com.bpgdev.autosolver.service.dimension.category.impl.AbstractDimensionWithCategoryService.SORT_BY_VALUE_ASC;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultDriveTypeServiceTest {
@@ -30,7 +31,7 @@ public class DefaultDriveTypeServiceTest {
 
 
     @Before
-    public void beforeTest(){
+    public void beforeTest() {
         Category category = new Category();
         category.setId(1L);
         category.setName("Lorry");
@@ -49,21 +50,21 @@ public class DefaultDriveTypeServiceTest {
 
     @Test
     public void getAll() {
-        Mockito.when(driveTypeDao.findAll()).thenReturn(driveTypes);
+        Mockito.when(driveTypeDao.findAll(SORT_BY_VALUE_ASC)).thenReturn(driveTypes);
         List<DriveType> actualDriveTypes = defaultDriveTypeService.getAll();
         assertEquals(driveTypes, actualDriveTypes);
     }
 
     @Test
     public void getByCategoryId() {
-        Mockito.when(driveTypeDao.findByCategoryId(1L)).thenReturn(driveTypes);
+        Mockito.when(driveTypeDao.findByCategoryId(1L, SORT_BY_VALUE_ASC)).thenReturn(driveTypes);
         List<DriveType> actulaDriveTypes = defaultDriveTypeService.getByCategoryId(1L);
         assertEquals(driveTypes, actulaDriveTypes);
     }
 
     @Test
     public void getByCategoryValue() {
-        Mockito.when(driveTypeDao.findByCategoryValue(1)).thenReturn(driveTypes);
+        Mockito.when(driveTypeDao.findByCategoryValue(1, SORT_BY_VALUE_ASC)).thenReturn(driveTypes);
         List<DriveType> actulaDriveTypes = defaultDriveTypeService.getByCategoryValue(1);
         assertEquals(driveTypes, actulaDriveTypes);
     }

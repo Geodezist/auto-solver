@@ -3,6 +3,7 @@ package ua.com.bpgdev.autosolver.service.dimension.category.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleMarkDao;
 import ua.com.bpgdev.autosolver.dto.dimension.simple.SimpleDTO;
@@ -44,7 +45,7 @@ public class DefaultVehicleMarkService
 
     @Override
     public List<VehicleMark> getByCategoryValue(int categoryValue) {
-        List<VehicleMark> result = vehicleMarkDao.findByCategoryValue(categoryValue);
+        List<VehicleMark> result = vehicleMarkDao.findByCategoryValue(categoryValue, SORT_BY_NAME_ASC);
         logger.debug("Getting VehicleMarks from DAO filtered by Category value = {}. Count of objects - {}"
                 , categoryValue
                 , result.size());
@@ -55,7 +56,7 @@ public class DefaultVehicleMarkService
     @Cacheable(value = "vehicleMarksCache", key = "#root.targetClass + #root.methodName + #categoryValue + #searchString")
     public List<SimpleDTO> getByCategoryValueAndNameStartsWithDto(int categoryValue, String searchString) {
         List<SimpleDTO> result = MODEL_MAPPER
-                .map(vehicleMarkDao.findByCategoryValueAndNameStartsWithIgnoreCase(categoryValue, searchString),
+                .map(vehicleMarkDao.findByCategoryValueAndNameStartsWithIgnoreCase(categoryValue, searchString, SORT_BY_NAME_ASC),
                         CATEGORY_DTO_TYPE);
         logger.debug("Getting VehicleMarks from DAO filtered by Category value = {} "
                         + "and Name starts with = {}. Count of objects - {}"

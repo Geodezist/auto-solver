@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static ua.com.bpgdev.autosolver.service.dimension.category.impl.AbstractDimensionWithCategoryService.SORT_BY_NAME_ASC;
+import static ua.com.bpgdev.autosolver.service.dimension.category.impl.AbstractDimensionWithCategoryService.SORT_BY_VALUE_ASC;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultBodyStyleServiceTest {
@@ -48,14 +50,14 @@ public class DefaultBodyStyleServiceTest {
 
     @Test
     public void getAll() {
-        Mockito.when(bodyStyleDao.findAll()).thenReturn(bodyStyles);
+        Mockito.when(bodyStyleDao.findAll(SORT_BY_VALUE_ASC)).thenReturn(bodyStyles);
         List<BodyStyle> actualBodyStyles = defaultBodyStyleService.getAll();
         assertEquals(bodyStyles, actualBodyStyles);
     }
 
     @Test
     public void getByCategoryId() {
-        Mockito.when(bodyStyleDao.findByCategoryId(1L)).thenReturn(bodyStyles);
+        Mockito.when(bodyStyleDao.findByCategoryId(1L, SORT_BY_VALUE_ASC)).thenReturn(bodyStyles);
         List<BodyStyle> actulaBodyStyles = defaultBodyStyleService.getByCategoryId(1L);
         assertEquals(bodyStyles, actulaBodyStyles);
     }
@@ -76,7 +78,7 @@ public class DefaultBodyStyleServiceTest {
 
     @Test
     public void getByCategoryValue() {
-        Mockito.when(bodyStyleDao.findByCategoryValue(1)).thenReturn(bodyStyles);
+        Mockito.when(bodyStyleDao.findByCategoryValue(1, SORT_BY_VALUE_ASC)).thenReturn(bodyStyles);
         List<BodyStyle> actulaBodyStyles = defaultBodyStyleService.getByCategoryValue(1);
         assertEquals(bodyStyles, actulaBodyStyles);
     }

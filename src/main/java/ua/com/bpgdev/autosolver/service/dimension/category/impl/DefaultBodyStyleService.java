@@ -23,7 +23,7 @@ public class DefaultBodyStyleService
     @Override
     public List<BodyStyle> getAll() {
         List<BodyStyle> bodyStyles = new ArrayList<>();
-        bodyStyleDao.findAll().forEach(bodyStyles::add);
+        bodyStyleDao.findAll(SORT_BY_VALUE_ASC).forEach(bodyStyles::add);
         logger.debug("Getting all BodyStyles from DAO. Count of objects - {}"
                 , bodyStyles.size());
         return bodyStyles;
@@ -31,7 +31,7 @@ public class DefaultBodyStyleService
 
     @Override
     public List<BodyStyle> getByCategoryId(Long categoryId) {
-        List<BodyStyle> result = bodyStyleDao.findByCategoryId(categoryId);
+        List<BodyStyle> result = bodyStyleDao.findByCategoryId(categoryId, SORT_BY_VALUE_ASC);
         logger.debug("Getting BodyStyles from DAO filtered by Category id = {}. Count of objects - {}"
                 , categoryId
                 , result.size());
@@ -40,7 +40,7 @@ public class DefaultBodyStyleService
 
     @Override
     public List<BodyStyle> getByCategoryValue(int categoryValue) {
-        List<BodyStyle> result = bodyStyleDao.findByCategoryValue(categoryValue);
+        List<BodyStyle> result = bodyStyleDao.findByCategoryValue(categoryValue, SORT_BY_VALUE_ASC);
         logger.debug("Getting BodyStyles from DAO filtered by Category value = {}. Count of objects - {}"
                 , categoryValue
                 , result.size());

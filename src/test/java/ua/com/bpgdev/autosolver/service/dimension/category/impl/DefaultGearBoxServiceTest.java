@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static ua.com.bpgdev.autosolver.service.dimension.category.impl.AbstractDimensionWithCategoryService.SORT_BY_VALUE_ASC;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultGearBoxServiceTest {
@@ -30,7 +31,7 @@ public class DefaultGearBoxServiceTest {
 
 
     @Before
-    public void beforeTest(){
+    public void beforeTest() {
         Category category = new Category();
         category.setId(1L);
         category.setName("Lorry");
@@ -49,21 +50,21 @@ public class DefaultGearBoxServiceTest {
 
     @Test
     public void getAll() {
-        Mockito.when(gearBoxDao.findAll()).thenReturn(gearBoxes);
+        Mockito.when(gearBoxDao.findAll(SORT_BY_VALUE_ASC)).thenReturn(gearBoxes);
         List<GearBox> actualGearBoxes = defaultGearBoxService.getAll();
         assertEquals(gearBoxes, actualGearBoxes);
     }
 
     @Test
     public void getByCategoryId() {
-        Mockito.when(gearBoxDao.findByCategoryId(1L)).thenReturn(gearBoxes);
+        Mockito.when(gearBoxDao.findByCategoryId(1L, SORT_BY_VALUE_ASC)).thenReturn(gearBoxes);
         List<GearBox> actulaGearBoxes = defaultGearBoxService.getByCategoryId(1L);
         assertEquals(gearBoxes, actulaGearBoxes);
     }
 
     @Test
     public void getByCategoryValue() {
-        Mockito.when(gearBoxDao.findByCategoryValue(1)).thenReturn(gearBoxes);
+        Mockito.when(gearBoxDao.findByCategoryValue(1, SORT_BY_VALUE_ASC)).thenReturn(gearBoxes);
         List<GearBox> actulaGearBoxes = defaultGearBoxService.getByCategoryValue(1);
         assertEquals(gearBoxes, actulaGearBoxes);
     }

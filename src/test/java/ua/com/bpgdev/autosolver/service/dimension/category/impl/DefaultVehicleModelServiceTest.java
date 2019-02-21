@@ -7,6 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.data.domain.Sort;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleMarkDao;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleModelDao;
 import ua.com.bpgdev.autosolver.dto.dimension.simple.SimpleDTO;
@@ -60,7 +61,7 @@ public class DefaultVehicleModelServiceTest {
 
     @Test
     public void getByCategoryValueAndMarkValueDto() {
-        Mockito.when(vehicleModelDao.findByVehicleMarkId(200L)).thenReturn(vehicleModels);
+        Mockito.when(vehicleModelDao.findByVehicleMarkId(200L, Sort.by("name").ascending())).thenReturn(vehicleModels);
         Mockito.when(vehicleMarkDao.findByCategoryValueAndValue(3000, 200)).thenReturn(vehicleMark);
         List<SimpleDTO> actualSimpleDTOs = defaultVehicleModelService
                 .getByCategoryValueAndMarkValueDto(3000, 200);

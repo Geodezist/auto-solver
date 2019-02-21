@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static ua.com.bpgdev.autosolver.service.dimension.category.impl.AbstractDimensionWithCategoryService.SORT_BY_NAME_ASC;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultVehicleMarkServiceTest {
@@ -63,14 +64,14 @@ public class DefaultVehicleMarkServiceTest {
 
     @Test
     public void getByCategoryValue() {
-        Mockito.when(vehicleMarkDao.findByCategoryValue(1)).thenReturn(vehicleMarks);
+        Mockito.when(vehicleMarkDao.findByCategoryValue(1, SORT_BY_NAME_ASC)).thenReturn(vehicleMarks);
         List<VehicleMark> actulaVehicleMarks = defaultVehicleMarkService.getByCategoryValue(1);
         assertEquals(vehicleMarks, actulaVehicleMarks);
     }
 
     @Test
     public void getByCategoryValueAndNameStartsWithDto() {
-        Mockito.when(vehicleMarkDao.findByCategoryValueAndNameStartsWithIgnoreCase(1, "Toy"))
+        Mockito.when(vehicleMarkDao.findByCategoryValueAndNameStartsWithIgnoreCase(1, "Toy", SORT_BY_NAME_ASC))
                 .thenReturn(vehicleMarks);
         List<SimpleDTO> actualSimpleDTOs = defaultVehicleMarkService
                 .getByCategoryValueAndNameStartsWithDto(1, "Toy");

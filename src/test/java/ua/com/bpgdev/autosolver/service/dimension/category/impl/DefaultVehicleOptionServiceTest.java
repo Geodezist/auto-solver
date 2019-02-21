@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static ua.com.bpgdev.autosolver.service.dimension.category.impl.AbstractDimensionWithCategoryService.SORT_BY_VALUE_ASC;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultVehicleOptionServiceTest {
@@ -42,21 +43,21 @@ public class DefaultVehicleOptionServiceTest {
 
     @Test
     public void getAll() {
-        Mockito.when(vehicleOptionDao.findAll()).thenReturn(vehicleOptions);
+        Mockito.when(vehicleOptionDao.findAll(SORT_BY_VALUE_ASC)).thenReturn(vehicleOptions);
         List<VehicleOption> actualVehicleOptions = defaultVehicleOptionService.getAll();
         assertEquals(vehicleOptions, actualVehicleOptions);
     }
 
     @Test
     public void getByCategoryId() {
-        Mockito.when(vehicleOptionDao.findByCategoryId(1L)).thenReturn(vehicleOptions);
+        Mockito.when(vehicleOptionDao.findByCategoryId(1L, SORT_BY_VALUE_ASC)).thenReturn(vehicleOptions);
         List<VehicleOption> actulaVehicleOptions = defaultVehicleOptionService.getByCategoryId(1L);
         assertEquals(vehicleOptions, actulaVehicleOptions);
     }
 
     @Test
     public void getByCategoryValue() {
-        Mockito.when(vehicleOptionDao.findByCategoryValue(1)).thenReturn(vehicleOptions);
+        Mockito.when(vehicleOptionDao.findByCategoryValue(1, SORT_BY_VALUE_ASC)).thenReturn(vehicleOptions);
         List<VehicleOption> actulaVehicleOptions = defaultVehicleOptionService.getByCategoryValue(1);
         assertEquals(vehicleOptions, actulaVehicleOptions);
     }

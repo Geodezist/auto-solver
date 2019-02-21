@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static ua.com.bpgdev.autosolver.service.dimension.category.impl.AbstractDimensionWithCategoryService.SORT_BY_VALUE_ASC;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultCategoryServiceTest {
@@ -28,7 +29,7 @@ public class DefaultCategoryServiceTest {
     private SimpleDTO simpleDTO = new SimpleDTO();
 
     @Before
-    public void beforeTest(){
+    public void beforeTest() {
         category.setId(1L);
         category.setName("Lorry");
         category.setValue(1);
@@ -42,17 +43,16 @@ public class DefaultCategoryServiceTest {
 
     @Test
     public void getAll() {
-        Mockito.when(categoryDao.findAll()).thenReturn(categories);
+        Mockito.when(categoryDao.findAll(SORT_BY_VALUE_ASC)).thenReturn(categories);
         List<Category> actualCategories = defaultCategoryService.getAll();
         assertEquals(categories, actualCategories);
     }
 
     @Test
     public void getAllDto() {
-        Mockito.when(categoryDao.findAll()).thenReturn(categories);
+        Mockito.when(categoryDao.findAll(SORT_BY_VALUE_ASC)).thenReturn(categories);
         List<SimpleDTO> actualSimpleDTOs = defaultCategoryService.getAllDto();
         assertEquals(simpleDTOs, actualSimpleDTOs);
-
     }
 
     @Test

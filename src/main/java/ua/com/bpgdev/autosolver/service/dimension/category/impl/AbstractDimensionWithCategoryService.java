@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Sort;
 import ua.com.bpgdev.autosolver.dto.dimension.simple.SimpleDTO;
 import ua.com.bpgdev.autosolver.entity.dimension.category.DimensionWithCategory;
 import ua.com.bpgdev.autosolver.service.dimension.category.DimensionWithCategoryService;
@@ -18,6 +19,8 @@ public abstract class AbstractDimensionWithCategoryService<T extends DimensionWi
     private final String className = getClass().getSimpleName();
     final Logger logger = LoggerFactory.getLogger(getClass());
 
+    static final Sort SORT_BY_NAME_ASC = Sort.by("name").ascending();
+    static final Sort SORT_BY_VALUE_ASC = Sort.by("value").ascending();
     static final ModelMapper MODEL_MAPPER = new ModelMapper();
     static final Type CATEGORY_DTO_TYPE = new TypeToken<List<SimpleDTO>>() {
     }.getType();
