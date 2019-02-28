@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.com.bpgdev.autosolver.dao.rest.ria.RiaCarDao;
 import ua.com.bpgdev.autosolver.dto.ria.RiaCarDTO;
+import ua.com.bpgdev.autosolver.util.ProgressStatus;
 import ua.com.bpgdev.autosolver.util.RestApiUrlBuilder;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.util.List;
 @Component
 public class DefaultRiaCarDao implements RiaCarDao {
     private static final int TRY_COUNT = 3;
+    private static final int MAX_CAR_ID_COUNT = 100;
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private RestApiUrlBuilder restApiUrlBuilder;
     private ObjectMapper objectMapper;
@@ -64,17 +66,25 @@ public class DefaultRiaCarDao implements RiaCarDao {
     }
 
     @Override
-    public List<RiaCarDTO> getAll(List<Integer> carIds) {
+    public List<RiaCarDTO> getAll(List<Integer> carIds, ProgressStatus progressStatus) {
         List<RiaCarDTO> result = new ArrayList<>();
+        progressStatus.setTotal(carIds.size());
+
+        if (carIds.size() > MAX_CAR_ID_COUNT) {
+            logger.warn("Too many car ids - {}! Current limit is {} id(s)", carIds.size(), MAX_CAR_ID_COUNT);
+            return result;
+        }
+
         logger.debug("Getting all cars from external REST resource. Count of cars - {}", carIds.size());
         try {
-            int counter = 1;
+            Integer counter = 1;
             for (Integer carId : carIds) {
                 RiaCarDTO car = getCar(carId);
                 if (car.getCarId() != null) {
                     result.add(car);
                 }
                 logger.debug("Processed {} from {}", counter, carIds.size());
+                progressStatus.setCurrent(counter);
                 counter++;
             }
         } catch (InterruptedException e) {

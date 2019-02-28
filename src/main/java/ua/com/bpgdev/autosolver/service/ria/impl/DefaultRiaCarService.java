@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.rest.ria.RiaCarDao;
 import ua.com.bpgdev.autosolver.dto.ria.RiaCarDTO;
 import ua.com.bpgdev.autosolver.service.ria.RiaCarService;
+import ua.com.bpgdev.autosolver.util.ProgressStatus;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class DefaultRiaCarService implements RiaCarService {
     }
 
     @Override
-    public List<RiaCarDTO> getAll(List<Integer> carIds) {
-        return riaCarDao.getAll(carIds);
+    public List<RiaCarDTO> getAll(List<Integer> carIds, ProgressStatus progressStatus) {
+        return riaCarDao.getAll(carIds, progressStatus);
     }
 }

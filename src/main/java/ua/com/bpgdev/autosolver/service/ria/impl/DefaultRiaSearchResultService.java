@@ -13,6 +13,7 @@ import java.util.Set;
 
 @Service
 public class DefaultRiaSearchResultService implements RiaSearchResultService {
+    private static final int MAX_TOTAL_COUNT_OF_CAR_IDS = 1000;
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private RiaSearchResultDao riaSearchResultDao;
 
@@ -25,12 +26,17 @@ public class DefaultRiaSearchResultService implements RiaSearchResultService {
     public Set<Integer> getSearchResult(String queryString) {
         RiaSearchResultDTO riaSearchResultDTO = riaSearchResultDao.getSearchResult(queryString);
         int totalCountOfCarIds = riaSearchResultDTO.getTotalCount();
+
         int pageSize = riaSearchResultDTO.getPageSize();
         Set<Integer> carIds = new HashSet<>(riaSearchResultDTO.getCarIds());
 
-        for (int page = 1; page * pageSize < totalCountOfCarIds; page++) {
-            RiaSearchResultDTO nextRiaSearchResultDTO = riaSearchResultDao.getSearchResult(queryString + "&page=" + page);
-            carIds.addAll(nextRiaSearchResultDTO.getCarIds());
+        if (totalCountOfCarIds <= MAX_TOTAL_COUNT_OF_CAR_IDS) {
+            for (int page = 1; page * pageSize < totalCountOfCarIds; page++) {
+                RiaSearchResultDTO nextRiaSearchResultDTO = riaSearchResultDao.getSearchResult(queryString + "&page=" + page);
+                carIds.addAll(nextRiaSearchResultDTO.getCarIds());
+            }
+        } else {
+            logger.info("Too many car ids returned - {}, returned first {} carIds!", totalCountOfCarIds, pageSize);
         }
         logger.debug("Got {} car ids from {}", carIds.size(), queryString);
         return carIds;

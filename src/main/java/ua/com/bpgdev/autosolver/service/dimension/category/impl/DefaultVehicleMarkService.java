@@ -3,7 +3,6 @@ package ua.com.bpgdev.autosolver.service.dimension.category.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.category.VehicleMarkDao;
 import ua.com.bpgdev.autosolver.dto.dimension.simple.SimpleDTO;

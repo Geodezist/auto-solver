@@ -60,7 +60,7 @@ public class DefaultVehicleModelPopulator
         return result;
     }
 
-    public int populateAll(Category category) {
+    private int populateAll(Category category) {
         int result = 0;
         List<VehicleMark> vehicleMarks = vehicleMarkService.getByCategoryId(category.getId());
         for (VehicleMark vehicleMark : vehicleMarks) {
@@ -69,7 +69,7 @@ public class DefaultVehicleModelPopulator
         return result;
     }
 
-    public int populateAll(Category category, VehicleMark vehicleMark) {
+    private int populateAll(Category category, VehicleMark vehicleMark) {
         String apiEntityString = MARK_API_ENTITY + vehicleMark.getValue() + VEHICLE_MODEL_API_ENTITY;
         List<VehicleModel> vehicleModels = getUpstreamData(VehicleModel[].class, category, apiEntityString);
         vehicleModels.forEach(vehicleModel -> vehicleModel.setVehicleMark(vehicleMark));

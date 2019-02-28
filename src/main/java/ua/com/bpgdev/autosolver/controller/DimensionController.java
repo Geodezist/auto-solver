@@ -127,5 +127,4 @@ public class DimensionController {
     public List<SimpleDTO> getVehicleOptions(@PathVariable int categoryValue) {
         return vehicleOptionService.getByCategoryValueDto(categoryValue);
     }
-
 }

@@ -62,7 +62,7 @@ databaseChangeLog:
                   name: fuel_type_name_eng
                   type: VARCHAR
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: gearbox_name
                   type: VARCHAR

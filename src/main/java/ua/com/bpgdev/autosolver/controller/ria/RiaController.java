@@ -42,18 +42,6 @@ public class RiaController {
         return riaSearchResultService.getSearchResult(queryString);
     }
 
-    @GetMapping(path = "/search/{queryString}/savecars")
-    public List<SourceCar> saveAllCars(@PathVariable String queryString) {
-        List<Integer> carIds = new ArrayList<>(riaSearchResultService.getSearchResult(queryString));
-        List<Integer> existingCarIds = sourceCarService.findAllByCarIdIn(carIds);
-        List<Integer> absentCarIds = new ArrayList<>(carIds);
-        absentCarIds.removeAll(existingCarIds);
-
-        List<RiaCarDTO> riaCarDTOs = riaCarService.getAll(absentCarIds);
-        sourceCarService.saveAllDTO(riaCarDTOs);
-        return sourceCarService.getAllByIds(carIds);
-    }
-
     @GetMapping(path = "/search/{queryString}/getcars")
     public List<SourceCar> getAllCars(@PathVariable String queryString) {
         List<Integer> carIds = new ArrayList<>(riaSearchResultService.getSearchResult(queryString));
