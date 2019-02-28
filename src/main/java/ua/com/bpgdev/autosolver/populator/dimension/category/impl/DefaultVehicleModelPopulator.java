@@ -45,6 +45,7 @@ public class DefaultVehicleModelPopulator
         return result;
     }
 
+    @Override
     public int populateAllAbsent() {
         int result = 0;
         List<Category> categories = categoryService.getAll();
@@ -67,6 +68,12 @@ public class DefaultVehicleModelPopulator
             result += populateAll(category, vehicleMark);
         }
         return result;
+    }
+
+    @Override
+    public int populateAllByCategory(int categoryValue) {
+        Category category = categoryService.getAll().stream().filter(c -> c.getValue() == categoryValue).findFirst().get();
+        return populateAll(category);
     }
 
     private int populateAll(Category category, VehicleMark vehicleMark) {

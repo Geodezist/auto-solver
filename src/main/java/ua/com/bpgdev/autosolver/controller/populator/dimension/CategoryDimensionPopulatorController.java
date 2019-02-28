@@ -3,6 +3,7 @@ package ua.com.bpgdev.autosolver.controller.populator.dimension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ua.com.bpgdev.autosolver.populator.dimension.category.*;
@@ -64,6 +65,11 @@ public class CategoryDimensionPopulatorController {
     @GetMapping(path = "/vehicle_models")
     public String populateVehicleModels() {
         return String.valueOf(vehicleModelPopulator.populateAllAbsent());
+    }
+
+    @GetMapping(path = "/vehicle_models/{categoryValue}")
+    public String populateVehicleModelsByCategory(@PathVariable int categoryValue) {
+        return String.valueOf(vehicleModelPopulator.populateAllByCategory(categoryValue));
     }
 
     @GetMapping(path = "/vehicle_options")

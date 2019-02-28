@@ -4,4 +4,5 @@ import ua.com.bpgdev.autosolver.populator.Populator;
 
 public interface VehicleModelPopulator extends Populator {
     int populateAllAbsent();
+    int populateAllByCategory(int categoryValue);
 }
