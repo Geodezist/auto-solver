@@ -1,4 +1,4 @@
-package ua.com.bpgdev.autosolver.util;
+package ua.com.bpgdev.autosolver.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

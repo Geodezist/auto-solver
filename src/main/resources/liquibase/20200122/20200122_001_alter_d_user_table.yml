@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2020012213150-1
+      author: geodezist@gmail.com
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: password_hash
+                  type: TEXT
+            tableName: d_user
+
+  - changeSet:
+      id: 2020012213150-2
+      author: geodezist@gmail.com
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: roles
+                  type: TEXT
+            tableName: d_user

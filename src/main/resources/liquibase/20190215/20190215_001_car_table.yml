@@ -49,33 +49,33 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: description
-                  type: VARCHAR
+                  name: car_description
+                  type: TEXT
                   constraints:
                     nullable: true
               - column:
                   name: fuel_type_name
-                  type: VARCHAR
+                  type: TEXT
                   constraints:
                     nullable: false
               - column:
                   name: fuel_type_name_eng
-                  type: VARCHAR
+                  type: TEXT
                   constraints:
                     nullable: true
               - column:
                   name: gearbox_name
-                  type: VARCHAR
+                  type: TEXT
                   constraints:
                     nullable: false
               - column:
                   name: ukraine_state_name
-                  type: VARCHAR
+                  type: TEXT
                   constraints:
                     nullable: false
               - column:
                   name: city_name
-                  type: VARCHAR
+                  type: TEXT
                   constraints:
                     nullable: false
 
@@ -139,13 +139,13 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: description
-                  type: VARCHAR
+                  name: car_description
+                  type: TEXT
                   constraints:
                     nullable: true
               - column:
                   name: engine capacity
-                  type: VARCHAR
+                  type: TEXT
                   constraints:
                     nullable: false
   #---------------------------------------------

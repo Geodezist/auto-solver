@@ -16,7 +16,7 @@ import java.util.Set;
 
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/api/ria", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/api/ria", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 @ResponseBody
 public class RiaController {
     private RiaSearchResultService riaSearchResultService;
