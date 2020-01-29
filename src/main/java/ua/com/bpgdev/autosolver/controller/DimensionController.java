@@ -13,7 +13,7 @@ import java.util.List;
 
 @Controller
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/api/dimension", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/api/dimension", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 @ResponseBody
 public class DimensionController {
     private CountryService countryService;

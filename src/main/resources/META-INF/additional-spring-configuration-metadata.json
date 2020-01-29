@@ -1,0 +1,24 @@
+{
+  "properties": [
+    {
+      "name": "autosolver.external-api.base-api-url",
+      "type": "java.lang.String",
+      "description": "Root Link to AutoRIA API (for example - https://developers.ria.com/auto/)."
+    },
+    {
+      "name": "autosolver.external-api.api-key",
+      "type": "java.lang.String",
+      "description": "You RIA API key."
+    },
+    {
+      "name": "autosolver.security.token-name",
+      "type": "java.lang.String",
+      "description": "HTTP Header name for authorisation (for example - Authorization)."
+    },
+    {
+      "name": "autosolver.security.secret-key",
+      "type": "java.lang.String",
+      "description": "Secret for JWT signature."
+    }
+  ]
+}

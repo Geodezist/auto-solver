@@ -34,3 +34,6 @@ autosolver:
   external-api:
     base-api-url:
     api-key:
+  security:
+    token-name: Authorization
+    secret-key: magic

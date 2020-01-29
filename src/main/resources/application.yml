@@ -34,3 +34,32 @@ autosolver:
   external-api:
     base-api-url: ${base_api_url}
     api-key: ${api_key}
+
+  security:
+    token-name: ${token_name}
+    secret-key: ${secret_key}
+
+
+---
+spring:
+  profiles: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/autosolver
+    username: root
+    password: root
+    platform: mysql
+    initialization-mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+server:
+  port: 8080
+
+autosolver:
+  external-api:
+    base-api-url: https://developers.ria.com/auto/
+    api-key: OSAOEe8k3tWvY94ie0Fq2PWFf453ewjVuSx0vEgc
+  security:
+    token-name: Authorization
+    secret-key: magic

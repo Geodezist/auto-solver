@@ -29,6 +29,7 @@ public class SourceCar {
     private Integer markValue;
     @Column(name = "model_value")
     private Integer modelValue;
+    @Column(name = "car_description")
     private String description;
     @Column(name = "fuel_type_name")
     private String fuelTypeName;

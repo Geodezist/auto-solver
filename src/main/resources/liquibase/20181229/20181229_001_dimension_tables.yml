@@ -439,13 +439,11 @@ databaseChangeLog:
         - column:
             constraints:
               nullable: false
-            defaultValue: 1900-01-01
             name: start_date
             type: date
         - column:
             constraints:
               nullable: false
-            defaultValue: 9999-01-01
             name: end_date
             type: date
 
@@ -469,7 +467,7 @@ databaseChangeLog:
             type: INT
         - column:
             name: original_data
-            type: VARCHAR
+            type: TEXT
         - column:
             name: locationCityName
             type: VARCHAR(1000)
