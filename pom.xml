@@ -6,7 +6,13 @@
 
     <groupId>ua.com.bpgdev</groupId>
     <artifactId>auto-solver</artifactId>
+    <packaging>pom</packaging>
     <version>0.1-SNAPSHOT</version>
+
+    <modules>
+        <module>security</module>
+        <module>auto-solver-app</module>
+    </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -16,7 +22,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jdk.version>10</jdk.version>
+
+        <auto-solver.version>0.1-SNAPSHOT</auto-solver.version>
+        <auto-solver-app.version>${auto-solver.version}</auto-solver-app.version>
+        <security.version>${auto-solver.version}</security.version>
+
+        <jdk.version>11</jdk.version>
         <jacoco-maven-plugin.version>0.8.2</jacoco-maven-plugin.version>
         <liquibase-maven-plugin.version>3.6.2</liquibase-maven-plugin.version>
     </properties>
@@ -32,11 +43,6 @@
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
             <plugin>
@@ -94,95 +100,20 @@
         </plugins>
     </reporting>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <!-- AUTO-SOLVER MODULES -->
+            <dependency>
+                <groupId>ua.com.bpgdev</groupId>
+                <artifactId>auto-solver-app</artifactId>
+                <version>${auto-solver.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-websocket</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.9.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.modelmapper</groupId>
-            <artifactId>modelmapper</artifactId>
-            <version>2.3.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>nl.jqno.equalsverifier</groupId>
-            <artifactId>equalsverifier</artifactId>
-            <version>3.1.4</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
+            <dependency>
+                <groupId>ua.com.bpgdev</groupId>
+                <artifactId>security</artifactId>
+                <version>${auto-solver.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
