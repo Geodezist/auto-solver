@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar auto-solver-app/target/*.jar ua.com.bpgdev.autosolver.AppStarter
