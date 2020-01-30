@@ -10,6 +10,17 @@
     </parent>
 
     <artifactId>security</artifactId>
+    <packaging>jar</packaging>
+    <version>0.1-SNAPSHOT</version>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <!-- SPRING  -->
@@ -31,7 +42,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
         </dependency>
 
         <!-- OTHERS  -->
