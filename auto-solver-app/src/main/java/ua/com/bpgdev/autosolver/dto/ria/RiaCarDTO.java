@@ -22,4 +22,5 @@ public class RiaCarDTO {
     private String gearboxName;
     private String ukraineStateName;
     private String cityName;
+    private String carTitle;
 }

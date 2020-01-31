@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2020013008550-1
+      author: geodezist@gmail.com
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: car_title
+                  type: TEXT
+            tableName: src_car
