@@ -2,6 +2,7 @@ package ua.com.bpgdev.autosolver.dao.rest.ria.impl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class DefaultRiaCarDao implements RiaCarDao {
     private static final int TRY_COUNT = 3;
     private static final int MAX_CAR_ID_COUNT = 100;
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    private RestApiUrlBuilder restApiUrlBuilder;
-    private ObjectMapper objectMapper;
-
-    @Autowired
-    public DefaultRiaCarDao(RestApiUrlBuilder restApiUrlBuilder,
-                            ObjectMapper objectMapper) {
-        this.restApiUrlBuilder = restApiUrlBuilder;
-        this.objectMapper = objectMapper;
-    }
+    private final RestApiUrlBuilder restApiUrlBuilder;
+    private final  ObjectMapper objectMapper;
 
     @Override
     public RiaCarDTO getCar(Integer carId) throws InterruptedException {
@@ -61,6 +56,7 @@ public class DefaultRiaCarDao implements RiaCarDao {
             result.setGearboxName(jsonResponseNode.at("/autoData/gearboxName").textValue());
             result.setUkraineStateName(jsonResponseNode.at("/stateData/regionName").textValue());
             result.setCityName(jsonResponseNode.at("/stateData/name").textValue());
+            result.setCarTitle(jsonResponseNode.at("/title").textValue());
         }
         return result;
     }

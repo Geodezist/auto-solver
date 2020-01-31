@@ -41,4 +41,6 @@ public class SourceCar {
     private String ukraineStateName;
     @Column(name = "city_name")
     private String cityName;
+    @Column(name = "car_title")
+    private String carTitle;
 }

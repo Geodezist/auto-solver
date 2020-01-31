@@ -1,5 +1,6 @@
 package ua.com.bpgdev.autosolver.controller.ria;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -18,19 +19,11 @@ import java.util.Set;
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "/api/ria", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 @ResponseBody
+@RequiredArgsConstructor
 public class RiaController {
-    private RiaSearchResultService riaSearchResultService;
-    private RiaCarService riaCarService;
-    private SourceCarService sourceCarService;
-
-    @Autowired
-    public RiaController(RiaSearchResultService riaSearchResultService,
-                         RiaCarService riaCarService,
-                         SourceCarService sourceCarService) {
-        this.riaSearchResultService = riaSearchResultService;
-        this.riaCarService = riaCarService;
-        this.sourceCarService = sourceCarService;
-    }
+    private final RiaSearchResultService riaSearchResultService;
+    private final RiaCarService riaCarService;
+    private final SourceCarService sourceCarService;
 
     @GetMapping(path = "/car/{carId}")
     public RiaCarDTO getCar(@PathVariable Integer carId) {

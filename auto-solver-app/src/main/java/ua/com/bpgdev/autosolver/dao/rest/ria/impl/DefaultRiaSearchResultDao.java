@@ -42,7 +42,7 @@ public class DefaultRiaSearchResultDao implements RiaSearchResultDao {
                     .get("result")
                     .get("search_result")
                     .get("ids")
-                    .traverse(), new TypeReference<List<Integer>>() {
+                    .traverse(), new TypeReference<>() {
             });
             int totalCount = jsonNode
                     .get("result")
