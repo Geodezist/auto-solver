@@ -5,8 +5,12 @@ import org.modelmapper.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.fact.SourceCarDao;
+import ua.com.bpgdev.autosolver.dao.jdbc.fact.specification.SearchCriteria;
+import ua.com.bpgdev.autosolver.dao.jdbc.fact.specification.SearchOperation;
+import ua.com.bpgdev.autosolver.dao.jdbc.fact.specification.SourceCarSpecification;
 import ua.com.bpgdev.autosolver.dto.ria.RiaCarDTO;
 import ua.com.bpgdev.autosolver.entity.fact.SourceCar;
 import ua.com.bpgdev.autosolver.service.fact.SourceCarService;
@@ -14,6 +18,7 @@ import ua.com.bpgdev.autosolver.service.fact.SourceCarService;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DefaultSourceCarService implements SourceCarService {
@@ -47,6 +52,16 @@ public class DefaultSourceCarService implements SourceCarService {
     @Override
     public List<SourceCar> getAllByIds(List<Integer> sourceCarIds) {
         return sourceCarDao.findAllByCarIdIn(sourceCarIds);
+    }
+
+    @Override
+    public List<SourceCar> getAllByIdsAndFilter(List<Integer> sourceCarIds, Specification<SourceCar> filter) {
+        SourceCarSpecification sourceCarIdsFilter = new SourceCarSpecification();
+        sourceCarIdsFilter.addSearchCriteria(new SearchCriteria("carId", sourceCarIds, SearchOperation.IN));
+
+        return sourceCarDao.findAll(
+                Specification.where(sourceCarIdsFilter).and(filter)
+        );
     }
 
     @Override

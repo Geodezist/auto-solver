@@ -1,10 +1,11 @@
 package ua.com.bpgdev.security.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.security.model.User;
-import ua.com.bpgdev.security.service.UserService;
 import ua.com.bpgdev.security.util.JwtUtils;
 
 import java.util.Optional;
@@ -18,9 +19,9 @@ public class JwtAuthenticationService implements UserAuthenticationService {
 
     @Override
     public Optional<String> login(String username, String password) {
-        User user = userService.getByName(username).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userService.getByName(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         if (!passwordEncoder.matches(password, user.getPasswordHash())) {
-            throw new RuntimeException("Password incorrect!");
+            throw new BadCredentialsException("Password incorrect!");
         }
         return Optional.ofNullable(jwtUtils.generateToken(user));
     }
