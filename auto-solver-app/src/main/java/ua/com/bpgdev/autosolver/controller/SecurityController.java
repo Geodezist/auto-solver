@@ -1,6 +1,8 @@
 package ua.com.bpgdev.autosolver.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -8,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ua.com.bpgdev.autosolver.dto.security.JwtSecurityDto;
-import ua.com.bpgdev.security.model.User;
 import ua.com.bpgdev.security.model.AuthenticationRequest;
 import ua.com.bpgdev.security.model.AuthenticationResponse;
+import ua.com.bpgdev.security.model.User;
 import ua.com.bpgdev.security.service.UserAuthenticationService;
 import ua.com.bpgdev.security.util.DateUtils;
 
@@ -24,12 +26,12 @@ public class SecurityController {
     private final UserAuthenticationService userAuthenticationService;
 
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public JwtSecurityDto login(@RequestBody AuthenticationRequest authenticationRequest) {
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) {
         String userName = authenticationRequest.getUsername();
         String jwtToken = userAuthenticationService
                 .login(userName, authenticationRequest.getPassword())
                 .orElseThrow(() -> new RuntimeException("invalid login and/or password"));
-        return new JwtSecurityDto(userName, jwtToken);
+        return new ResponseEntity<>(new JwtSecurityDto(userName, jwtToken), new HttpHeaders(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

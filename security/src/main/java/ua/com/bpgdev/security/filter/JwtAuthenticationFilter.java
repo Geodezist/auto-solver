@@ -1,9 +1,11 @@
 package ua.com.bpgdev.security.filter;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.SneakyThrows;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -41,7 +43,11 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
         if (authorizationHeader != null && authorizationHeader.startsWith(BEARER)) {
             String jwt = authorizationHeader.substring(7);
-            user = jwtUtils.validateToken(jwt);
+            try {
+                user = jwtUtils.validateToken(jwt);
+            } catch (ExpiredJwtException e) {
+                throw new CredentialsExpiredException(e.getMessage());
+            }
         }
         if (!hasText(user)) {
             throw new BadCredentialsException(AUTHENTICATION_FAILED);
@@ -65,14 +71,14 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
                                               HttpServletResponse response,
                                               AuthenticationException authException) {
 
-        logger.warn(AUTHENTICATION_FAILED);
+        logger.warn(authException.getMessage());
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.getWriter().print(new JSONObject()
                 .put("timestamp", LocalDateTime.now())
                 .put("status", HttpServletResponse.SC_UNAUTHORIZED)
                 .put("error", AUTHENTICATION_FAILED)
-                .put("message", AUTHENTICATION_FAILED)
+                .put("message", authException.getMessage())
                 .toString());
         response.getWriter().flush();
     }
