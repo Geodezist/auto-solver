@@ -1,60 +1,52 @@
 package ua.com.bpgdev.autosolver.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import ua.com.bpgdev.autosolver.dto.AdditionalFilterDTO;
 import ua.com.bpgdev.autosolver.dto.dimension.simple.CityDTO;
 import ua.com.bpgdev.autosolver.dto.dimension.simple.SimpleDTO;
-import ua.com.bpgdev.autosolver.service.dimension.category.*;
-import ua.com.bpgdev.autosolver.service.dimension.simple.*;
+import ua.com.bpgdev.autosolver.service.dimension.category.BodyStyleService;
+import ua.com.bpgdev.autosolver.service.dimension.category.CategoryService;
+import ua.com.bpgdev.autosolver.service.dimension.category.DriveTypeService;
+import ua.com.bpgdev.autosolver.service.dimension.category.GearBoxService;
+import ua.com.bpgdev.autosolver.service.dimension.category.VehicleMarkService;
+import ua.com.bpgdev.autosolver.service.dimension.category.VehicleModelService;
+import ua.com.bpgdev.autosolver.service.dimension.category.VehicleOptionService;
+import ua.com.bpgdev.autosolver.service.dimension.simple.CityService;
+import ua.com.bpgdev.autosolver.service.dimension.simple.CountryService;
+import ua.com.bpgdev.autosolver.service.dimension.simple.FuelTypeService;
+import ua.com.bpgdev.autosolver.service.dimension.simple.UkraineStateService;
+import ua.com.bpgdev.autosolver.service.dimension.simple.VehicleColorService;
+import ua.com.bpgdev.autosolver.service.filter.AdditionalFilterService;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "/api/dimension", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 @ResponseBody
+@AllArgsConstructor
 public class DimensionController {
-    private CountryService countryService;
-    private FuelTypeService fuelTypeService;
-    private UkraineStateService ukraineStateService;
-    private CityService cityService;
-    private VehicleColorService vehicleColorService;
-    private CategoryService categoryService;
-    private BodyStyleService bodyStyleService;
-    private DriveTypeService driveTypeService;
-    private GearBoxService gearBoxService;
-    private VehicleMarkService vehicleMarkService;
-    private VehicleModelService vehicleModelService;
-    private VehicleOptionService vehicleOptionService;
-
-    @Autowired
-    public DimensionController(CountryService countryService,
-                               FuelTypeService fuelTypeService,
-                               UkraineStateService ukraineStateService,
-                               CityService cityService,
-                               VehicleColorService vehicleColorService,
-                               CategoryService categoryService,
-                               BodyStyleService bodyStyleService,
-                               DriveTypeService driveTypeService,
-                               GearBoxService gearBoxService,
-                               VehicleMarkService vehicleMarkService,
-                               VehicleModelService vehicleModelService,
-                               VehicleOptionService vehicleOptionService) {
-        this.countryService = countryService;
-        this.fuelTypeService = fuelTypeService;
-        this.ukraineStateService = ukraineStateService;
-        this.cityService = cityService;
-        this.vehicleColorService = vehicleColorService;
-        this.categoryService = categoryService;
-        this.bodyStyleService = bodyStyleService;
-        this.driveTypeService = driveTypeService;
-        this.gearBoxService = gearBoxService;
-        this.vehicleMarkService = vehicleMarkService;
-        this.vehicleModelService = vehicleModelService;
-        this.vehicleOptionService = vehicleOptionService;
-    }
+    private final CountryService countryService;
+    private final FuelTypeService fuelTypeService;
+    private final UkraineStateService ukraineStateService;
+    private final CityService cityService;
+    private final VehicleColorService vehicleColorService;
+    private final CategoryService categoryService;
+    private final BodyStyleService bodyStyleService;
+    private final DriveTypeService driveTypeService;
+    private final GearBoxService gearBoxService;
+    private final VehicleMarkService vehicleMarkService;
+    private final VehicleModelService vehicleModelService;
+    private final VehicleOptionService vehicleOptionService;
+    private final AdditionalFilterService additionalFilterService;
 
     @GetMapping(path = "/states/{stateValue}/cities")
     public List<SimpleDTO> getCitiesByUkraineState(@PathVariable int stateValue) {
@@ -126,5 +118,10 @@ public class DimensionController {
     @GetMapping(path = "/categories/{categoryValue}/options")
     public List<SimpleDTO> getVehicleOptions(@PathVariable int categoryValue) {
         return vehicleOptionService.getByCategoryValueDto(categoryValue);
+    }
+
+    @GetMapping(path = "/additional_filters")
+    public List<AdditionalFilterDTO> getAdditionalFilters() {
+        return additionalFilterService.getAllAdditionalFilterDefinitions();
     }
 }
