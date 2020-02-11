@@ -11,10 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SourceCarSpecification implements Specification<SourceCar> {
-    private List<SearchCriteria> searchCriteria;
+    private List<SearchCriteria> searchCriteria = new ArrayList<>();
 
     public SourceCarSpecification() {
-        this.searchCriteria = new ArrayList<>();
+    }
+
+    public SourceCarSpecification(SearchCriteria criteria) {
+        searchCriteria.add(criteria);
     }
 
     public void addSearchCriteria(SearchCriteria criteria) {
