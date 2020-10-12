@@ -59,13 +59,13 @@ public class RiaControllerTest {
         RiaCarDTO actualRiaCarDTO = riaController.getCar(1);
         assertEquals(expectedRiaCarDTO, actualRiaCarDTO);
     }
-
-    @Test
-    public void getAllCarIds() {
-        Mockito.when(riaSearchResultService.getSearchResult("test")).thenReturn(expectedIds);
-        Set<Integer> actualIds = riaController.getAllCarIds("test");
-        assertEquals(expectedIds, actualIds);
-    }
+//
+//    @Test
+//    public void getAllCarIds() {
+//        Mockito.when(riaSearchResultService.getSearchResult("test")).thenReturn(expectedIds);
+//        Set<Integer> actualIds = riaController.getAllCarIds("test");
+//        assertEquals(expectedIds, actualIds);
+//    }
 
     @Test
     public void saveAllCars() {

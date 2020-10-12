@@ -1,36 +1,24 @@
 package ua.com.bpgdev.autosolver.controller.populator.dimension;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import ua.com.bpgdev.autosolver.populator.dimension.simple.*;
+import org.springframework.web.bind.annotation.RestController;
+import ua.com.bpgdev.autosolver.populator.dimension.simple.CityPopulator;
+import ua.com.bpgdev.autosolver.populator.dimension.simple.CountryPopulator;
+import ua.com.bpgdev.autosolver.populator.dimension.simple.FuelTypePopulator;
+import ua.com.bpgdev.autosolver.populator.dimension.simple.UkraineStatePopulator;
+import ua.com.bpgdev.autosolver.populator.dimension.simple.VehicleColorPopulator;
 
-@Controller
+@RestController
 @RequestMapping("/populate/dimension/simple")
-@ResponseBody
+@RequiredArgsConstructor
 public class SimpleDimensionPopulatorController {
-    private CountryPopulator countryPopulator;
-    private UkraineStatePopulator ukraineStatePopulator;
-    private CityPopulator cityPopulator;
-    private FuelTypePopulator fuelTypePopulator;
-    private VehicleColorPopulator vehicleColorPopulator;
-
-
-    @Autowired
-    public SimpleDimensionPopulatorController(CountryPopulator countryPopulator,
-                                              UkraineStatePopulator ukraineStatePopulator,
-                                              CityPopulator cityPopulator,
-                                              FuelTypePopulator fuelTypePopulator,
-                                              VehicleColorPopulator vehicleColorPopulator
-    ) {
-        this.countryPopulator = countryPopulator;
-        this.ukraineStatePopulator = ukraineStatePopulator;
-        this.cityPopulator = cityPopulator;
-        this.fuelTypePopulator = fuelTypePopulator;
-        this.vehicleColorPopulator = vehicleColorPopulator;
-    }
+    private final CountryPopulator countryPopulator;
+    private final UkraineStatePopulator ukraineStatePopulator;
+    private final CityPopulator cityPopulator;
+    private final FuelTypePopulator fuelTypePopulator;
+    private final VehicleColorPopulator vehicleColorPopulator;
 
     @GetMapping(path = "/countries")
     public String populateCountries() {

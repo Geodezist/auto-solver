@@ -1,41 +1,29 @@
 package ua.com.bpgdev.autosolver.controller.populator.dimension;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import ua.com.bpgdev.autosolver.populator.dimension.category.*;
+import org.springframework.web.bind.annotation.RestController;
+import ua.com.bpgdev.autosolver.populator.dimension.category.BodyStylePopulator;
+import ua.com.bpgdev.autosolver.populator.dimension.category.CategoryPopulator;
+import ua.com.bpgdev.autosolver.populator.dimension.category.DriveTypePopulator;
+import ua.com.bpgdev.autosolver.populator.dimension.category.GearBoxPopulator;
+import ua.com.bpgdev.autosolver.populator.dimension.category.VehicleMarkPopulator;
+import ua.com.bpgdev.autosolver.populator.dimension.category.VehicleModelPopulator;
+import ua.com.bpgdev.autosolver.populator.dimension.category.VehicleOptionPopulator;
 
-@Controller
+@RestController
 @RequestMapping("/populate/dimension/category")
-@ResponseBody
+@RequiredArgsConstructor
 public class CategoryDimensionPopulatorController {
-    private CategoryPopulator categoryPopulator;
-    private BodyStylePopulator bodyStylePopulator;
-    private DriveTypePopulator driveTypePopulator;
-    private GearBoxPopulator gearBoxPopulator;
-    private VehicleMarkPopulator vehicleMarkPopulator;
-    private VehicleModelPopulator vehicleModelPopulator;
-    private VehicleOptionPopulator vehicleOptionPopulator;
-
-    @Autowired
-    public CategoryDimensionPopulatorController(CategoryPopulator categoryPopulator,
-                                                BodyStylePopulator bodyStylePopulator,
-                                                DriveTypePopulator driveTypePopulator,
-                                                GearBoxPopulator gearBoxPopulator,
-                                                VehicleMarkPopulator vehicleMarkPopulator,
-                                                VehicleModelPopulator vehicleModelPopulator,
-                                                VehicleOptionPopulator vehicleOptionPopulator) {
-        this.categoryPopulator = categoryPopulator;
-        this.bodyStylePopulator = bodyStylePopulator;
-        this.driveTypePopulator = driveTypePopulator;
-        this.gearBoxPopulator = gearBoxPopulator;
-        this.vehicleMarkPopulator = vehicleMarkPopulator;
-        this.vehicleModelPopulator = vehicleModelPopulator;
-        this.vehicleOptionPopulator = vehicleOptionPopulator;
-    }
+    private final CategoryPopulator categoryPopulator;
+    private final BodyStylePopulator bodyStylePopulator;
+    private final DriveTypePopulator driveTypePopulator;
+    private final GearBoxPopulator gearBoxPopulator;
+    private final VehicleMarkPopulator vehicleMarkPopulator;
+    private final VehicleModelPopulator vehicleModelPopulator;
+    private final VehicleOptionPopulator vehicleOptionPopulator;
 
     @GetMapping(path = "/categories")
     public String populateCategories() {

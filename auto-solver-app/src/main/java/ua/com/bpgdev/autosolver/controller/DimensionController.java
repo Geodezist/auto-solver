@@ -1,13 +1,12 @@
 package ua.com.bpgdev.autosolver.controller;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import ua.com.bpgdev.autosolver.dto.AdditionalFilterDTO;
 import ua.com.bpgdev.autosolver.dto.dimension.simple.CityDTO;
 import ua.com.bpgdev.autosolver.dto.dimension.simple.SimpleDTO;
@@ -26,13 +25,11 @@ import ua.com.bpgdev.autosolver.service.dimension.simple.VehicleColorService;
 import ua.com.bpgdev.autosolver.service.filter.AdditionalFilterService;
 
 import java.util.List;
-import java.util.Map;
 
-@Controller
+@RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/api/dimension", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-@ResponseBody
-@AllArgsConstructor
+@RequestMapping(path = "/api/dimension", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequiredArgsConstructor
 public class DimensionController {
     private final CountryService countryService;
     private final FuelTypeService fuelTypeService;

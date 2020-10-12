@@ -1,38 +1,41 @@
 package ua.com.bpgdev.autosolver.service.ria.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.databind.JsonNode;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ua.com.bpgdev.autosolver.dao.rest.ria.RiaCarDao;
+import ua.com.bpgdev.autosolver.dao.rest.ria.RiaRestDao;
 import ua.com.bpgdev.autosolver.dto.ria.RiaCarDTO;
 import ua.com.bpgdev.autosolver.service.ria.RiaCarService;
-import ua.com.bpgdev.autosolver.util.ProgressStatus;
-
-import java.util.List;
 
 @Service
+@RequiredArgsConstructor
+@Slf4j
 public class DefaultRiaCarService implements RiaCarService {
-    private final Logger logger = LoggerFactory.getLogger(getClass());
-    private RiaCarDao riaCarDao;
-
-    public DefaultRiaCarService(RiaCarDao riaCarDao) {
-        this.riaCarDao = riaCarDao;
-    }
+    private final RiaRestDao riaRestDao;
 
     @Override
     public RiaCarDTO getCar(Integer carId) {
-        RiaCarDTO car = null;
-        try {
-            car = riaCarDao.getCar(carId);
-        } catch (InterruptedException e) {
-            logger.error("Thread was interrupted!", e);
-            Thread.currentThread().interrupt();
-        }
-        return car;
-    }
+        JsonNode rawRiaCar = riaRestDao.getCar(carId);
 
-    @Override
-    public List<RiaCarDTO> getAll(List<Integer> carIds, ProgressStatus progressStatus) {
-        return riaCarDao.getAll(carIds, progressStatus);
+        return RiaCarDTO.builder()
+                .carId(carId)
+                .year(rawRiaCar.at("/autoData/year").intValue())
+                .mileage(rawRiaCar.at("/autoData/raceInt").intValue())
+                .priceUSD(rawRiaCar.at("/USD").intValue())
+                .categoryValue(rawRiaCar.at("/autoData/categoryId").intValue())
+                .bodystyleValue(rawRiaCar.at("/autoData/bodyId").intValue())
+                .markValue(rawRiaCar.at("/markId").intValue())
+                .modelValue(rawRiaCar.at("/modelId").intValue())
+                .description(rawRiaCar.at("/autoData/description").textValue())
+                .fuelTypeName(rawRiaCar.at("/autoData/fuelName").textValue())
+                .fuelTypeNameEng(rawRiaCar.at("/autoData/fuelNameEng").textValue())
+                .gearboxName(rawRiaCar.at("/autoData/gearboxName").textValue())
+                .ukraineStateName(rawRiaCar.at("/stateData/regionName").textValue())
+                .cityName(rawRiaCar.at("/stateData/name").textValue())
+                .carTitle(rawRiaCar.at("/title").textValue())
+                .sourceMessage(rawRiaCar.toPrettyString())
+                .linkToAutoRia(rawRiaCar.at("/linkToView").textValue())
+                .build();
     }
 }

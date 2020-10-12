@@ -7,3 +7,5 @@ databaseChangeLog:
       file: liquibase/20200122/20200122_001_alter_d_user_table.yml
   - include:
       file: liquibase/20200131/20200131_001_alter_src_car_table.yml
+  - include:
+      file: liquibase/20201012/20201012_001_alter_src_car_table.yml

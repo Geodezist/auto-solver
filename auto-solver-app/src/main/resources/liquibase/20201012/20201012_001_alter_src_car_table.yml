@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2020101212200-1
+      author: geodezist@gmail.com
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: source_message
+                  type: TEXT
+              - column:
+                  name: link_to_autoria
+                  type: TEXT
+            tableName: src_car

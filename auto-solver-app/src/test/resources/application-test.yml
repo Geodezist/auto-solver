@@ -32,7 +32,7 @@ logging:
 
 autosolver:
   external-api:
-    base-api-url:
+    base-api-url: https://developers/auto/
     api-key:
   security:
     token-name: Authorization

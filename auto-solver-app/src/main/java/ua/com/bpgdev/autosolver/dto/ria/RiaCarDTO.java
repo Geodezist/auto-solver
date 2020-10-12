@@ -1,12 +1,14 @@
 package ua.com.bpgdev.autosolver.dto.ria;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
+@Builder
 public class RiaCarDTO {
     private Integer carId;
     private Integer year;
@@ -23,4 +25,6 @@ public class RiaCarDTO {
     private String ukraineStateName;
     private String cityName;
     private String carTitle;
+    private String sourceMessage;
+    private String linkToAutoRia;
 }
