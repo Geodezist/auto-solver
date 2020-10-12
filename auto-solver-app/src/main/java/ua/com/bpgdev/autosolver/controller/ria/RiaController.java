@@ -15,29 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Controller
+@RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/api/ria", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-@ResponseBody
+@RequestMapping(path = "/api/ria", produces = {MediaType.APPLICATION_JSON_VALUE})
 @RequiredArgsConstructor
 public class RiaController {
-    private final RiaSearchResultService riaSearchResultService;
     private final RiaCarService riaCarService;
-    private final SourceCarService sourceCarService;
 
     @GetMapping(path = "/car/{carId}")
     public RiaCarDTO getCar(@PathVariable Integer carId) {
         return riaCarService.getCar(carId);
     }
 
-    @GetMapping(path = "/search/{queryString}")
-    public Set<Integer> getAllCarIds(@PathVariable String queryString) {
-        return riaSearchResultService.getSearchResult(queryString);
-    }
-
-    @GetMapping(path = "/search/{queryString}/getcars")
-    public List<SourceCar> getAllCars(@PathVariable String queryString) {
-        List<Integer> carIds = new ArrayList<>(riaSearchResultService.getSearchResult(queryString));
-        return sourceCarService.getAllByIds(carIds);
-    }
 }

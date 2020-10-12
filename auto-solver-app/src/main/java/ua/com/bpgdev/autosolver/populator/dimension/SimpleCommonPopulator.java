@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class SimpleCommonPopulator<T> {
-    private RestApiUrlBuilder restApiUrlBuilder;
-    private RestTemplate restTemplate;
+    private final RestApiUrlBuilder restApiUrlBuilder;
+    private final RestTemplate restTemplate;
 
     public SimpleCommonPopulator(RestApiUrlBuilder restApiUrlBuilder,
                                     RestTemplate restTemplate) {

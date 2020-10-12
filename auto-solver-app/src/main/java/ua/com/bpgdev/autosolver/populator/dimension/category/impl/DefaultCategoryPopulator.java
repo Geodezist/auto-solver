@@ -12,7 +12,7 @@ import ua.com.bpgdev.autosolver.util.RestApiUrlBuilder;
 @Component
 public class DefaultCategoryPopulator extends SimpleCommonPopulator<Category> implements CategoryPopulator {
     private static final String CATEGORY_API_ENTITY = "categories/";
-    private CategoryService categoryService;
+    private final CategoryService categoryService;
 
     @Autowired
     public DefaultCategoryPopulator(RestApiUrlBuilder restApiUrlBuilder,

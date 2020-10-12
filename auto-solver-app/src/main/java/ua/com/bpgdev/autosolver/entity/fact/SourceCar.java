@@ -43,4 +43,8 @@ public class SourceCar {
     private String cityName;
     @Column(name = "car_title")
     private String carTitle;
+    @Column(name = "source_message")
+    private String sourceMessage;
+    @Column(name = "link_to_autoria")
+    private String linkToAutoRia;
 }

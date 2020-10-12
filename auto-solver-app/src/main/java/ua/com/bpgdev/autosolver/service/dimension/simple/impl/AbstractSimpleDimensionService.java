@@ -15,6 +15,7 @@ import java.util.List;
 
 public abstract class AbstractSimpleDimensionService<T extends SimpleDimension>
         implements SimpleDimensionService<T, SimpleDTO> {
+
     private final String className = getClass().getSimpleName();
     final Logger logger = LoggerFactory.getLogger(getClass());
 

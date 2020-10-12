@@ -1,6 +1,6 @@
 package ua.com.bpgdev.autosolver.service.dimension.simple.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.simple.UkraineStateDao;
 import ua.com.bpgdev.autosolver.entity.dimension.simple.UkraineState;
@@ -10,15 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class DefaultUkraineStateService
         extends AbstractSimpleDimensionService<UkraineState>
         implements UkraineStateService {
-    private UkraineStateDao ukraineStateDao;
-
-    @Autowired
-    public DefaultUkraineStateService(UkraineStateDao ukraineStateDao) {
-        this.ukraineStateDao = ukraineStateDao;
-    }
+    private final UkraineStateDao ukraineStateDao;
 
     @Override
     public List<UkraineState> getAll() {

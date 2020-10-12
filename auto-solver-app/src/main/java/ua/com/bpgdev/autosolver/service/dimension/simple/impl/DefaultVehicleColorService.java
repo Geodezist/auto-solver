@@ -1,6 +1,6 @@
 package ua.com.bpgdev.autosolver.service.dimension.simple.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.simple.VehicleColorDao;
 import ua.com.bpgdev.autosolver.entity.dimension.simple.VehicleColor;
@@ -10,15 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class DefaultVehicleColorService
         extends AbstractSimpleDimensionService<VehicleColor>
         implements VehicleColorService {
-    private VehicleColorDao vehicleColorDao;
-
-    @Autowired
-    public DefaultVehicleColorService(VehicleColorDao vehicleColorDao) {
-        this.vehicleColorDao = vehicleColorDao;
-    }
+    private final VehicleColorDao vehicleColorDao;
 
     @Override
     public List<VehicleColor> getAll() {
