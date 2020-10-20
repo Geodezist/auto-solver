@@ -31,7 +31,7 @@ public class DefaultCityService implements CityService {
     }.getType();
 
 
-    private CityDao cityDao;
+    private final CityDao cityDao;
 
     @Autowired
     public DefaultCityService(CityDao cityDao) {

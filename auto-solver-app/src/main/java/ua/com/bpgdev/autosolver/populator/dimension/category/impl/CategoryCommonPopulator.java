@@ -12,7 +12,7 @@ import java.util.List;
 
 abstract class CategoryCommonPopulator<T> {
     private static final String CATEGORY_API_ENTITY = "categories";
-    private RestApiUrlBuilder restApiUrlBuilder;
+    private final RestApiUrlBuilder restApiUrlBuilder;
     CategoryService categoryService;
 
     CategoryCommonPopulator(RestApiUrlBuilder restApiUrlBuilder, CategoryService categoryService) {

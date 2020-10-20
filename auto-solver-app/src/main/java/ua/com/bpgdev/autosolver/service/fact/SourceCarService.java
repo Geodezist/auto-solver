@@ -1,7 +1,6 @@
 package ua.com.bpgdev.autosolver.service.fact;
 
 import org.springframework.data.jpa.domain.Specification;
-import ua.com.bpgdev.autosolver.dao.jdbc.fact.specification.SourceCarSpecification;
 import ua.com.bpgdev.autosolver.dto.ria.RiaCarDTO;
 import ua.com.bpgdev.autosolver.dto.ria.SearchRequestDTO;
 import ua.com.bpgdev.autosolver.entity.fact.SourceCar;

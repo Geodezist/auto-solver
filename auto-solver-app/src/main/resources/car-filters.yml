@@ -1,0 +1,38 @@
+car-filters:
+  additionalFilters:
+    -
+      name: onlyOfficial
+      description: Содержит в описании "официальный" и подобные слова
+      searchCriteria:
+        -
+          column: description
+          value: offi
+          operation: MATCH
+          andThen: OR
+        -
+          column: description
+          value: ofi
+          operation: MATCH
+          andThen: OR
+        -
+          column: description
+          value: фиц
+          operation: MATCH
+    -
+      name: notUSA
+      description: Не содержит в описании США и подобные слова
+      searchCriteria:
+        -
+          column: description
+          value: usa
+          operation: NOT_MATCH
+          andThen: AND
+        -
+          column: description
+          value: сша
+          operation: NOT_MATCH
+          andThen: AND
+        -
+          column: description
+          value: амер
+          operation: NOT_MATCH

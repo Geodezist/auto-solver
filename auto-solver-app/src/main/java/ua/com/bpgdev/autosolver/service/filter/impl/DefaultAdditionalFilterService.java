@@ -2,54 +2,73 @@ package ua.com.bpgdev.autosolver.service.filter.impl;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import ua.com.bpgdev.autosolver.config.property.CarFiltersProperties;
 import ua.com.bpgdev.autosolver.dao.jdbc.fact.specification.SearchCriteria;
-import ua.com.bpgdev.autosolver.dao.jdbc.fact.specification.SearchOperation;
 import ua.com.bpgdev.autosolver.dao.jdbc.fact.specification.SourceCarSpecification;
 import ua.com.bpgdev.autosolver.dto.AdditionalFilterDTO;
-import ua.com.bpgdev.autosolver.dto.dimension.simple.SimpleDTO;
 import ua.com.bpgdev.autosolver.entity.fact.SourceCar;
 import ua.com.bpgdev.autosolver.service.filter.AdditionalFilterService;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class DefaultAdditionalFilterService implements AdditionalFilterService {
 
-    private static final String DESCRIPTION_FIELD_NAME = "description";
-    private static final String ONLY_OFFICIAL = "onlyOfficial";
-    private static final String NOT_USA = "notUSA";
+    private final Map<String, Specification<SourceCar>> additionalFilters;
+    private final Map<String, String> additionalFilterDefinitions;
 
-    private Map<String, Specification<SourceCar>> additionalFilters = new HashMap<>();
-
-    public DefaultAdditionalFilterService() {
-        additionalFilters.put(ONLY_OFFICIAL, Specification
-                .where(createSpecification("фиц", SearchOperation.MATCH))
-                .or(createSpecification("offi", SearchOperation.MATCH))
-                .or(createSpecification("ofi", SearchOperation.MATCH)));
-
-        additionalFilters.put(NOT_USA, Specification
-                .where(createSpecification("сша", SearchOperation.NOT_MATCH))
-                .and(createSpecification("usa", SearchOperation.NOT_MATCH))
-                .and(createSpecification("амер", SearchOperation.NOT_MATCH)));
+    public DefaultAdditionalFilterService(CarFiltersProperties carFiltersProperties) {
+        additionalFilters = buildAdditionalFilters(carFiltersProperties);
+        additionalFilterDefinitions = buildAdditionalFilterDefinitions(carFiltersProperties);
     }
 
-    private Specification<SourceCar> createSpecification(Object criteria, SearchOperation searchOperation) {
-        return new SourceCarSpecification(new SearchCriteria(DESCRIPTION_FIELD_NAME, criteria, searchOperation));
+    private Map<String, String> buildAdditionalFilterDefinitions(CarFiltersProperties carFiltersProperties) {
+        return carFiltersProperties.getAdditionalFilters().stream()
+                .collect(Collectors.toMap(
+                        CarFiltersProperties.Filter::getName,
+                        CarFiltersProperties.Filter::getDescription,
+                        (a, b) -> b));
     }
 
     @Override
     public List<AdditionalFilterDTO> getAllAdditionalFilterDefinitions() {
-        return Arrays.asList(
-                new AdditionalFilterDTO(ONLY_OFFICIAL, "Содержит в описании \"официальный\" и подобные слова"),
-                new AdditionalFilterDTO(NOT_USA, "Не содержит в описании США и подобные слова")
-        );
+        return additionalFilterDefinitions.entrySet().stream()
+                .map(e -> new AdditionalFilterDTO(e.getKey(), e.getValue()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Specification<SourceCar> getAdditionalFilter(String additionalFilterName) {
         return additionalFilters.getOrDefault(additionalFilterName, new SourceCarSpecification());
+    }
+
+    private Map<String, Specification<SourceCar>> buildAdditionalFilters(CarFiltersProperties carFiltersProperties) {
+        return carFiltersProperties.getAdditionalFilters().stream()
+                .collect(Collectors.toMap(
+                        CarFiltersProperties.Filter::getName,
+                        filter -> buildSpecification(filter.getSearchCriteria()),
+                        (a, b) -> b));
+    }
+
+    private Specification<SourceCar> buildSpecification(LinkedList<SearchCriteria> searchCriteria) {
+        SearchCriteria first = searchCriteria.getFirst();
+        Specification<SourceCar> sourceCarSpecification = Specification.where(new SourceCarSpecification(first));
+        for (int i = 1; i < searchCriteria.size(); i++) {
+            SearchCriteria previousCriteria = searchCriteria.get(i - 1);
+            SearchCriteria currentCriteria = searchCriteria.get(i);
+            if ("OR".equalsIgnoreCase(previousCriteria.getAndThen())) {
+                sourceCarSpecification = sourceCarSpecification.or(new SourceCarSpecification(currentCriteria));
+            } else if ("AND".equalsIgnoreCase(previousCriteria.getAndThen())) {
+                sourceCarSpecification = sourceCarSpecification.and(new SourceCarSpecification(currentCriteria));
+            } else if (previousCriteria.getAndThen() == null) {
+                return sourceCarSpecification;
+            } else {
+                throw new RuntimeException("Type currentCriteria.getAndThen() is not supported!");
+            }
+        }
+        return sourceCarSpecification;
     }
 }

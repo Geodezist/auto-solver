@@ -27,11 +27,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class DefaultSourceCarService implements SourceCarService {
 
     private static final ModelMapper MODEL_MAPPER = new ModelMapper();
@@ -41,7 +40,6 @@ public class DefaultSourceCarService implements SourceCarService {
     private final SourceCarDao sourceCarDao;
     private final RiaSearchResultService riaSearchResultService;
     private final RiaCarService riaCarService;
-
 
     @Override
     public SourceCar get(Integer sourceCarId) {
@@ -65,7 +63,7 @@ public class DefaultSourceCarService implements SourceCarService {
     @Override
     public List<SourceCar> getAllByIdsAndFilter(List<Integer> sourceCarIds, Specification<SourceCar> filter) {
         SourceCarSpecification sourceCarIdsFilter = new SourceCarSpecification();
-        sourceCarIdsFilter.addSearchCriteria(new SearchCriteria("carId", sourceCarIds, SearchOperation.IN));
+        sourceCarIdsFilter.addSearchCriteria(new SearchCriteria("carId", sourceCarIds, SearchOperation.IN, null));
 
         return sourceCarDao.findAll(
                 Specification.where(sourceCarIdsFilter).and(filter)

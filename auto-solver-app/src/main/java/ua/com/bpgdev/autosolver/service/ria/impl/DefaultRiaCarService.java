@@ -10,7 +10,6 @@ import ua.com.bpgdev.autosolver.service.ria.RiaCarService;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class DefaultRiaCarService implements RiaCarService {
     private final RiaRestDao riaRestDao;
 

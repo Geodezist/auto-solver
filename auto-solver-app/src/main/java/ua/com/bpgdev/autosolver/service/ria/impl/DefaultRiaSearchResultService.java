@@ -16,9 +16,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class DefaultRiaSearchResultService implements RiaSearchResultService {
     private final RiaRestDao riaRestDao;
     private final ObjectMapper objectMapper;

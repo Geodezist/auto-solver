@@ -1,6 +1,6 @@
 package ua.com.bpgdev.autosolver.service.dimension.simple.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ua.com.bpgdev.autosolver.dao.jdbc.dimension.simple.CountryDao;
 import ua.com.bpgdev.autosolver.entity.dimension.simple.Country;
@@ -10,15 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class DefaultCountryService
         extends AbstractSimpleDimensionService<Country>
         implements CountryService {
-    private CountryDao countryDao;
-
-    @Autowired
-    public DefaultCountryService(CountryDao countryDao) {
-        this.countryDao = countryDao;
-    }
+    private final CountryDao countryDao;
 
     @Override
     public List<Country> getAll() {
